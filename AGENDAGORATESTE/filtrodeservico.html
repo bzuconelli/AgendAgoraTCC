@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Inicial</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #868686;
+        }
+        .menu-container {
+            background-color: #333;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 50px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+        }
+        .menu-container h2 {
+            color: #fff;
+        }
+        .btn-custom {
+            background-color: #d29f06;
+            border-color: #d29f06;
+            color: #fff;
+        }
+        .btn:hover{
+            background-color: #f2f2f2;
+        }
+        .div-1{
+            text-align: center;
+            
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="menu-container">
+                    <h2 class="text-center">Menu Inicial</h2>
+                    <form>
+                        <div class="mb-3">
+                            <label for="filtroServico" class="form-label text-white">Filtrar por Serviço</label>
+                            <select class="form-select" id="filtroServico">
+                                <option value="servico0"></option>
+                                <option value="servico1">Serviço 1</option>
+                                <option value="servico2">Serviço 2</option>
+                                <option value="servico3">Serviço 3</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="filtroDistancia" class="form-label text-white">Filtrar por Distância (km)</label>
+                            <input type="number" class="form-control" id="filtroDistancia" placeholder="Distância máxima">
+                        </div>
+                        <div class="mb-3">
+                            <label for="filtroPagamento" class="form-label text-white">Filtrar por Forma de Pagamento</label>
+                            <select class="form-select" id="filtroPagamento">
+                                <option value=""></option>
+                                <option value="pix">Pix</option>
+                                <option value="credito">Cartão de Crédito</option>
+                                <option value="debito">Cartão de Débito</option>
+                                <option value="dinheiro">Dinheiro</option>
+                            </select>
+                        </div>
+                        <div class="div-1">
+                        <button type="submit" class="btn btn-custom btn-block">Filtrar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
