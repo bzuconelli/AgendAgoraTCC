@@ -30,7 +30,12 @@ document.getElementById('cadastro').addEventListener('submit', function (event) 
       } else {
         recebedinheiro = "não"
       }
-      console.log(recebecartao, recebedinheiro, recebepix)
+      let tipodeserviço = document.querySelector('#servico');
+      let servico = tipodeserviço.options[tipodeserviço.selectedIndex].value;
+      let qtdvagas = document.getElementById('qtdvagas').value;
+      postPrestador(idlogin, nome, telefone, cidade, rua, bairro, numero, recebecartao, recebedinheiro, recebepix, servico, qtdvagas).then(prestador => { })
+    }else{
+      postContratante(idlogin, nome, telefone, cidade, rua, bairro, numero).then(contratante => { })
 
     }
   })
@@ -70,6 +75,8 @@ prestador.addEventListener("change", (el) => {
     document.getElementById("labelc").style.display = "block";
     document.getElementById("labelp").style.display = "block";
     document.getElementById("labeld").style.display = "block";
+    document.getElementById("labelqtdvagas").style.display = "block";
+    document.getElementById("qtdvagas").style.display = "block";
     //document.getElementById("contratante").style.display = "none;"
     //document.getElementById("ps").style.display = "none;"
   }
@@ -87,6 +94,9 @@ contratante.addEventListener("change", (el) => {
     document.getElementById("labelc").style.display = "none";
     document.getElementById("labelp").style.display = "none";
     document.getElementById("labeld").style.display = "none";
+    document.getElementById("labelqtdvagas").style.display = "none";
+    document.getElementById("qtdvagas").style.display = "none";
+    document.getElementById("qtdvagas").value = "";
     let servicos = document.querySelector('#servico');
     servicos.selectedIndex = 0;
     var checkboxes = document.getElementsByName('formapag');
@@ -95,7 +105,7 @@ contratante.addEventListener("change", (el) => {
     }
   }
 });
-function vizualizar() {
+function visualizar() {
   let checkbox = document.getElementById('versenha');
   if (checkbox.checked) {
     document.getElementById('senha').type = 'text';
