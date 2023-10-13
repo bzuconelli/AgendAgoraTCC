@@ -104,7 +104,7 @@
                         <div class="mb-3">
                             <label for="servico" class="text-white" style="display: none;" id="teste">Tipo de
                                 Serviço:</label>
-                            <select class="form-control" id="servico" style="display: none;">
+                            <select class="form-control" id="servico" style="display: none;" >
                                 <option value="" selected>Que tipo de serviço Voce presta</option>
                                 <option value="Eletricista">Eletricista</option>
                                 <option value="Encanador">Encanador</option>
@@ -113,25 +113,25 @@
                         </div>
                         <label class="text-white" style="display: none;" id="pag">Quai formas de
                             pagamento Voce aceita ?</label>
-                        <fieldset name="formapag"></fieldset>
+                        <fieldset name="formapag">
                         <div class="mb-3 form-check">
 
                             <input type="checkbox" class="form-check-input" id="cartao" name="formapag" value="cartao"
-                                style="display: none;">
+                                style="display: none;" >
                             <label class="form-check-label text-white" for="cartao" id="labelc"
                                 style="display: none;">cartão</label>
                         </div>
                         <div class="mb-3 form-check">
                             <input type="checkbox" class="form-check-input" id="pix" name="formapag" value="pix"
-                                style="display: none;">
+                                style="display: none;" >
                             <label class="form-check-label text-white" for="pix" id="labelp"
                                 style="display: none;">PIX</label>
                         </div>
-                        <div class="mb-3 form-check">
+                        <div class="mb-3 form-check" >
                             <input type="checkbox" class="form-check-input" id="dinheiro" name="formapag"
-                                value="dinheiro" style="display: none;">
+                                value="dinheiro" style="display: none;" >
                             <label class="form-check-label text-white" for="dinheiro" id="labeld"
-                                style="display: none;">Dinheiro</label>
+                                style="display: none;" >Dinheiro</label>
                         </div>
                         </fieldset>
 
@@ -145,6 +145,8 @@
         </div>
     </div>
     <script src="cadastro.js"></script>
+    <script src="api.js"> </script>
+
 </body>
 
 </html>

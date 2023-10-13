@@ -1,21 +1,43 @@
 document.getElementById('cadastro').addEventListener('submit', function (event) {
   event.preventDefault();
-  let nome = document.getElementById('nome').value;
   let email = document.getElementById('email').value;
   let senha = document.getElementById('senha').value;
-  let telefone = document.getElementById('telefone').value;
-  let cidade = document.getElementById('cidade').value;
-  let rua = document.getElementById('rua').value;
-  let bairro = document.getElementById('bairro').value;
-  let numero = document.getElementById('numero').value;
-  
-    let checkbox = document.getElementById('cartao');
-    //console.log(checkbox);
+  postLogin(email, senha).then(login => {
+    let idlogin = login.id
+    let nome = document.getElementById('nome').value;
+    let telefone = document.getElementById('telefone').value;
+    let cidade = document.getElementById('cidade').value;
+    let rua = document.getElementById('rua').value;
+    let bairro = document.getElementById('bairro').value;
+    let numero = document.getElementById('numero').value;
 
-    console.log(checkbox.checked);
+    if (prestador.checked) {
+      let checkboxcartao = document.getElementById('cartao');
+      if (checkboxcartao.checked == true) {
+        var recebecartao = "sim"
+      } else {
+        recebecartao = "não"
+      }
+      let checkboxpix = document.getElementById('pix');
+      if (checkboxpix.checked == true) {
+        var recebepix = "sim"
+      } else {
+        recebepix = "não"
+      }
+      let checkboxdinheiro = document.getElementById('dinheiro');
+      if (checkboxdinheiro.checked == true) {
+        var recebedinheiro = "sim"
+      } else {
+        recebedinheiro = "não"
+      }
+      console.log(recebecartao, recebedinheiro, recebepix)
+
+    }
+  })
 
 
-  
+
+
 
 
 
