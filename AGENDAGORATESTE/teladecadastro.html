@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tela de Cadastro</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <style>
         body {
             background-color: #868686;
@@ -37,8 +38,9 @@
             text-align: center;
 
         }
+
         .required:after {
-            content:" *"; 
+            content: " *";
             color: red;
         }
     </style>
@@ -64,7 +66,7 @@
                             <input type="password" class="form-control" id="senha" placeholder="Sua senha" required>
                         </div>
                         <div class="mb-3 form-check">
-                            <input type="checkbox" class="form-check-input" id="versenha" onclick="vizualizar()">
+                            <input type="checkbox" class="form-check-input" id="versenha" onclick="visualizar()">
                             <label class="form-check-label text-white" for="versenha">Ver Senha</label>
                         </div>
                         <div class="mb-3">
@@ -104,7 +106,7 @@
                         <div class="mb-3">
                             <label for="servico" class="text-white" style="display: none;" id="teste">Tipo de
                                 Serviço:</label>
-                            <select class="form-control" id="servico" style="display: none;" >
+                            <select class="form-control" id="servico" style="display: none;">
                                 <option value="" selected>Que tipo de serviço Voce presta</option>
                                 <option value="Eletricista">Eletricista</option>
                                 <option value="Encanador">Encanador</option>
@@ -114,40 +116,63 @@
                         <label class="text-white" style="display: none;" id="pag">Quai formas de
                             pagamento Voce aceita ?</label>
                         <fieldset name="formapag">
-                        <div class="mb-3 form-check">
+                            <div class="mb-3 form-check">
 
-                            <input type="checkbox" class="form-check-input" id="cartao" name="formapag" value="cartao"
-                                style="display: none;" >
-                            <label class="form-check-label text-white" for="cartao" id="labelc"
-                                style="display: none;">cartão</label>
-                        </div>
-                        <div class="mb-3 form-check">
-                            <input type="checkbox" class="form-check-input" id="pix" name="formapag" value="pix"
-                                style="display: none;" >
-                            <label class="form-check-label text-white" for="pix" id="labelp"
-                                style="display: none;">PIX</label>
-                        </div>
-                        <div class="mb-3 form-check" >
-                            <input type="checkbox" class="form-check-input" id="dinheiro" name="formapag"
-                                value="dinheiro" style="display: none;" >
-                            <label class="form-check-label text-white" for="dinheiro" id="labeld"
-                                style="display: none;" >Dinheiro</label>
-                        </div>
+                                <input type="checkbox" class="form-check-input" id="cartao" name="formapag"
+                                    value="cartao" style="display: none;">
+                                <label class="form-check-label text-white" for="cartao" id="labelc"
+                                    style="display: none;">cartão</label>
+                            </div>
+                            <div class="mb-3 form-check">
+                                <input type="checkbox" class="form-check-input" id="pix" name="formapag" value="pix"
+                                    style="display: none;">
+                                <label class="form-check-label text-white" for="pix" id="labelp"
+                                    style="display: none;">PIX</label>
+                            </div>
+                            <div class="mb-3 form-check">
+                                <input type="checkbox" class="form-check-input" id="dinheiro" name="formapag"
+                                    value="dinheiro" style="display: none;">
+                                <label class="form-check-label text-white" for="dinheiro" id="labeld"
+                                    style="display: none;">Dinheiro</label>
+                            </div>
                         </fieldset>
                         <div class="mb-3">
-                            <label for="qtdvagas" class="form-label text-white" id="labelqtdvagas" style="display: none;">Quantidade de atendimentos por dia</label>
-                            <input type="number" class="form-control" id="qtdvagas" placeholder="Quantidade de atendimentos por dia " style="display: none;" >
+                            <label for="qtdvagas" class="form-label text-white" id="labelqtdvagas"
+                                style="display: none;">Quantidade de atendimentos por dia</label>
+                            <input type="number" class="form-control" id="qtdvagas"
+                                placeholder="Quantidade de atendimentos por dia " style="display: none;">
                         </div>
 
 
                         <div class="div-1">
-                            <button type="submit" class="btn btn-custom btn-block">Cadastrar</button>
+
+                            <button type="submit" class="btn btn-custom btn-block" id="cadastrar">
+                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"
+                                    id="spinner" style="display:none"></span>Cadastrar
+                            </button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
+        <div class="modal" tabindex="-1" id="modal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Informações</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Usuario Cadastrado com sucesso.</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
     <script src="cadastro.js"></script>
     <script src="api.js"> </script>
 

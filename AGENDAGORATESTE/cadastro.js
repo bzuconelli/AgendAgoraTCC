@@ -2,6 +2,9 @@ document.getElementById('cadastro').addEventListener('submit', function (event) 
   event.preventDefault();
   let email = document.getElementById('email').value;
   let senha = document.getElementById('senha').value;
+  document.getElementById("spinner").style.display = 'inline-block';
+  document.getElementById("cadastrar").disabled = true;
+
   postLogin(email, senha).then(login => {
     let idlogin = login.id
     let nome = document.getElementById('nome').value;
@@ -33,9 +36,32 @@ document.getElementById('cadastro').addEventListener('submit', function (event) 
       let tipodeserviço = document.querySelector('#servico');
       let servico = tipodeserviço.options[tipodeserviço.selectedIndex].value;
       let qtdvagas = document.getElementById('qtdvagas').value;
-      postPrestador(idlogin, nome, telefone, cidade, rua, bairro, numero, recebecartao, recebedinheiro, recebepix, servico, qtdvagas).then(prestador => { })
-    }else{
-      postContratante(idlogin, nome, telefone, cidade, rua, bairro, numero).then(contratante => { })
+      postPrestador(idlogin, nome, telefone, cidade, rua, bairro, numero, recebecartao, recebedinheiro, recebepix, servico, qtdvagas).then(prestador => {
+        const myModal = new bootstrap.Modal(document.getElementById('modal'), {})
+        myModal.show();
+        document.getElementById("cadastro").reset();
+        document.getElementById("spinner").style.display = 'none';
+        document.getElementById("cadastrar").disabled = false;
+        document.getElementById("servico").style.display = "none";
+        document.getElementById("teste").style.display = "none";
+        document.getElementById("cartao").style.display = "none";
+        document.getElementById("pix").style.display = "none";
+        document.getElementById("dinheiro").style.display = "none";
+        document.getElementById("pag").style.display = "none";
+        document.getElementById("labelc").style.display = "none";
+        document.getElementById("labelp").style.display = "none";
+        document.getElementById("labeld").style.display = "none";
+        document.getElementById("labelqtdvagas").style.display = "none";
+        document.getElementById("qtdvagas").style.display = "none";
+      })
+    } else {
+      postContratante(idlogin, nome, telefone, cidade, rua, bairro, numero).then(contratante => {
+        const myModal = new bootstrap.Modal(document.getElementById('modal'), {})
+        myModal.show();
+        document.getElementById("cadastro").reset();
+        document.getElementById("spinner").style.display = 'none';
+        document.getElementById("cadastrar").disabled = false;
+      })
 
     }
   })
