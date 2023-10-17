@@ -1,5 +1,5 @@
 
-var loginvalidado= false
+var loginvalidado = false
 document.getElementById('formulario').addEventListener('submit', function (event) {
     event.preventDefault();
 
@@ -8,17 +8,17 @@ document.getElementById('formulario').addEventListener('submit', function (event
     document.getElementById("spinner").style.display = 'inline-block';
     document.getElementById("entrar").disabled = true;
 
-    getLogin().then(logins=> logins.forEach( login => {
+    getLogin().then(logins => logins.forEach(login => {
 
         console.log(login);
 
 
-       // if (email == login.email && senha == login.senha){
-        //   loginvalidado = true;
-       // }
+        if (email == login.email && senha == login.senha) {
+            loginvalidado = true;
+        }
     }));
 
-    if (loginvalidado==true) {
+    if (loginvalidado == true) {
         document.getElementById("spinner").style.display = 'none';
         document.getElementById("entrar").disabled = false;
         window.location.href = "inicio.html"

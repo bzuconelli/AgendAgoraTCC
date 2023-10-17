@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Principal</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f2f2f2;
+        }
+        .navbar {
+            background-color: #333;
+        }
+        .navbar-dark .navbar-nav .nav-link {
+            color: #fff;
+        }
+        .navbar-dark .navbar-toggler-icon {
+            background-color: #fff;
+        }
+        .account-settings {
+            color: #fff;
+        }
+        .top-rated-providers {
+            background-color: #333;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 50px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+        }
+        .top-rated-providers h2 {
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">Seu Logo</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Serviço 1</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Serviço 2</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Serviço 3</a>
+                    </li>
+                </ul>
+            </div>
+            <span class="account-settings">Configurações de Conta</span>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="top-rated-providers">
+                    <h2 class="text-center">Prestadores Mais Bem Avaliados</h2>
+                    <!-- Coloque aqui os cards dos prestadores mais bem avaliados -->
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
