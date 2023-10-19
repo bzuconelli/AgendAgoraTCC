@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,18 +10,23 @@
         body {
             background-color: #f2f2f2;
         }
+
         .navbar {
             background-color: #333;
         }
+
         .navbar-dark .navbar-nav .nav-link {
             color: #fff;
         }
+
         .navbar-dark .navbar-toggler-icon {
             background-color: #fff;
         }
+
         .account-settings {
             color: #fff;
         }
+
         .top-rated-providers {
             background-color: #333;
             padding: 20px;
@@ -28,16 +34,54 @@
             margin-top: 50px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
         }
+
         .top-rated-providers h2 {
             color: #fff;
         }
+
+        body {
+            background-color: #868686;
+        }
+
+        .menu-container {
+            background-color: #333;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 50px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .menu-container h2 {
+            color: #d29f06;
+        }
+
+        .provider-card {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 10px;
+            margin-top: 10px;
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-custom {
+            background-color: #d29f06;
+            border-color: #d29f06;
+            color: #fff;
+        }
+
+        .div-1 {
+            text-align: center;
+
+        }
     </style>
 </head>
+
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
             <a class="navbar-brand" href="#">Logo</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
@@ -61,10 +105,41 @@
             <div class="col-md-8">
                 <div class="top-rated-providers">
                     <h2 class="text-center">Prestadores Mais Bem Avaliados</h2>
-                    <!-- Coloque aqui os cards dos prestadores mais bem avaliados -->
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="provider-card">
+                                <h4>Classe de Serviço 1</h4>
+                                <p>Nome do Prestador 1</p>
+                                <p>Classificação: 4.8</p>
+                                <div class="div-1">
+                                    <button class="btn btn-custom btn-sm">Contratar</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="provider-card">
+                                <h4>Classe de Serviço 2</h4>
+                                <p>Nome do Prestador 2</p>
+                                <p>Classificação: 4.5</p>
+                                <div class="div-1">
+                                    <button class="btn btn-custom btn-sm">Contratar</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="provider-card">
+                                <h4>Classe de Serviço 3</h4>
+                                <p>Nome do Prestador 3</p>
+                                <p>Classificação: 4.9</p>
+                                <div class="div-1">
+                                    <button class="btn btn-custom btn-sm">Contratar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 </body>
+
 </html>
