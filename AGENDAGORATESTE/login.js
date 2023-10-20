@@ -16,23 +16,24 @@ document.getElementById('formulario').addEventListener('submit', function (event
         if (email == login.email && senha == login.senha) {
             loginvalidado = true;
         }
+
+
+        if (loginvalidado == true) {
+            document.getElementById("spinner").style.display = 'none';
+            document.getElementById("entrar").disabled = false;
+            window.location.href = "telademenuinicial.html"
+
+        } else {
+            const myModal = new bootstrap.Modal(document.getElementById('modal'), {})
+            myModal.show();
+            document.getElementById("entrar").disabled = false;
+            document.getElementById("spinner").style.display = 'none';
+            document.getElementById("formulario").reset();
+            document.getElementById("email").focus;
+
+
+        }
     }));
-
-    if (loginvalidado == true) {
-        document.getElementById("spinner").style.display = 'none';
-        document.getElementById("entrar").disabled = false;
-        window.location.href = "inicio.html"
-
-    } else {
-        const myModal = new bootstrap.Modal(document.getElementById('modal'), {})
-        myModal.show();
-        document.getElementById("entrar").disabled = false;
-        document.getElementById("spinner").style.display = 'none';
-        document.getElementById("formulario").reset();
-        document.getElementById("email").focus;
-
-
-    }
 });
 
 function visualizar() {
