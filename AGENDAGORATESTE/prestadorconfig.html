@@ -8,7 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
-            background-color: #f2f2f2;
+            background-color: #868686;
         }
 
         .settings-container {
@@ -68,7 +68,6 @@
                             <input type="tel" maxlength="15" class="form-control" id="telefone"
                                 onkeyup="handlePhone(event)" required />
                         </div>
-
                         <div class="mb-3">
                             <label for="cidade" class="form-label text-white required">Cidade</label>
                             <input type="cidade" class="form-control" id="cidade" placeholder="Sua Cidade" required>
@@ -86,47 +85,42 @@
                             <input type="numero" class="form-control" id="numero" placeholder="Seu Numero" required>
                         </div>
                         <div class="mb-3">
-                            <label for="servico" class="text-white" style="display: none;" id="teste">Tipo de
+                            <label for="servico" class="text-white" id="teste">Tipo de
                                 Serviço:</label>
-                            <select class="form-control" id="servico" style="display: none;">
+                            <select class="form-control" id="servico">
                                 <option value="" selected>Que tipo de serviço você presta</option>
                                 <option value="Eletricista">Eletricista</option>
                                 <option value="Encanador">Encanador</option>
                                 <option value="Pintor">Pintor</option>
                             </select>
                         </div>
-                        <label class="text-white" style="display: none;" id="pag">Quais formas de
-                            pagamento Voce aceita ?</label>
+                        <label class="text-white" id="pag">Quais formas de pagamento você aceita ?</label>
                         <fieldset name="formapag">
                             <div class="mb-3 form-check">
 
                                 <input type="checkbox" class="form-check-input" id="cartao" name="formapag"
-                                    value="cartao" style="display: none;">
-                                <label class="form-check-label text-white" for="cartao" id="labelc"
-                                    style="display: none;">cartão</label>
+                                    value="cartao">
+                                <label class="form-check-label text-white" for="cartao" id="labelc">Cartão</label>
                             </div>
                             <div class="mb-3 form-check">
-                                <input type="checkbox" class="form-check-input" id="pix" name="formapag" value="pix"
-                                    style="display: none;">
-                                <label class="form-check-label text-white" for="pix" id="labelp"
-                                    style="display: none;">PIX</label>
+                                <input type="checkbox" class="form-check-input" id="pix" name="formapag" value="pix">
+                                <label class="form-check-label text-white" for="pix" id="labelp">PIX</label>
                             </div>
                             <div class="mb-3 form-check">
                                 <input type="checkbox" class="form-check-input" id="dinheiro" name="formapag"
-                                    value="dinheiro" style="display: none;">
-                                <label class="form-check-label text-white" for="dinheiro" id="labeld"
-                                    style="display: none;">Dinheiro</label>
+                                    value="dinheiro">
+                                <label class="form-check-label text-white" for="dinheiro" id="labeld">Dinheiro</label>
                             </div>
                         </fieldset>
                         <div class="mb-3">
-                            <label for="qtdvagas" class="form-label text-white" id="labelqtdvagas"
-                                style="display: none;">Quantidade de atendimentos por dia</label>
+                            <label for="qtdvagas" class="form-label text-white" id="labelqtdvagas">Quantidade de
+                                atendimentos por dia</label>
                             <input type="number" class="form-control" id="qtdvagas"
-                                placeholder="Quantidade de atendimentos por dia " style="display: none;">
+                                placeholder="Quantidade de atendimentos por dia">
                         </div>
 
 
-                        <div class="div-1">
+                        <div class=" div-1">
                             <button type="submit" class="btn btn-custom btn-block">Salvar Configurações</button>
                         </div>
                     </form>
