@@ -31,7 +31,7 @@ function initMap() {
             title: prestador.nome,
         });
         let infoWindow = new google.maps.InfoWindow({
-            content: '<div id="teste">' + prestador.id + '<h2>' + prestador.nome + '</h2>' + ' <button class="btn-close" data-bs-dismiss="modal" onclick="selecionar(this)">botão</button> </div>'
+            content: '<div id="teste">' + prestador.id + '<h2>' + prestador.nome + '</h2>' + ' <button type="button"  data-bs-dismiss="modal" aria-label="Close" onclick="selecionar(this)">Selecionar Prestador</button></div>'
 
         });
         marker.addListener('click', () => {

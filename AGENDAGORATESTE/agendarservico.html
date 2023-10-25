@@ -9,7 +9,7 @@
     <style>
         #map {
             height: 100%;
-        }     
+        }
 
 
 
@@ -43,6 +43,11 @@
             text-align: center;
 
         }
+
+        .required:after {
+            content: " *";
+            color: red;
+        }
     </style>
 </head>
 
@@ -54,28 +59,22 @@
                     <h2 class="text-center">Agendar serviço</h2>
                     <form id="agendarservico">
                         <div class="mb-3">
-                            <label for="Saf" class="form-label text-white">Serviço à ser realizado
-                            </label>
+                            <label for="Saf" class="form-label text-white required">Serviço à ser realizado</label>
                             <input type="text" class="form-control" id="Saf" placeholder="Serviço a ser realizado"
                                 required>
-
                         </div>
                         <div class="mb-3">
-                            <label for="filtroDistancia" class="form-label text-white">Filtrar por Distância
-                                (km)</label>
+                            <label for="filtroDistancia" class="form-label text-white required">Filtrar por distância (km)</label>
                             <input type="number" class="form-control" id="filtroDistancia"
                                 placeholder="Distância máxima" required>
                         </div>
                         <div class="mb-3">
-                            <label for="data" class="form-label text-white"> Escolha a data
-                            </label>
-                            <input type="date" class="form-control" id="data" placeholder="Escolha a data" required>
+                            <label for="data" class="form-label text-white required"> Escolha a data</label>
+                            <input type="date" class="form-control " id="data" placeholder="Escolha a data" required>
                         </div>
-
                         <div class="mb-3">
-                            <label for="filtroPagamento" class="form-label text-white">Escolha uma forma de
-                                Pagamento</label>
-                            <select class="form-select" id="filtroPagamento" required>
+                            <label for="filtroPagamento" class="form-label text-white required">Escolha uma forma de Pagamento</label>
+                            <select class="form-select required" id="filtroPagamento" required>
                                 <option value="" select> Escolha uma forma de Pagamento</option>
                                 <option value="pix">Pix</option>
                                 <option value="credito">Cartão de Crédito</option>
@@ -97,14 +96,14 @@
                         <h5 class="modal-title">Informações</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body" id="map" style="height:600px" ></div>
-                    </div>
-
+                    <div class="modal-body" id="map" style="height:600px"></div>
                 </div>
+
             </div>
-
-
         </div>
+
+
+    </div>
     </div>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDpddblAFVXI6kT9mVTf4PfXmo_fhTabFM&callback=initMap"
         defer></script>
