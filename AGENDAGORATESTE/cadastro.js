@@ -4,6 +4,18 @@ document.getElementById('cadastro').addEventListener('submit', function (event) 
   let senha = document.getElementById('senha').value;
   document.getElementById("spinner").style.display = 'inline-block';
   document.getElementById("cadastrar").disabled = true;
+  if ("geolocation" in navigator) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      var latitude = position.coords.latitude;
+      var longitude = position.coords.longitude;
+      var coordinatesElement = document.getElementById("coordinates");
+      coordinatesElement.textContent = "Latitude: " + latitude + ", Longitude: " + longitude;
+    }, function(error) {
+      console.error("Erro ao obter localização: " + error.message);
+    });
+  } else {
+    console.error("Navegador não suporta geolocalização.");
+  }
 
   postLogin(email, senha).then(login => {
     let idlogin = login.id

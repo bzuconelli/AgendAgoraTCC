@@ -31,7 +31,7 @@ function initMap() {
             title: prestador.nome,
         });
         let infoWindow = new google.maps.InfoWindow({
-            content: '<div id="teste">' + prestador.id + '<h2>' + prestador.nome + '</h2>' + ' <button onclick="selecionar(this)">Selecionar Prestador</button> </div>'
+            content: '<div id="teste">' + prestador.id + '<h2>' + prestador.nome + '</h2>' + ' <button class="btn-close" data-bs-dismiss="modal" onclick="selecionar(this)">botão</button> </div>'
 
         });
         marker.addListener('click', () => {
@@ -42,10 +42,9 @@ function initMap() {
 }
 
 
-function selecionar(elemet) {
-    let proximoelemento = elemet.parentNode;
+function selecionar(element) {
+    let proximoelemento = element.parentNode;
     let idprestador = proximoelemento.childNodes[0];
     console.log(idprestador);
     const myModal = new bootstrap.Modal(document.getElementById('modalp'), {})
-    myModal.hide();
 }
