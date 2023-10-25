@@ -83,4 +83,12 @@ async function postContratante(idlogin, nome, telefone, cidade, rua, bairro, num
 
     return contratante;
 }
+async function getPretadores() {
+    let response = await fetch("https://650f142154d18aabfe99d018.mockapi.io/Servicos")
+    let prestadores = await response.json();
+    console.log(prestadores);
+    return prestadores;
+}
+
+
 

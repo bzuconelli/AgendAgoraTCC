@@ -13,10 +13,9 @@ document.getElementById('agendarservico').addEventListener('submit', function (e
 
 });
 
-var Prestador = "Jose Silva";
-var nota = 8;
-var id = 1;
+
 var map;
+
 
 function initMap() {
     var mapOptions = {
@@ -26,29 +25,27 @@ function initMap() {
 
     map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
-    const marker = new google.maps.Marker({
-        position: { lat: -26.826162, lng: -49.300635 },
-        map: map,
-        title: 'Jose',
+    getPretadores().then(prestadores => prestadores.forEach(prestador => {
+        const marker = new google.maps.Marker({
+            position: { lat: prestador.latitude, lng: prestador.longitude },
+            title: prestador.nome,
+        });
+        let infoWindow = new google.maps.InfoWindow({
+            content: '<div id="teste">' + prestador.id + '<h2>' + prestador.nome + '</h2>' + ' <button onclick="selecionar(this)">Selecionar Prestador</button> </div>'
 
-
-    })
-    let infoWindow = new google.maps.InfoWindow({
-        content: '<div id="teste">' + id + '<h2>' + Prestador + '</h2>' + '<h2> Avalição:' + nota + '</h2>' + '<button onclick="selecionar(this)">Selecionar Prestador</button> </div>'
-
-    });
-    marker.addListener('click', () => {
-        infoWindow.open(map, marker);
-    })
-
+        });
+        marker.addListener('click', () => {
+            infoWindow.open(map, marker);
+        })
+        marker.setMap(map);
+    }));
 }
 
 
 function selecionar(elemet) {
-
-    console.log(elemet)
-
-
-
-
+    let proximoelemento = elemet.parentNode;
+    let idprestador = proximoelemento.childNodes[0];
+    console.log(idprestador);
+    const myModal = new bootstrap.Modal(document.getElementById('modalp'), {})
+    myModal.hide();
 }
