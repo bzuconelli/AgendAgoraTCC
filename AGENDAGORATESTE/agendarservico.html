@@ -64,7 +64,8 @@
                                 required>
                         </div>
                         <div class="mb-3">
-                            <label for="filtroDistancia" class="form-label text-white required">Filtrar por distância (km)</label>
+                            <label for="filtroDistancia" class="form-label text-white required">Agendar por distância
+                                (km)</label>
                             <input type="number" class="form-control" id="filtroDistancia"
                                 placeholder="Distância máxima" required>
                         </div>
@@ -73,7 +74,8 @@
                             <input type="date" class="form-control " id="data" placeholder="Escolha a data" required>
                         </div>
                         <div class="mb-3">
-                            <label for="filtroPagamento" class="form-label text-white required">Escolha uma forma de Pagamento</label>
+                            <label for="filtroPagamento" class="form-label text-white required">Escolha uma forma de
+                                Pagamento</label>
                             <select class="form-select required" id="filtroPagamento" required>
                                 <option value="" select> Escolha uma forma de Pagamento</option>
                                 <option value="pix">Pix</option>
@@ -84,6 +86,9 @@
                         </div>
                         <div class="div-1">
                             <button type="submit" class="btn btn-custom btn-block" id="Filtrar">Filtrar</button>
+                            <button class="btn btn-custom btn-block" id="agendar" onclick="agendarservico()"
+                                style="display: none;">Agendar</button>
+
                         </div>
                     </form>
                 </div>
@@ -101,6 +106,7 @@
 
             </div>
         </div>
+        
 
 
     </div>

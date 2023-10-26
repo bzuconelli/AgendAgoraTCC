@@ -12,6 +12,16 @@ document.getElementById('agendarservico').addEventListener('submit', function (e
 
 
 });
+function agendarservico() {
+    let servicoaserrealizado = document.getElementById('Saf').value;
+    let distancia = document.getElementById('filtroDistancia').value;
+
+    let data = document.getElementById('data').value;
+    let formasdepagamento = document.querySelector('#filtroPagamento');
+    let formadepagamento = formasdepagamento.options[formasdepagamento.selectedIndex].value;
+}
+
+
 
 
 var map;
@@ -44,7 +54,9 @@ function initMap() {
 
 function selecionar(element) {
     let proximoelemento = element.parentNode;
-    let idprestador = proximoelemento.childNodes[0];
+    var idprestador = proximoelemento.childNodes[0];
     console.log(idprestador);
-    const myModal = new bootstrap.Modal(document.getElementById('modalp'), {})
+    document.getElementById('agendar').style.display= "block"
+
+
 }

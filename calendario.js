@@ -1,13 +1,22 @@
 function daysInMonth(month, year) {
     return new Date(year, month, 0).getDate();
 }
+var ano, mes
+function escolherAnoMes() {
+    [ano, mes] = document.getElementById('month').value.split('-');
+    console.log(mes, ano);
+    createCalendar(mes,ano);  
 
-function createCalendar() {
+}
+
+
+
+
+function createCalendar(month,year) {
     let calendar = document.querySelector(".calendar");
 
-    // Defina o mês e ano desejados
-    let month = 2; // Novembro (1 - janeiro, 2 - fevereiro, etc.)
-    let year = 2023;
+
+    
 
     let daysInThisMonth = daysInMonth(month, year);
 
@@ -17,10 +26,12 @@ function createCalendar() {
         dayElement.innerHTML = `
         <div class="day h2">
         <p><strong>${day}</strong></p> 
-        <input type="number" class="form-control day-text">
+        <input type="number" class="form-control day-text" min=0 value="0">
         </div>`;
         calendar.appendChild(dayElement);
     }
+    
 }
 
-createCalendar();
+
+
