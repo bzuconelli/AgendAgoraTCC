@@ -31,7 +31,7 @@
             margin: 10px;
         }
 
-        .day  {
+        .day {
             background-color: #fff;
             padding: 10px;
             border-radius: 5px;
@@ -46,6 +46,7 @@
         .day-text {
             width: 100%;
         }
+
         .div-1 {
             text-align: center;
 
@@ -58,16 +59,21 @@
         <div class="row justify-content-center">
             <div class="col-md-10">
                 <div class="calendar-container">
-                    <h2>Calendário com vagas disponíveis</h2>
+                    <h2>Calendário com vagas disponíveis no mês  </h2>
+                    <div class="div-1">
+                        <input type="month" id="month">
+                        <button onclick="escolherAnoMes()">Escolher ano e mês</button>
+
+                    </div>
+
                     <div class="calendar">
                         <!-- Dias do mês -->
-                        
+
 
                     </div>
                     <div class="div-1">
-                        <button class="btn btn-custom btn-sm">Salvar</button>
-                        <input type="month" id="month">
-                        <button onclick="escolherAnoMes()">Escolher ano e mês</button>
+                        <button class="btn btn-custom btn-sm" onclick="coletarDados()">Salvar</button>
+
                     </div>
                 </div>
             </div>
