@@ -43,18 +43,18 @@
             <div class="col-md-6">
                 <div class="settings-container">
                     <h2 class="text-center">Configurações de Conta</h2>
-                    <form>
+                    <form id="editarconfigcontra">
                         <div class="mb-3">
                             <label for="nome" class="form-label">Nome</label>
-                            <input type="text" class="form-control" id="nome" placeholder="Seu Nome">
+                            <input type="text" class="form-control" id="nome" placeholder="Seu Nome" required>
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">E-mail</label>
-                            <input type="email" class="form-control" id="email" placeholder="seuemail@example.com">
+                            <input type="email" class="form-control" id="email" placeholder="seuemail@example.com" required>
                         </div>
                         <div class="mb-3">
                             <label for="senha" class="form-label">Senha</label>
-                            <input type="password" class="form-control" id="senha" placeholder="Sua Senha">
+                            <input type="password" class="form-control" id="senha" placeholder="Sua Senha" required>
                         </div>
                         <div class="mb-3">
                             <label for="telefone" class="form-label text-white required">Telefone</label>
@@ -85,6 +85,8 @@
             </div>
         </div>
     </div>
+    <script src="contratanteconfig.js"></script>
+    <script src="api.js"></script>
 </body>
 </html>
 

@@ -89,6 +89,26 @@ async function getPretadores() {
     console.log(prestadores);
     return prestadores;
 }
+async function putcontratante(id,nome,idade){
+    let response= await fetch("https://65298d9455b137ddc83efbf7.mockapi.io/contratante/"+id,{
+    method:"PUT",    
+    headers: {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json'
+    },        
+    
+    body:JSON.stringify({
+        name:nome ,
+        age:idade
+
+    })
+    });             
+
+    let pessoa = await response.json();
+    //console.log(pessoas);
+    return pessoa;
+}
+
 
 
 

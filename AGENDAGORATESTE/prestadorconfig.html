@@ -53,15 +53,15 @@
                     <form>
                         <div class="mb-3">
                             <label for="nome" class="form-label">Nome</label>
-                            <input type="text" class="form-control" id="nome" placeholder="Seu Nome">
+                            <input type="text" class="form-control" id="nome" placeholder="Seu Nome" required>
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">E-mail</label>
-                            <input type="email" class="form-control" id="email" placeholder="seuemail@example.com">
+                            <input type="email" class="form-control" id="email" placeholder="seuemail@example.com" required>
                         </div>
                         <div class="mb-3">
                             <label for="senha" class="form-label">Senha</label>
-                            <input type="password" class="form-control" id="senha" placeholder="Sua Senha">
+                            <input type="password" class="form-control" id="senha" placeholder="Sua Senha"required>
                         </div>
                         <div class="mb-3">
                             <label for="telefone" class="form-label text-white required">Telefone</label>
@@ -87,7 +87,7 @@
                         <div class="mb-3">
                             <label for="servico" class="text-white" id="teste">Tipo de
                                 Serviço:</label>
-                            <select class="form-control" id="servico">
+                            <select class="form-control" id="servico" required>
                                 <option value="" selected>Que tipo de serviço você presta</option>
                                 <option value="Eletricista">Eletricista</option>
                                 <option value="Encanador">Encanador</option>
@@ -95,7 +95,7 @@
                             </select>
                         </div>
                         <label class="text-white" id="pag">Quais formas de pagamento você aceita ?</label>
-                        <fieldset name="formapag">
+                        <fieldset name="formapag" >
                             <div class="mb-3 form-check">
 
                                 <input type="checkbox" class="form-check-input" id="cartao" name="formapag"
@@ -111,15 +111,7 @@
                                     value="dinheiro">
                                 <label class="form-check-label text-white" for="dinheiro" id="labeld">Dinheiro</label>
                             </div>
-                        </fieldset>
-                        <div class="mb-3">
-                            <label for="qtdvagas" class="form-label text-white" id="labelqtdvagas">Quantidade de
-                                atendimentos por dia</label>
-                            <input type="number" class="form-control" id="qtdvagas"
-                                placeholder="Quantidade de atendimentos por dia">
-                        </div>
-
-
+                        </fieldset>                   
                         <div class=" div-1">
                             <button type="submit" class="btn btn-custom btn-block">Salvar Configurações</button>
                         </div>

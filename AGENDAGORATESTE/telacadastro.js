@@ -5,12 +5,11 @@ document.getElementById('cadastro').addEventListener('submit', function (event) 
   document.getElementById("spinner").style.display = 'inline-block';
   document.getElementById("cadastrar").disabled = true;
   if ("geolocation" in navigator) {
-    navigator.geolocation.getCurrentPosition(function(position) {
+    navigator.geolocation.getCurrentPosition(function (position) {
       var latitude = position.coords.latitude;
       var longitude = position.coords.longitude;
-      var coordinatesElement = document.getElementById("coordinates");
-      coordinatesElement.textContent = "Latitude: " + latitude + ", Longitude: " + longitude;
-    }, function(error) {
+      
+    }, function (error) {
       console.error("Erro ao obter localização: " + error.message);
     });
   } else {
@@ -47,15 +46,15 @@ document.getElementById('cadastro').addEventListener('submit', function (event) 
       }
       let tipodeserviço = document.querySelector('#servico');
       let servico = tipodeserviço.options[tipodeserviço.selectedIndex].value;
-      let qtdvagas = document.getElementById('qtdvagas').value;
-      postPrestador(idlogin, nome, telefone, cidade, rua, bairro, numero, recebecartao, recebedinheiro, recebepix, servico, qtdvagas).then(prestador => {
+
+      postPrestador(idlogin, nome, telefone, cidade, rua, bairro, numero, recebecartao, recebedinheiro, recebepix, servico).then(prestador => {
         const myModal = new bootstrap.Modal(document.getElementById('modal'), {})
         myModal.show();
         document.getElementById("cadastro").reset();
         document.getElementById("spinner").style.display = 'none';
         document.getElementById("cadastrar").disabled = false;
         document.getElementById("servico").style.display = "none";
-        document.getElementById("teste").style.display = "none";
+        document.getElementById("servicolabel").style.display = "none";
         document.getElementById("cartao").style.display = "none";
         document.getElementById("pix").style.display = "none";
         document.getElementById("dinheiro").style.display = "none";
@@ -63,8 +62,7 @@ document.getElementById('cadastro').addEventListener('submit', function (event) 
         document.getElementById("labelc").style.display = "none";
         document.getElementById("labelp").style.display = "none";
         document.getElementById("labeld").style.display = "none";
-        document.getElementById("labelqtdvagas").style.display = "none";
-        document.getElementById("qtdvagas").style.display = "none";
+
       })
     } else {
       postContratante(idlogin, nome, telefone, cidade, rua, bairro, numero).then(contratante => {
@@ -77,14 +75,6 @@ document.getElementById('cadastro').addEventListener('submit', function (event) 
 
     }
   })
-
-
-
-
-
-
-
-
 })
 
 let handlePhone = (event) => {
@@ -105,7 +95,7 @@ var contratante = document.querySelector("#contratante");
 prestador.addEventListener("change", (el) => {
   if (prestador.checked) {
     document.getElementById("servico").style.display = "block";
-    document.getElementById("teste").style.display = "block";
+    document.getElementById("servicolabel").style.display = "block";
     document.getElementById("cartao").style.display = "block";
     document.getElementById("pix").style.display = "block";
     document.getElementById("dinheiro").style.display = "block";
@@ -113,10 +103,9 @@ prestador.addEventListener("change", (el) => {
     document.getElementById("labelc").style.display = "block";
     document.getElementById("labelp").style.display = "block";
     document.getElementById("labeld").style.display = "block";
-    document.getElementById("labelqtdvagas").style.display = "block";
-    document.getElementById("qtdvagas").style.display = "block";
-    //document.getElementById("contratante").style.display = "none;"
-    //document.getElementById("ps").style.display = "none;"
+    document.getElementById("servico").setAttribute("required","required");
+    
+
   }
 
 }
@@ -124,7 +113,7 @@ prestador.addEventListener("change", (el) => {
 contratante.addEventListener("change", (el) => {
   if (contratante.checked) {
     document.getElementById("servico").style.display = "none";
-    document.getElementById("teste").style.display = "none";
+    document.getElementById("servicolabel").style.display = "none";
     document.getElementById("cartao").style.display = "none";
     document.getElementById("pix").style.display = "none";
     document.getElementById("dinheiro").style.display = "none";
@@ -132,9 +121,7 @@ contratante.addEventListener("change", (el) => {
     document.getElementById("labelc").style.display = "none";
     document.getElementById("labelp").style.display = "none";
     document.getElementById("labeld").style.display = "none";
-    document.getElementById("labelqtdvagas").style.display = "none";
-    document.getElementById("qtdvagas").style.display = "none";
-    document.getElementById("qtdvagas").value = "";
+    document.getElementById("servico").removeAttribute("required")
     let servicos = document.querySelector('#servico');
     servicos.selectedIndex = 0;
     var checkboxes = document.getElementsByName('formapag');
@@ -143,6 +130,7 @@ contratante.addEventListener("change", (el) => {
     }
   }
 });
+
 function visualizar() {
   let checkbox = document.getElementById('versenha');
   if (checkbox.checked) {

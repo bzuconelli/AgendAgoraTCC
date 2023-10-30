@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendário com Campos de Texto</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #868686;
+        }
+
+        .calendar-container {
+            background-color: #333;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 50px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .calendar-container h2 {
+            color: #fff;
+            text-align: center;
+        }
+
+        .calendar {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+            margin: 10px;
+        }
+
+        .day {
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .btn-custom {
+            background-color: #d29f06;
+            border-color: #d29f06;
+            color: #fff;
+        }
+
+        .day-text {
+            width: 100%;
+        }
+
+        .div-1 {
+            text-align: center;
+
+        }
+        .navbar {
+            background-color: #333;
+        }
+
+        .navbar-dark .navbar-nav .nav-link {
+            color: #fff;
+        }
+
+        .navbar-dark .navbar-toggler-icon {
+            background-color: #fff;
+        }
+
+        .account-settings {
+            color: #fff;
+        }
+
+        .top-rated-providers {
+            background-color: #333;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 50px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .top-rated-providers h2 {
+            color: #fff;
+        }
+
+        body {
+            background-color: #868686;
+        }
+
+        .menu-container {
+            background-color: #333;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 50px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .menu-container h2 {
+            color: #d29f06;
+        }
+
+        .provider-card {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 10px;
+            margin-top: 10px;
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-custom {
+            background-color: #d29f06;
+            border-color: #d29f06;
+            color: #fff;
+        }
+
+        .div-1 {
+            text-align: center;
+
+        }
+        .img-thumbnail {
+            width: 75px;
+            align-items: left;
+
+        }
+    </style>
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <img src="AgenA.png" class="img-thumbnail" >
+        <div class="container">                        
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Encanador</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="agendarservico.html">Eletricista</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Pintor</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Serviços Agendados</a>
+                    </li>
+                </ul>
+            </div>                        
+                <a class="account-settings" href="prestadorconfig.html">Configurações de Conta</a>
+            </li>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <div class="calendar-container">
+                    <h2>Calendário com vagas disponíveis no mês  </h2>
+                    <div class="div-1">
+                        <input type="month" id="month">
+                        <button onclick="escolherAnoMes()">Escolher ano e mês</button>
+
+                    </div>
+
+                    <div class="calendar">
+                     
+
+
+                    </div>
+                    <div class="div-1">
+                        <button class="btn btn-custom btn-sm" onclick="coletarDados()">Salvar</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="telamenupricipalpres.js"> </script>
+</body>
+
+</html>
