@@ -19,7 +19,7 @@ document.getElementById('formulario').addEventListener('submit', function (event
 
         }
         if (loginvalidado == true) {
-            window.location.href = "telademenuinicial.html"
+            window.location.href = "telademenuinicialcont.html"
             document.getElementById("spinner").style.display = 'none';
             document.getElementById("entrar").disabled = false;
         }else{
