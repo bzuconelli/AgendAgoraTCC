@@ -9,6 +9,7 @@ public class UsuarioDTO {
     public int id;
 
 
+
     public UsuarioDTO(String usuario, String senha) {
         this.login = usuario;
         this.senha = senha;
