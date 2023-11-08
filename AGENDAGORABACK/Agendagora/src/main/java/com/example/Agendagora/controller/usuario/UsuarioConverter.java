@@ -2,6 +2,9 @@ package com.example.Agendagora.controller.usuario;
 
 
 import com.example.Agendagora.controller.contratante.ContratanteDTO;
+import com.example.Agendagora.controller.prestador.PrestadorDTO;
+import com.example.Agendagora.model.contratante.ContratanteEntity;
+import com.example.Agendagora.model.prestador.PrestadorEntity;
 import com.example.Agendagora.model.usuario.UsuarioEntity;
 
 import java.util.List;
@@ -28,8 +31,12 @@ public class UsuarioConverter {
     public UsuarioDTO toDTO(UsuarioEntity entity) {
         return new UsuarioDTO(entity.login, entity.senha, entity.id);
     }
-    public UsuarioEntity toEntity(com.example.Agendagora.controller.usuario.UsuarioDTO dto) {
-        return new UsuarioEntity(dto.login, dto.senha,dto.id);
+    public UsuarioEntity toEntity(ContratanteDTO dto, ContratanteEntity contratanteEntity) {
+        return new UsuarioEntity(dto.login, dto.senha,contratanteEntity);
+
+    }
+    public UsuarioEntity toEntityP(PrestadorDTO dto, PrestadorEntity prestadorEntity) {
+        return new UsuarioEntity(dto.login, dto.senha,prestadorEntity);
 
     }
 

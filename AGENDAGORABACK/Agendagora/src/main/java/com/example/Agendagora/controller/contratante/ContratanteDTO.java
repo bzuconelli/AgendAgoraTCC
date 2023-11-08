@@ -6,7 +6,7 @@ public class ContratanteDTO {
     public int id;
     public String nome;
     public String sobrenome;
-    public String cpf;
+
     public String telefone;
     public int idendereco;
     public String rua;
@@ -17,11 +17,11 @@ public class ContratanteDTO {
     public String lng;
     public String login;
     public String senha;
-    public int idlogin;
 
 
 
-
+    public ContratanteDTO() {
+    }
 
     public ContratanteDTO(int idendereco, String cidade, String rua, String bairo, int numero, String lat, String lng) {
     }

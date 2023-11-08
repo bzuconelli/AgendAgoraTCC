@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 public class PrestadorConverter {
 
-    public List<PrestadorDTO> toDTO(List<PrestadorEntity> entities) {
+   // public List<PrestadorDTO> toDTO(List<PrestadorEntity> entities) {
         //        List<PessoaDTO> pessoasDto = new ArrayList<>();
         //        for (PessoaEntity entity : pessoasEntity) {
         //            PessoaDTO dto = new PessoaDTO();
@@ -20,21 +20,20 @@ public class PrestadorConverter {
         //            pessoasDto.add(dto);
         //        }
 
-        return entities //
-                .stream() //
-                .map(entity -> new  PrestadorDTO  (entity.id, entity.nome, entity.sobrenome,entity.cpf, entity.cnpj, entity.telefone,entity.enderecoEntity.idendereco,
-                        entity.enderecoEntity.rua,entity.enderecoEntity.bairo,entity.enderecoEntity.cidade,entity.enderecoEntity.numero,entity.enderecoEntity.lat,entity.enderecoEntity.lng)) //
-                .collect(Collectors.toList());
-    }
+     //   return entities //
+          //      .stream() //
+           //     .map(entity -> new  PrestadorDTO  (entity.id, entity.nome, entity.sobrenome,entity.cpf, entity.cnpj, entity.telefone,entity.enderecoEntity.idendereco,
+                    //    entity.enderecoEntity.rua,entity.enderecoEntity.bairo,entity.enderecoEntity.cidade,entity.enderecoEntity.numero,entity.enderecoEntity.lat,entity.enderecoEntity.lng)) //
+             //   .collect(Collectors.toList());
+   // }
 
-    public PrestadorDTO toDTO(PrestadorEntity entity) {
-        return new PrestadorDTO(entity.id, entity.nome, entity.sobrenome,entity.cpf, entity.cnpj, entity.telefone,entity.enderecoEntity.idendereco,
-                entity.enderecoEntity.rua,entity.enderecoEntity.bairo,entity.enderecoEntity.cidade,entity.enderecoEntity.numero,entity.enderecoEntity.lat,entity.enderecoEntity.lng);
-    }
+   // public PrestadorDTO toDTO(PrestadorEntity entity) {
+      //  return new PrestadorDTO(entity.id, entity.nome, entity.sobrenome,entity.cpf, entity.cnpj, entity.telefone,entity.enderecoEntity.idendereco,
+     //           entity.enderecoEntity.rua,entity.enderecoEntity.bairo,entity.enderecoEntity.cidade,entity.enderecoEntity.numero,entity.enderecoEntity.lat,entity.enderecoEntity.lng);
+   // }
 
-    public PrestadorEntity toEntity(PrestadorDTO dto) {
-        return new PrestadorEntity(dto.id,dto.nome, dto.nome, dto.sobrenome, dto.cpf,dto.cnpj, dto.telefone,dto.enderecoDTO.idendereco,
-                dto.enderecoDTO.rua,dto.enderecoDTO.bairo,dto.enderecoDTO.cidade,dto.enderecoDTO.numero,dto.enderecoDTO.lat,dto.enderecoDTO.lng);
+    public PrestadorEntity toEntity(PrestadorDTO dto, EnderecoEntity enderecoEntity) {
+        return new PrestadorEntity(dto.id,dto.nome, dto.sobrenome, dto.telefone, enderecoEntity, dto.recebecartao, dto.recebepix,dto.dinheiro);
     }
 
 }

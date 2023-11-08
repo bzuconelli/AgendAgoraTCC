@@ -66,7 +66,7 @@ public class UsuarioDAO {
             }
         }
     }
-    public int addlogin(String usuario, String senha, int id) throws SQLException {
+    public int addloginprest(String usuario, String senha, int id) throws SQLException {
         final String sql ="insert into usuario (login, senha,prestador_idprestador ) values ( ?, ?, ?)";
         try (final PreparedStatement preparedStatement = ConnectionSingleton.getConnection().prepareStatement(sql,Statement.RETURN_GENERATED_KEYS)){
             preparedStatement.setString(1, usuario);
@@ -81,7 +81,42 @@ public class UsuarioDAO {
         }
 
     }
+    public void addlongincont(UsuarioEntity usuario) throws SQLException {
+        try (final PreparedStatement preparedStatement = ConnectionSingleton.getConnection().prepareStatement("insert into usuario (login, senha,contratante_idcontratante ) values ( ?, ?, ?)", Statement.RETURN_GENERATED_KEYS)) {
+            preparedStatement.setString(1, usuario.login);
+            preparedStatement.setString(2, usuario.senha);
+            preparedStatement.setInt(3, usuario.contratante.id);
+            preparedStatement.executeUpdate();
+            try (ResultSet rs = preparedStatement.getGeneratedKeys()) {
+                rs.next();
+                usuario.id = rs.getInt(1);
+            }
+        }
+    }
+    public void addlonginprest(UsuarioEntity usuario) throws SQLException {
+        try (final PreparedStatement preparedStatement = ConnectionSingleton.getConnection().prepareStatement("insert into usuario (login, senha,prestador_idprestador ) values ( ?, ?, ?)", Statement.RETURN_GENERATED_KEYS)) {
+            preparedStatement.setString(1, usuario.login);
+            preparedStatement.setString(2, usuario.senha);
+            preparedStatement.setInt(3, usuario.prestador.id);
+            preparedStatement.executeUpdate();
+            try (ResultSet rs = preparedStatement.getGeneratedKeys()) {
+                rs.next();
+                usuario.id = rs.getInt(1);
+            }
+        }
+    }
+    public boolean findbylogin(String usuario)throws SQLException {
+        final String sql = "select * from usuario where login = ?  ";
+        try (final PreparedStatement preparedStatement = ConnectionSingleton.getConnection().prepareStatement(sql)) {
+            preparedStatement.setString(1, usuario);
+
+            try (final ResultSet rs = preparedStatement.executeQuery()) {
+                return rs.next();
+            }
+        }
+    }
 }
+
 
 
 

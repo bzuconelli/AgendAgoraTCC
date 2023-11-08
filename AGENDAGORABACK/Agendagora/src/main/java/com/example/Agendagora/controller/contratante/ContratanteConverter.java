@@ -30,7 +30,7 @@ public class ContratanteConverter {
    // }
 
     public ContratanteEntity toEntity(ContratanteDTO dto, EnderecoEntity enderecoEntity) {
-        return new ContratanteEntity(dto.id, dto.nome, dto.sobrenome,dto.cpf, dto.telefone, enderecoEntity);
+        return new ContratanteEntity(dto.id, dto.nome, dto.sobrenome, dto.telefone, enderecoEntity);
     }
 
 }

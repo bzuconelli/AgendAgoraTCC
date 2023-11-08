@@ -25,8 +25,8 @@ async function postLogin(email, senha) {
     return login;
 }
 
-async function postPrestador(idlogin, nome, telefone, cidade, rua, bairro, numero, recebecartao, recebedinheiro, recebepix, servico, qtdvagas) {
-    let response = await fetch("https://650f142154d18aabfe99d018.mockapi.io/Servicos", {
+async function postPrestador( nome, telefone, cidade, rua, bairro, numero, recebecartao, recebedinheiro, recebepix, servico, latitude, longitude,login, senha, sobrenome) {
+    let response = await fetch("http://localhost:8080/prestador/", {
         method: "POST",
         headers: {
             'Accept': 'application/json',
@@ -34,18 +34,23 @@ async function postPrestador(idlogin, nome, telefone, cidade, rua, bairro, numer
         },
 
         body: JSON.stringify({
-            idlogin: idlogin,
+
+            login: login,
+            senha: senha,
             nome: nome,
+            sobrenome: sobrenome,
             telefone: telefone,
             cidade: cidade,
-            bairro: bairro,
             rua: rua,
             numero: numero,
-            tipodeservico: servico,
-            aceitacartao: recebecartao,
-            aceitapix: recebepix,
-            aceitadinheiro: recebedinheiro,
-            qtdvagas: qtdvagas,
+            bairo: bairro,
+            lat: latitude,
+            lng: longitude,
+            recebepix: recebepix,
+            recebecartao: recebecartao,
+            dinheiro: recebedinheiro,
+            idtiposervico: servico
+
 
 
 
@@ -56,8 +61,8 @@ async function postPrestador(idlogin, nome, telefone, cidade, rua, bairro, numer
 
     return prestador;
 }
-async function postContratante(idlogin, nome, telefone, cidade, rua, bairro, numero) {
-    let response = await fetch("https://65298d9455b137ddc83efbf7.mockapi.io/contratante", {
+async function postContratante(nome, telefone, cidade, rua, bairro, numero, latitude, longitude, login, senha, sobrenome) {
+    let response = await fetch("http://localhost:8080/contratante/", {
         method: "POST",
         headers: {
             'Accept': 'application/json',
@@ -65,17 +70,17 @@ async function postContratante(idlogin, nome, telefone, cidade, rua, bairro, num
         },
 
         body: JSON.stringify({
-            idlogin: idlogin,
+            login: login,
+            senha: senha,
             nome: nome,
+            sobrenome: sobrenome,
             telefone: telefone,
             cidade: cidade,
-            bairro: bairro,
             rua: rua,
             numero: numero,
-
-
-
-
+            bairo: bairro,
+            lat: latitude,
+            lng: longitude
         })
     });
 
@@ -89,20 +94,20 @@ async function getPretadores() {
     console.log(prestadores);
     return prestadores;
 }
-async function putcontratante(id,nome,idade){
-    let response= await fetch("https://65298d9455b137ddc83efbf7.mockapi.io/contratante/"+id,{
-    method:"PUT",    
-    headers: {
-    'Accept': 'application/json',
-    'Content-Type': 'application/json'
-    },        
-    
-    body:JSON.stringify({
-        name:nome ,
-        age:idade
+async function putcontratante(id, nome, idade) {
+    let response = await fetch("https://65298d9455b137ddc83efbf7.mockapi.io/contratante/" + id, {
+        method: "PUT",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
 
-    })
-    });             
+        body: JSON.stringify({
+            name: nome,
+            age: idade
+
+        })
+    });
 
     let pessoa = await response.json();
     //console.log(pessoas);

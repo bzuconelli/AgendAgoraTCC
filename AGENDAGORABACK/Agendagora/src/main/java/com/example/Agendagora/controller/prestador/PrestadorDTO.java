@@ -7,28 +7,28 @@ public class PrestadorDTO {
     public int id;
     public String nome;
     public String sobrenome;
-    public String cpf;
-    public String cnpj;
+
     public String telefone;
-    public EnderecoDTO enderecoDTO;
+    public int idendereco;
+    public String rua;
+    public String cidade;
+    public String bairo;
+    public int numero;
+    public String lat;
+    public String lng;
 
-    public PrestadorDTO(int id, String nome, String sobrenome, String cpf, String cnpj, String telefone, EnderecoDTO enderecoDTO) {
-        this.id = id;
-        this.nome = nome;
-        this.sobrenome = sobrenome;
-        this.cpf = cpf;
-        this.cnpj = cnpj;
-        this.telefone = telefone;
-        this.enderecoDTO = enderecoDTO;
-    }
+    public String login;
 
-
-   
+    public String senha;
+    public String recebepix;
+    public String dinheiro;
+    public String recebecartao;
+    public int idlogin;
+    public  int idtiposervico;
 
     public PrestadorDTO() {
-
     }
 
-    public PrestadorDTO(int id, String nome, String sobrenome, String cpf, String cnpj, String telefone, int idendereco, String rua, String bairo, String cidade, int numero, String lat, String lng) {
+    public PrestadorDTO(int idendereco, String cidade, String rua, String bairo, int numero, String lat, String lng) {
     }
 }

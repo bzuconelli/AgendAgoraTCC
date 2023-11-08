@@ -58,6 +58,10 @@
                             <input type="text" class="form-control" id="nome" placeholder="Seu nome" required>
                         </div>
                         <div class="mb-3">
+                            <label for="nome" class="form-label text-white required ">Sobrenome</label>
+                            <input type="text" class="form-control" id="sobrenome" placeholder="Seu sobrenome" required>
+                        </div>
+                        <div class="mb-3">
                             <label for="email" class="form-label text-white required">Email</label>
                             <input type="email" class="form-control" id="email" placeholder="Seu email" required>
                         </div>
@@ -108,9 +112,9 @@
                                 Serviço:</label>
                             <select class="form-control" id="servico" style="display: none;">
                                 <option value="" selected>Que tipo de serviço você presta?</option>
-                                <option value="Eletricista">Eletricista</option>
-                                <option value="Encanador">Encanador</option>
-                                <option value="Pintor">Pintor</option>
+                                <option value=1>Eletricista</option>
+                                <option value=2>Encanador</option>
+                                <option value=3>Pintor</option>
                             </select>
                         </div>
                         <label class="text-white" style="display: none;" id="pag">Quais formas de pagamento você aceita ?</label>
@@ -154,6 +158,20 @@
                     </div>
                     <div class="modal-body">
                         <p>Usuário cadastrado com sucesso.</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="modal" tabindex="-1" id="modaljacadastrado">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Informações</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Email já cadastrado.</p>
                     </div>
 
                 </div>

@@ -21,4 +21,5 @@ public class EnderecoEntity {
 
     public EnderecoEntity() {
     }
+
 }

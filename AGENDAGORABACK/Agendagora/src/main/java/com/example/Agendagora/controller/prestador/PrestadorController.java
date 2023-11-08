@@ -3,10 +3,18 @@ package com.example.Agendagora.controller.prestador;
 
 
 
-import com.example.Agendagora.controller.enderco.EnderecoDTO;
+
+import com.example.Agendagora.controller.contratante.ContratanteDTO;
+import com.example.Agendagora.controller.enderco.EnderecoConverter;
+import com.example.Agendagora.controller.usuario.UsuarioConverter;
+import com.example.Agendagora.model.contratante.ContratanteDAO;
+import com.example.Agendagora.model.contratante.ContratanteEntity;
+import com.example.Agendagora.model.endereco.EnderecoEntity;
+import com.example.Agendagora.model.endereco.EndrecoDAO;
 import com.example.Agendagora.model.prestador.PrestadorDAO;
 import com.example.Agendagora.model.prestador.PrestadorEntity;
 import com.example.Agendagora.model.usuario.UsuarioDAO;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,36 +23,27 @@ import java.sql.SQLException;
 @RestController
 @CrossOrigin("*")
 @RequestMapping("/prestador/")
-
 public class PrestadorController {
     @PostMapping()
-    public ResponseEntity<String> addprestador(@RequestBody CadprestadorDTO dto) throws SQLException {
-         PrestadorDTO prestadorDTO = new PrestadorDTO();
-         prestadorDTO.id= dto.id;
-         prestadorDTO.cpf= dto.cpf;
-         prestadorDTO.nome= dto.nome;
-         prestadorDTO.sobrenome= dto.sobrenome;
-         prestadorDTO.cnpj= dto.cnpj;
-         prestadorDTO.telefone= dto.telefone;
-         prestadorDTO.enderecoDTO= new EnderecoDTO();
-         prestadorDTO.enderecoDTO.cidade= dto.cidade;
-         prestadorDTO.enderecoDTO.bairo= dto.bairo;
-         prestadorDTO.enderecoDTO.rua= dto.rua;
-         prestadorDTO.enderecoDTO.numero= dto.numero;
-         prestadorDTO.enderecoDTO.lat= dto.lat;
-         prestadorDTO.enderecoDTO.lng= dto.lng;
-         final PrestadorConverter converter = new PrestadorConverter();
-         PrestadorEntity prestadorEntity= new PrestadorDAO().addprestador(dto,converter.toEntity( prestadorDTO));
-         int funciona = new UsuarioDAO().addlogin(dto.login, dto.senha, prestadorEntity.id);
-         if(funciona !=0){
-              return ResponseEntity.ok().body("funfa");
-         } else {
-              return ResponseEntity.badRequest().body("não funcionaou ");
-         }
+    public ResponseEntity<HttpStatus> addconprestador(@RequestBody PrestadorDTO dto) throws SQLException {
 
-
+        final EnderecoConverter converterE = new EnderecoConverter();
+        final PrestadorConverter converterP = new PrestadorConverter();
+        final UsuarioConverter converterU = new UsuarioConverter();
+        if (!new UsuarioDAO().findbylogin(dto.login)) {
+            EnderecoEntity enderecoEntity = new EndrecoDAO().addendereco(converterE.toEntityP(dto));
+            PrestadorEntity prestadorEntity = new PrestadorDAO().addprestador(converterP.toEntity(dto, enderecoEntity));
+            new UsuarioDAO().addlonginprest(converterU.toEntityP(dto, prestadorEntity));
+            new PrestadorDAO().prestadorpresta(prestadorEntity.id, dto.idtiposervico);
+            return ResponseEntity.ok().body(HttpStatus.CREATED);
+        }
+        return ResponseEntity.ok().body(HttpStatus.UNPROCESSABLE_ENTITY);
     }
 }
+
+
+
+
 
 
 
