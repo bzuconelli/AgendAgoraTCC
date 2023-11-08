@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 public class EnderecoConverter {
 
-    public List<EnderecoDTO> toDTO(List<EnderecoEntity> entities) {
+    public List<ContratanteDTO> toDTO(List<EnderecoEntity> entities) {
         //        List<PessoaDTO> pessoasDto = new ArrayList<>();
         //        for (PessoaEntity entity : pessoasEntity) {
         //            PessoaDTO dto = new PessoaDTO();
@@ -22,15 +22,15 @@ public class EnderecoConverter {
 
         return entities //
                 .stream() //
-                .map(entity -> new EnderecoDTO(entity.idendereco, entity.cidade, entity.rua,entity.bairo, entity.numero,entity.lat, entity.lng)) //
+                .map(entity -> new ContratanteDTO(entity.idendereco, entity.cidade, entity.rua,entity.bairo, entity.numero,entity.lat, entity.lng)) //
                 .collect(Collectors.toList());
     }
 
-    public EnderecoDTO toDTO(EnderecoEntity entity) {
-        return new EnderecoDTO(entity.idendereco, entity.rua, entity.cidade,entity.bairo, entity.numero, entity.lat, entity.lng);
+    public ContratanteDTO toDTO(EnderecoEntity entity) {
+        return new ContratanteDTO(entity.idendereco, entity.rua, entity.cidade,entity.bairo, entity.numero, entity.lat, entity.lng);
     }
 
-    public EnderecoEntity toEntity(EnderecoDTO dto) {
+    public EnderecoEntity toEntity(ContratanteDTO dto) {
         return new EnderecoEntity(dto.idendereco, dto.rua, dto.bairo, dto.cidade,dto.numero,dto.lat, dto.lng);
     }
 

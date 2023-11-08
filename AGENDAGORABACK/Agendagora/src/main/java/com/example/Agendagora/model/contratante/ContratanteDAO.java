@@ -21,7 +21,7 @@ public class ContratanteDAO {
             preparedStatement.executeUpdate();
             try (ResultSet rs = preparedStatement.getGeneratedKeys()) {
                 rs.next();
-                entity.idendereco = rs.getInt(1);
+                entity.id = rs.getInt(1);
 
             }
         }
