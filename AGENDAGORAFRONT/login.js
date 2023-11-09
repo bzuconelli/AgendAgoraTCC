@@ -10,15 +10,15 @@ document.getElementById('formulario').addEventListener('submit', function (event
 
     
 
-    let retornoLogin= postLogin(email,senha);
-    console.log(retornoLogin);
+    postLogin(email,senha).then(token => {
+        console.log(token)
     
     
     
     
-    /*.then(login => {
+    
 
-        console.log(login);
+       
 
 
         if (email == login.email && senha == login.senha) {
@@ -41,7 +41,7 @@ document.getElementById('formulario').addEventListener('submit', function (event
             document.getElementById("formulario").reset();
             document.getElementById("email").focus;
         }
-    })*/
+    })
 
 
 

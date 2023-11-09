@@ -6,19 +6,29 @@ async function postLogin(email, senha) {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
-
         body: JSON.stringify({
-
             login: email,
             senha: senha,
-
         })
     });
 
-    let login = await response;
+    if (response.status === 200) {
+       
+        const token = await response.text();
+        return token;
+        console.log(token);
 
-    return login;
+
+    } else {
+        
+        throw new Error("Falha na autenticação");
+    }
+    
 }
+
+
+
+
 
 async function postPrestador( nome, telefone, cidade, rua, bairro, numero, recebecartao, recebedinheiro, recebepix, servico, login, senha, sobrenome,latitude,longitude) {
     let response = await fetch("http://localhost:8080/prestador/", {
