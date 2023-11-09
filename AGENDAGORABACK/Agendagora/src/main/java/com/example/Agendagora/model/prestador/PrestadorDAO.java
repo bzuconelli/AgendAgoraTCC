@@ -31,11 +31,12 @@ public class PrestadorDAO {
             return entity;
     }
     public void prestadorpresta(int id, int servico) throws SQLException {
-        String sql= "insert into prestadorpresta ( prestador_idprestador, tiposervico_idtipodeservico) values ( ? ,?)";
+        String sql= "insert into prestadorpresta ( prestador_idprestador, tiposervico_idtipodeservico) values ( ? , ? )";
         try (final PreparedStatement preparedStatement = ConnectionSingleton.getConnection().prepareStatement(sql)) {
             preparedStatement.setInt(1, id);
-            preparedStatement.setInt(1, servico);
-            preparedStatement.executeUpdate();
+            preparedStatement.setInt(2, servico);
+            preparedStatement.execute();
+
         }
     }
 

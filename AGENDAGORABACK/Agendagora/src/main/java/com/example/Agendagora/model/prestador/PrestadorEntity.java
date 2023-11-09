@@ -6,8 +6,7 @@ public class PrestadorEntity {
     public int id;
     public String nome;
     public String sobrenome;
-    public String cpf;
-    public String cnpj;
+
     public String telefone;
     public EnderecoEntity enderecoEntity;
     public String recebepix;

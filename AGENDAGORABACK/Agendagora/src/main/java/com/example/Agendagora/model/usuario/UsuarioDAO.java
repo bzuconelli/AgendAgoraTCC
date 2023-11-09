@@ -66,21 +66,7 @@ public class UsuarioDAO {
             }
         }
     }
-    public int addloginprest(String usuario, String senha, int id) throws SQLException {
-        final String sql ="insert into usuario (login, senha,prestador_idprestador ) values ( ?, ?, ?)";
-        try (final PreparedStatement preparedStatement = ConnectionSingleton.getConnection().prepareStatement(sql,Statement.RETURN_GENERATED_KEYS)){
-            preparedStatement.setString(1, usuario);
-            preparedStatement.setString(2, senha);
-            preparedStatement.setInt(3, id);
-            preparedStatement.execute();
-            try (ResultSet rs = preparedStatement.getGeneratedKeys()) {
-                rs.next();
-                return  rs.getInt(1);
-            }
 
-        }
-
-    }
     public void addlongincont(UsuarioEntity usuario) throws SQLException {
         try (final PreparedStatement preparedStatement = ConnectionSingleton.getConnection().prepareStatement("insert into usuario (login, senha,contratante_idcontratante ) values ( ?, ?, ?)", Statement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setString(1, usuario.login);

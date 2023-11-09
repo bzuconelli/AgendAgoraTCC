@@ -1,11 +1,6 @@
-async function getLogin() {
-    let response = await fetch("https://650a2f88f6553137159c7cc2.mockapi.io/login")
-    let logins = await response.json();
-    console.log(logins);
-    return logins;
-}
+
 async function postLogin(email, senha) {
-    let response = await fetch("https://650a2f88f6553137159c7cc2.mockapi.io/login", {
+    let response = await fetch("http://localhost:8080/login/", {
         method: "POST",
         headers: {
             'Accept': 'application/json',
@@ -14,18 +9,18 @@ async function postLogin(email, senha) {
 
         body: JSON.stringify({
 
-            email: email,
+            login: email,
             senha: senha,
 
         })
     });
 
-    let login = await response.json();
+    let login = await response;
 
     return login;
 }
 
-async function postPrestador( nome, telefone, cidade, rua, bairro, numero, recebecartao, recebedinheiro, recebepix, servico, latitude, longitude,login, senha, sobrenome) {
+async function postPrestador( nome, telefone, cidade, rua, bairro, numero, recebecartao, recebedinheiro, recebepix, servico, login, senha, sobrenome,latitude,longitude) {
     let response = await fetch("http://localhost:8080/prestador/", {
         method: "POST",
         headers: {
@@ -50,10 +45,6 @@ async function postPrestador( nome, telefone, cidade, rua, bairro, numero, receb
             recebecartao: recebecartao,
             dinheiro: recebedinheiro,
             idtiposervico: servico
-
-
-
-
         })
     });
 

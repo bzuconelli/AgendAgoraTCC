@@ -6,6 +6,7 @@ public class UsuarioDTO {
 
     public String login;
     public String senha;
+
     public int id;
 
 

@@ -42,7 +42,7 @@ document.getElementById('cadastro').addEventListener('submit', function (event) 
         let servico = tipodeserviço.options[tipodeserviço.selectedIndex].value;
         
 
-        postPrestador(nome, telefone, cidade, rua, bairro, numero, recebecartao, recebedinheiro, recebepix, servico, email, senha, sobrenome).then(prestador => {
+        postPrestador(nome, telefone, cidade, rua, bairro, numero, recebecartao, recebedinheiro, recebepix, servico, email, senha, sobrenome, latitude,longitude).then(prestador => {
           if (prestador == "CREATED") {
           const myModal = new bootstrap.Modal(document.getElementById('modal'), {})
           myModal.show();
