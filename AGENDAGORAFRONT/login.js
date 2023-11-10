@@ -2,38 +2,30 @@
 
 document.getElementById('formulario').addEventListener('submit', function (event) {
     event.preventDefault();
-    let loginvalidado;
     let email = document.getElementById("email").value;
     let senha = document.getElementById("password").value;
     document.getElementById("spinner").style.display = 'inline-block';
     document.getElementById("entrar").disabled = true;
-
-    
-
-    postLogin(email,senha).then(token => {
-        console.log(token)
-    
-    
-    
-    
-    
-
-       
+    postLogin(email, senha).then(token => {
 
 
-        if (email == login.email && senha == login.senha) {
-            loginvalidado = true;
+        if (token != "Usuário não autorizado") {
+          
+            let [tokent, tipousario] = token.split("|")
+            localStorage.setItem('token',token)
+            
 
-        }
-        if (loginvalidado == true) {
-            window.location.href = "telademenuinicialcont.html"
-            document.getElementById("spinner").style.display = 'none';
-            document.getElementById("entrar").disabled = false;
-        } else {
-            loginvalidado = false;
-        }
-        if (loginvalidado == false) {
-            window.location.href = "login.html"
+            if (tipousario == "contratante") {
+                window.location.href = "telademenuinicialcont.html"
+                document.getElementById("spinner").style.display = 'none';
+                document.getElementById("entrar").disabled = false;
+            } else {
+                window.location.href = "telamenuinicialpres.html"
+                document.getElementById("spinner").style.display = 'none';
+                document.getElementById("entrar").disabled = false;
+
+            }
+        }else{
             const myModal = new bootstrap.Modal(document.getElementById('modal'), {})
             myModal.show();
             document.getElementById("entrar").disabled = false;

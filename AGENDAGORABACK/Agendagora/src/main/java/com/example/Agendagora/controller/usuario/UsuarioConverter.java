@@ -6,10 +6,11 @@ import com.example.Agendagora.controller.prestador.PrestadorDTO;
 import com.example.Agendagora.model.contratante.ContratanteEntity;
 import com.example.Agendagora.model.prestador.PrestadorEntity;
 import com.example.Agendagora.model.usuario.UsuarioEntity;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
+@Component
 public class UsuarioConverter {
 
     public List<UsuarioDTO> toDTO(List<UsuarioEntity> entities) {

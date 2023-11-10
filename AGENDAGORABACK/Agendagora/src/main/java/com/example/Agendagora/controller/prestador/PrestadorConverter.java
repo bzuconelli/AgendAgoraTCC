@@ -4,9 +4,11 @@ package com.example.Agendagora.controller.prestador;
 import com.example.Agendagora.controller.enderco.EnderecoDTO;
 import com.example.Agendagora.model.endereco.EnderecoEntity;
 import com.example.Agendagora.model.prestador.PrestadorEntity;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
+@Component
 
 public class PrestadorConverter {
 

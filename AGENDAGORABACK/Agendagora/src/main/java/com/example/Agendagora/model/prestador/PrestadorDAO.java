@@ -1,19 +1,22 @@
 package com.example.Agendagora.model.prestador;
 
 import com.example.Agendagora.ConnectionSingleton;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
+@Component
 public class PrestadorDAO {
+    @Autowired
+    public ConnectionSingleton connectionSingleton;
 
     public PrestadorEntity addprestador(PrestadorEntity entity) throws SQLException {
 
-            try (final PreparedStatement preparedStatement = ConnectionSingleton.getConnection().prepareStatement("insert into prestador (nomeprestador , sobrenomeprestador , telefone, pix, cartao, dinheiro, endereco_idendereco) values ( ?, ?, ?, ?, ?, ?,? )", Statement.RETURN_GENERATED_KEYS)) {
+            try (final PreparedStatement preparedStatement = connectionSingleton.getConnection().prepareStatement("insert into prestador (nomeprestador , sobrenomeprestador , telefone, pix, cartao, dinheiro, endereco_idendereco) values ( ?, ?, ?, ?, ?, ?,? )", Statement.RETURN_GENERATED_KEYS)) {
                 preparedStatement.setString(1, entity.nome);
                 preparedStatement.setString(2, entity.sobrenome);
                 preparedStatement.setString(3, entity.telefone);
@@ -32,7 +35,7 @@ public class PrestadorDAO {
     }
     public void prestadorpresta(int id, int servico) throws SQLException {
         String sql= "insert into prestadorpresta ( prestador_idprestador, tiposervico_idtipodeservico) values ( ? , ? )";
-        try (final PreparedStatement preparedStatement = ConnectionSingleton.getConnection().prepareStatement(sql)) {
+        try (final PreparedStatement preparedStatement = connectionSingleton.getConnection().prepareStatement(sql)) {
             preparedStatement.setInt(1, id);
             preparedStatement.setInt(2, servico);
             preparedStatement.execute();

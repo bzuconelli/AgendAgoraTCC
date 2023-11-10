@@ -16,11 +16,12 @@ async function postLogin(email, senha) {
        
         const token = await response.text();
         return token;
-        console.log(token);
+       
 
 
+    } else if (response.status === 401) {
+       return "Usuário não autorizado";
     } else {
-        
         throw new Error("Falha na autenticação");
     }
     

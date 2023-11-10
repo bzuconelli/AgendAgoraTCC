@@ -3,9 +3,11 @@ package com.example.Agendagora.controller.contratante;
 
 import com.example.Agendagora.model.contratante.ContratanteEntity;
 import com.example.Agendagora.model.endereco.EnderecoEntity;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
+@Component
 
 public class ContratanteConverter {
 
