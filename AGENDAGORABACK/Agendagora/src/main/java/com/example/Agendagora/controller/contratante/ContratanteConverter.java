@@ -3,6 +3,7 @@ package com.example.Agendagora.controller.contratante;
 
 import com.example.Agendagora.model.contratante.ContratanteEntity;
 import com.example.Agendagora.model.endereco.EnderecoEntity;
+import com.example.Agendagora.model.usuario.UsuarioEntity;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -11,25 +12,21 @@ import java.util.stream.Collectors;
 
 public class ContratanteConverter {
 
-   // public List<ContratanteDTO> toDTO(List<ContratanteEntity> entities) {
-        //        List<PessoaDTO> pessoasDto = new ArrayList<>();
-        //        for (PessoaEntity entity : pessoasEntity) {
-        //            PessoaDTO dto = new PessoaDTO();
-        //            dto.id = entity.id;
-        //            dto.nome = entity.nome;
-        //            dto.idade = entity.idade;
-        //            pessoasDto.add(dto);
-        //        }
+    public List<ContratanteDTO> toDTO(List<UsuarioEntity> entities) {
 
-      //  return entities //
-            //    .stream() //
-              //  .map(entity -> new ContratanteDTO(entity.id, entity.nome, entity.sobrenome,entity.telefone, entity.cpf,entity.enderecoEntity)) //
-             //   .collect(Collectors.toList());
-   // }
+       return entities //
+             .stream() //
+               .map(entity -> new ContratanteDTO(entity.contratante.id,entity.contratante.nome,entity.contratante.sobrenome,entity.contratante.telefone,entity.contratante.enderecoEntity.idendereco,
+                       entity.contratante.enderecoEntity.rua, entity.contratante.enderecoEntity.cidade, entity.contratante.enderecoEntity.bairo, entity.contratante.enderecoEntity.numero,
+                       entity.contratante.enderecoEntity.lat,  entity.contratante.enderecoEntity.lng,entity.login, entity.senha)) //
+               .collect(Collectors.toList());
+    }
 
-  //  public ContratanteDTO toDTO(ContratanteEntity entity) {
-     //   return new ContratanteDTO(entity.id, entity.nome, entity.sobrenome,entity.cpf, entity.telefone,entity.enderecoEntity);
-   // }
+   public ContratanteDTO toDTO(UsuarioEntity entity) {
+       return new ContratanteDTO(entity.contratante.id,entity.contratante.nome,entity.contratante.sobrenome,entity.contratante.telefone,entity.contratante.enderecoEntity.idendereco,
+               entity.contratante.enderecoEntity.rua, entity.contratante.enderecoEntity.cidade, entity.contratante.enderecoEntity.bairo, entity.contratante.enderecoEntity.numero,
+               entity.contratante.enderecoEntity.lat,  entity.contratante.enderecoEntity.lng,entity.login, entity.senha);
+   }
 
     public ContratanteEntity toEntity(ContratanteDTO dto, EnderecoEntity enderecoEntity) {
         return new ContratanteEntity(dto.id, dto.nome, dto.sobrenome, dto.telefone, enderecoEntity);

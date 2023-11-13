@@ -12,7 +12,7 @@ document.getElementById('formulario').addEventListener('submit', function (event
         if (token != "Usuário não autorizado") {
           
             let [tokent, tipousario] = token.split("|")
-            localStorage.setItem('token',token)
+            localStorage.setItem('token',tokent)
             
 
             if (tipousario == "contratante") {

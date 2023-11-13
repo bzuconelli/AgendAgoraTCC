@@ -25,7 +25,7 @@ public class EnderecoConverter {
     }
 
     public EnderecoEntity toEntity(ContratanteDTO dto) {
-        return new EnderecoEntity(dto.idendereco, dto.rua, dto.bairo, dto.cidade,dto.numero,dto.lat, dto.lng);
+        return new EnderecoEntity(dto.idendereco, dto.rua, dto.cidade,dto.bairo,dto.numero,dto.lat, dto.lng);
     }
     public List<PrestadorDTO> toDTOP(List<EnderecoEntity> entities) {
         return entities //
@@ -36,7 +36,7 @@ public class EnderecoConverter {
     public PrestadorDTO toDTOP(EnderecoEntity entity) {
         return new PrestadorDTO(entity.idendereco, entity.rua, entity.cidade,entity.bairo, entity.numero, entity.lat, entity.lng);
     }public EnderecoEntity toEntityP(PrestadorDTO dto) {
-        return new EnderecoEntity(dto.idendereco, dto.rua, dto.bairo, dto.cidade,dto.numero,dto.lat, dto.lng);
+        return new EnderecoEntity(dto.idendereco, dto.rua,  dto.cidade,dto.bairo,dto.numero,dto.lat, dto.lng);
     }
 
 }

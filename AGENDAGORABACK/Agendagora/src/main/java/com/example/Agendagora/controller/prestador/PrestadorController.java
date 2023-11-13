@@ -49,7 +49,7 @@ public class PrestadorController {
             EnderecoEntity enderecoEntity = endrecoDAO.addendereco(converterE.toEntityP(dto));
             PrestadorEntity prestadorEntity = prestadorDAO.addprestador(converterP.toEntity(dto, enderecoEntity));
             usuarioDAO.addlonginprest(converterU.toEntityP(dto, prestadorEntity));
-         prestadorDAO.prestadorpresta(prestadorEntity.id, dto.idtiposervico);
+            prestadorDAO.prestadorpresta(prestadorEntity.id, dto.idtiposervico);
             return ResponseEntity.ok().body(HttpStatus.CREATED);
         }
         return ResponseEntity.ok().body(HttpStatus.UNPROCESSABLE_ENTITY);

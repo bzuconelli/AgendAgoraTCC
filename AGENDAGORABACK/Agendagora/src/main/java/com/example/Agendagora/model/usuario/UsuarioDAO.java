@@ -1,6 +1,7 @@
 package com.example.Agendagora.model.usuario;
 
 import com.example.Agendagora.ConnectionSingleton;
+import com.example.Agendagora.model.contratante.ContratanteEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -14,7 +15,7 @@ public class UsuarioDAO {
     @Autowired
     public ConnectionSingleton connectionSingleton;
 
-    public int pesquisar(String usuario, String senha)throws SQLException {
+    public int pesquisar(String usuario, String senha) throws SQLException {
         final String sql = "select * from usuario where login = ? and senha = ? ";
         try (final PreparedStatement preparedStatement = connectionSingleton.getConnection().prepareStatement(sql)) {
             preparedStatement.setString(1, usuario);
@@ -40,17 +41,14 @@ public class UsuarioDAO {
     }
 
     public int existetoken(String toke) throws SQLException {
-        final String sql = "select count(*) from login where token = ? ";
+        final String sql = "select usuario_idusuario from token where token = ? ";
         try (final PreparedStatement preparedStatement = connectionSingleton.getConnection().prepareStatement(sql)) {
             preparedStatement.setString(1, toke);
             try (final ResultSet rs = preparedStatement.executeQuery()) {
-                rs.next();
-                int existe = rs.getInt(1);
-                if (existe == 0) {
+                while (!rs.next()) {
                     return 0;
-                } else {
-                    return rs.getInt(2);
                 }
+                return rs.getInt(1);
             }
         }
     }
@@ -62,9 +60,9 @@ public class UsuarioDAO {
             try (final ResultSet rs = preparedStatement.executeQuery()) {
                 rs.next();
                 int tem = rs.getInt(5);
-                if (tem == 0){
+                if (tem == 0) {
                     return false;
-                }else {
+                } else {
                     return true;
                 }
             }
@@ -83,6 +81,7 @@ public class UsuarioDAO {
             }
         }
     }
+
     public void addlonginprest(UsuarioEntity usuario) throws SQLException {
         try (final PreparedStatement preparedStatement = connectionSingleton.getConnection().prepareStatement("insert into usuario (login, senha,prestador_idprestador ) values ( ?, ?, ?)", Statement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setString(1, usuario.login);
@@ -95,7 +94,8 @@ public class UsuarioDAO {
             }
         }
     }
-    public boolean findbylogin(String usuario)throws SQLException {
+
+    public boolean findbylogin(String usuario) throws SQLException {
         final String sql = "select * from usuario where login = ?  ";
         try (final PreparedStatement preparedStatement = connectionSingleton.getConnection().prepareStatement(sql)) {
             preparedStatement.setString(1, usuario);
@@ -104,19 +104,75 @@ public class UsuarioDAO {
             }
         }
     }
-    public UsuarioEntity findbyid(int id,boolean contratante)throws SQLException {
-        if (contratante) {
-            final String sql = "select * from usuario where contratante_idcontratante = ?  ";
-        }
-        final String sql = "select * from usuario where prestador_idprestador = ?  ";
+
+    public UsuarioEntity findbyid(int id, boolean contratante) throws SQLException {
+
+        final String sql = "select * from usuario where idusuario = ?  ";
         try (final PreparedStatement preparedStatement = connectionSingleton.getConnection().prepareStatement(sql)) {
             preparedStatement.setInt(1, id);
             try (final ResultSet rs = preparedStatement.executeQuery()) {
+                rs.next();
+                if (contratante) {
+                    UsuarioEntity usuario = new UsuarioEntity();
+                    usuario.id = rs.getInt(1);
+                    usuario.login = rs.getString(2);
+                    usuario.senha = rs.getString(3);
+                    usuario.contratante = new ContratanteEntity();
+                    usuario.contratante.id = rs.getInt(4);
+
+                    return usuario;
+                } else {
+                    UsuarioEntity usuario = new UsuarioEntity();
+                    usuario.id = rs.getInt(1);
+                    usuario.login = rs.getString(2);
+                    usuario.senha = rs.getString(3);
+                    usuario.prestador.id = rs.getInt(5);
+                    usuario.id = id;
+                    return usuario;
+                }
 
             }
         }
     }
+
+    public UsuarioEntity updateusuario(UsuarioEntity entity, boolean contratante) throws SQLException {
+        String sql = "update usuario set login= ?,senha=? where ";
+        if (contratante) {
+            sql += " contratante_idcontratante = ? ";
+        } else {
+            sql += "prestador_idprestador = ?";
+        }
+        if (contratante) {
+            try (final PreparedStatement preparedStatement = connectionSingleton.getConnection().prepareStatement(sql)) {
+                preparedStatement.setString(1, entity.login);
+                preparedStatement.setString(2, entity.senha);
+                preparedStatement.setInt(3, entity.contratante.id);
+                int qtdlinhas = preparedStatement.executeUpdate();;
+                if(qtdlinhas==0){
+                    return null;
+                }
+                return entity;
+
+            }
+        }
+        try (final PreparedStatement preparedStatement = connectionSingleton.getConnection().prepareStatement(sql)) {
+            preparedStatement.setString(1, entity.login);
+            preparedStatement.setString(2, entity.senha);
+            preparedStatement.setInt(3, entity.prestador.id);
+            int qtdlinhas = preparedStatement.executeUpdate();;
+            if(qtdlinhas==0){
+                return null;
+            }
+            return entity;
+        }
+    }
 }
+
+
+
+
+
+
 
 
 

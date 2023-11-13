@@ -13,25 +13,26 @@ async function postLogin(email, senha) {
     });
 
     if (response.status === 200) {
-       
+
         const token = await response.text();
         return token;
-       
+
 
 
     } else if (response.status === 401) {
-       return "Usuário não autorizado";
+        return "Usuário não autorizado";
     } else {
         throw new Error("Falha na autenticação");
     }
-    
+
 }
 
 
 
 
 
-async function postPrestador( nome, telefone, cidade, rua, bairro, numero, recebecartao, recebedinheiro, recebepix, servico, login, senha, sobrenome,latitude,longitude) {
+
+async function postPrestador(nome, telefone, cidade, rua, bairro, numero, recebecartao, recebedinheiro, recebepix, servico, login, senha, sobrenome, latitude, longitude) {
     let response = await fetch("http://localhost:8080/prestador/", {
         method: "POST",
         headers: {
@@ -90,29 +91,36 @@ async function postContratante(nome, telefone, cidade, rua, bairro, numero, lati
 
     return contratante;
 }
-async function getPretadores() {
-    let response = await fetch("https://650f142154d18aabfe99d018.mockapi.io/Servicos")
-    let prestadores = await response.json();
-    console.log(prestadores);
-    return prestadores;
-}
-async function putcontratante(id, nome, idade) {
-    let response = await fetch("https://65298d9455b137ddc83efbf7.mockapi.io/contratante/" + id, {
+
+async function putcontratante(id, nome, sobrenome, telefone, cidade, rua, bairro, numero, email, senha, latitude, longitude, idendereco) {
+    let response = await fetch("http://localhost:8080/contratante/put/" + id, {
         method: "PUT",
         headers: {
             'Accept': 'application/json',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.getItem('token')
         },
 
         body: JSON.stringify({
-            name: nome,
-            age: idade
+            id: id,
+            nome: nome,
+            sobrenome: sobrenome,
+            telefone: telefone,
+            idendereco: idendereco,
+            rua: rua,
+            cidade: cidade,
+            bairo: bairro,
+            numero: numero,
+            lat: latitude,
+            lng: longitude,
+            login: email,
+            senha: senha
 
         })
     });
 
     let pessoa = await response.json();
-    //console.log(pessoas);
+
     return pessoa;
 }
 

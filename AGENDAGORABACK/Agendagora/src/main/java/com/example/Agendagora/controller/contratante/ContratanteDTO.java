@@ -20,14 +20,29 @@ public class ContratanteDTO {
 
 
 
-    public ContratanteDTO() {
-    }
+
 
     public ContratanteDTO(int idendereco, String cidade, String rua, String bairo, int numero, String lat, String lng) {
     }
 
+    public ContratanteDTO(int id, String nome, String sobrenome, String telefone, int idendereco, String rua, String cidade, String bairo, int numero, String lat, String lng, String login, String senha) {
+        this.id = id;
+        this.nome = nome;
+        this.sobrenome = sobrenome;
+        this.telefone = telefone;
+        this.idendereco = idendereco;
+        this.rua = rua;
+        this.cidade = cidade;
+        this.bairo = bairo;
+        this.numero = numero;
+        this.lat = lat;
+        this.lng = lng;
+        this.login = login;
+        this.senha = senha;
+    }
 
-
+    public ContratanteDTO() {
+    }
 }
 
 
