@@ -43,12 +43,12 @@ public class ContratanteController {
         final ContratanteConverter converterC = contratanteConverter;
         final UsuarioConverter converterU = usuarioConverter;
         if(!usuarioDAO.findbylogin(dto.login)){
-        EnderecoEntity enderecoEntity =endrecoDAO.addendereco(converterE.toEntity(dto));
-        ContratanteEntity contratanteEntity= contratanteDAO.addcontratante(converterC.toEntity(dto,enderecoEntity));
-        usuarioDAO.addlongincont(converterU.toEntity(dto,contratanteEntity));
-        return ResponseEntity.ok().body(HttpStatus.CREATED);
+            EnderecoEntity enderecoEntity =endrecoDAO.addendereco(converterE.toEntity(dto));
+            ContratanteEntity contratanteEntity= contratanteDAO.addcontratante(converterC.toEntity(dto,enderecoEntity));
+            usuarioDAO.addlongincont(converterU.toEntity(dto,contratanteEntity));
+            return ResponseEntity.ok().body(HttpStatus.CREATED);
         }
-        return ResponseEntity.ok().body(HttpStatus.UNPROCESSABLE_ENTITY);
+        return ResponseEntity.ok().body(HttpStatus.BAD_REQUEST);
     }
     @GetMapping("pequisar")
     public ResponseEntity<ContratanteDTO>pesquisacontratante( @RequestHeader(HttpHeaders.AUTHORIZATION) String auth) throws SQLException {
@@ -61,24 +61,24 @@ public class ContratanteController {
         UsuarioEntity usuarioEntity= usuarioDAO.findbyid(idusuario,tipousuario);
         ContratanteEntity contratanteEntity= contratanteDAO.pesquisarporid(usuarioEntity);
         EnderecoEntity enderecoEntity= endrecoDAO.pesquisar(contratanteEntity.enderecoEntity.idendereco);
-        UsuarioEntity usuario =new UsuarioEntity();
-        usuario.id= usuarioEntity.id;
-        usuario.login= usuarioEntity.login;
-        usuario.senha= usuarioEntity.senha;
-        usuario.contratante= new ContratanteEntity();
-        usuario.contratante.id= contratanteEntity.id;
-        usuario.contratante.nome=contratanteEntity.nome;
-        usuario.contratante.sobrenome=contratanteEntity.sobrenome;
-        usuario.contratante.telefone=contratanteEntity.telefone;
-        usuario.contratante.enderecoEntity= new EnderecoEntity();
-        usuario.contratante.enderecoEntity.idendereco= enderecoEntity.idendereco;
-        usuario.contratante.enderecoEntity.rua= enderecoEntity.rua;
-        usuario.contratante.enderecoEntity.cidade= enderecoEntity.cidade;
-        usuario.contratante.enderecoEntity.bairo= enderecoEntity.bairo;
-        usuario.contratante.enderecoEntity.numero= enderecoEntity.numero;
-        usuario.contratante.enderecoEntity.lat= enderecoEntity.lat;
-        usuario.contratante.enderecoEntity.lng= enderecoEntity.lng;
-        return ResponseEntity.ok().body(converterC.toDTO(usuario));
+
+
+        ContratanteDTO dtoResponse = new ContratanteDTO();
+
+        dtoResponse.login= usuarioEntity.login;
+        dtoResponse.senha= usuarioEntity.senha;
+        dtoResponse.id= contratanteEntity.id;
+        dtoResponse.nome=contratanteEntity.nome;
+        dtoResponse.sobrenome=contratanteEntity.sobrenome;
+        dtoResponse.telefone=contratanteEntity.telefone;
+        dtoResponse.idendereco= enderecoEntity.idendereco;
+        dtoResponse.rua= enderecoEntity.rua;
+        dtoResponse.cidade= enderecoEntity.cidade;
+        dtoResponse.bairo= enderecoEntity.bairo;
+        dtoResponse.numero= enderecoEntity.numero;
+        dtoResponse.lat= enderecoEntity.lat;
+        dtoResponse.lng= enderecoEntity.lng;
+        return ResponseEntity.ok().body(dtoResponse);
     }
     @PutMapping("put/{id}")
     public ResponseEntity<ContratanteDTO>putcontratante(@RequestBody ContratanteDTO dto, @PathVariable int id,  @RequestHeader(HttpHeaders.AUTHORIZATION) String auth) throws SQLException {
@@ -102,16 +102,17 @@ public class ContratanteController {
         if(usuarioEntity ==null){
             return ResponseEntity.notFound().build();
         }
-        usuarioEntity.contratante.nome =contratanteEntity.nome;
-        usuarioEntity.contratante.sobrenome =contratanteEntity.sobrenome;
-        usuarioEntity.contratante.telefone =contratanteEntity.telefone;
-        usuarioEntity.contratante.enderecoEntity.rua =enderecoEntity.rua;
-        usuarioEntity.contratante.enderecoEntity.cidade =enderecoEntity.cidade;
-        usuarioEntity.contratante.enderecoEntity.bairo =enderecoEntity.bairo;
-        usuarioEntity.contratante.enderecoEntity.numero =enderecoEntity.numero;
-        usuarioEntity.contratante.enderecoEntity.lat =enderecoEntity.lat;
-        usuarioEntity.contratante.enderecoEntity.lng =enderecoEntity.lng;
-        return ResponseEntity.ok().body(converterC.toDTO(usuarioEntity));
+        ContratanteDTO dtoResponse = new ContratanteDTO();
+        dtoResponse.nome =contratanteEntity.nome;
+        dtoResponse.sobrenome =contratanteEntity.sobrenome;
+        dtoResponse.telefone =contratanteEntity.telefone;
+        dtoResponse.rua =enderecoEntity.rua;
+        dtoResponse.cidade =enderecoEntity.cidade;
+        dtoResponse.bairo =enderecoEntity.bairo;
+        dtoResponse.numero =enderecoEntity.numero;
+        dtoResponse.lat =enderecoEntity.lat;
+        dtoResponse.lng =enderecoEntity.lng;
+        return ResponseEntity.ok().body(dtoResponse);
 
     }
 }
