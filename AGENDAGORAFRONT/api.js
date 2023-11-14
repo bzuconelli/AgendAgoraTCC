@@ -14,8 +14,8 @@ async function postLogin(email, senha) {
 
     if (response.status === 200) {
 
-        const token = await response.text();
-        return token;
+        const login = await response.json();
+        return login;
 
 
 
@@ -60,8 +60,8 @@ async function postPrestador(nome, telefone, cidade, rua, bairro, numero, recebe
         })
     });
 
+    if (response.status === 400) { return null; }
     let prestador = await response.json();
-
     return prestador;
 }
 async function postContratante(nome, telefone, cidade, rua, bairro, numero, latitude, longitude, login, senha, sobrenome) {
@@ -86,14 +86,18 @@ async function postContratante(nome, telefone, cidade, rua, bairro, numero, lati
             lng: longitude
         })
     });
+    if (response.status === 400) { return null; }
 
     let contratante = await response.json();
+    return contratante
 
-    return contratante;
+
+
+
 }
 
 async function putcontratante(id, nome, sobrenome, telefone, cidade, rua, bairro, numero, email, senha, latitude, longitude, idendereco) {
-    let response = await fetch("http://localhost:8080/contratante/put/" + id, {
+    let response = await fetch("http://localhost:8080/contratante/" + id, {
         method: "PUT",
         headers: {
             'Accept': 'application/json',

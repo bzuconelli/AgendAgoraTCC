@@ -13,6 +13,7 @@ public class PrestadorEntity {
     public String dinheiro;
     public String recebecartao;
     public  int idtiposervico;
+    public int nota;
 
     public PrestadorEntity() {
     }

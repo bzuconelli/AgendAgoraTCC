@@ -21,6 +21,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
+import java.util.Date;
+import java.util.List;
 
 @RestController
 @CrossOrigin("*")
@@ -40,7 +42,7 @@ public class PrestadorController {
     public UsuarioDAO usuarioDAO;
 
     @PostMapping()
-    public ResponseEntity<HttpStatus> addconprestador(@RequestBody PrestadorDTO dto) throws SQLException {
+    public ResponseEntity<PrestadorDTO> addconprestador(@RequestBody PrestadorDTO dto) throws SQLException {
 
         final EnderecoConverter converterE = enderecoConverter;
         final PrestadorConverter converterP = prestadorConverter;
@@ -50,10 +52,30 @@ public class PrestadorController {
             PrestadorEntity prestadorEntity = prestadorDAO.addprestador(converterP.toEntity(dto, enderecoEntity));
             usuarioDAO.addlonginprest(converterU.toEntityP(dto, prestadorEntity));
             prestadorDAO.prestadorpresta(prestadorEntity.id, dto.idtiposervico);
-            return ResponseEntity.ok().body(HttpStatus.CREATED);
+            PrestadorDTO dtoResponse = new PrestadorDTO();
+            dtoResponse.id= prestadorEntity.id;
+            dtoResponse.nome=prestadorEntity.nome;
+            dtoResponse.sobrenome=prestadorEntity.sobrenome;
+            dtoResponse.telefone=prestadorEntity.telefone;
+            dtoResponse.recebecartao=prestadorEntity.recebecartao;
+            dtoResponse.recebepix=prestadorEntity.recebepix;
+            dtoResponse.dinheiro=prestadorEntity.dinheiro;
+            dtoResponse.idendereco= enderecoEntity.idendereco;
+            return ResponseEntity.ok().body(dtoResponse);
+
         }
-        return ResponseEntity.ok().body(HttpStatus.UNPROCESSABLE_ENTITY);
+        return ResponseEntity.badRequest().build();
     }
+   // @GetMapping()
+   // public ResponseEntity<List<PrestadorDTO>>pesquisarprestadores(@RequestParam (value = "data",required = false)Date data, @RequestParam(value = "tipopag",required = false)String tipopag,
+                                                             //       @RequestParam (value = "tiposervico",required = false)int tiposervico, @RequestParam (value = "distancia",required = false) int distancia,
+                                                                  //  @RequestParam (value = "lat",required = false)String lat, @RequestParam (value = "lng",required = false)String lng){
+       // final PrestadorEntity prestadorEntity= prestadorDAO.//
+
+  //  }
+
+
+   // }
 }
 
 

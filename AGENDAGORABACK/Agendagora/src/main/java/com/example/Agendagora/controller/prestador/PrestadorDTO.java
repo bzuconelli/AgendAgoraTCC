@@ -23,8 +23,9 @@ public class PrestadorDTO {
     public String recebepix;
     public String dinheiro;
     public String recebecartao;
-    public int idlogin;
+    public int nota;
     public  int idtiposervico;
+
 
     public PrestadorDTO() {
     }

@@ -6,16 +6,20 @@ document.getElementById('formulario').addEventListener('submit', function (event
     let senha = document.getElementById("password").value;
     document.getElementById("spinner").style.display = 'inline-block';
     document.getElementById("entrar").disabled = true;
-    postLogin(email, senha).then(token => {
+    postLogin(email, senha).then(login => {
 
 
-        if (token != "Usuário não autorizado") {
+        if (login != "Usuário não autorizado") {
+                let token= login.token
+                let tipousario= login.niveldeacesso
+                localStorage.setItem('token',token)
+
+
           
-            let [tokent, tipousario] = token.split("|")
-            localStorage.setItem('token',tokent)
+            
             
 
-            if (tipousario == "contratante") {
+            if ( tipousario== "contratante") {
                 window.location.href = "telademenuinicialcont.html"
                 document.getElementById("spinner").style.display = 'none';
                 document.getElementById("entrar").disabled = false;

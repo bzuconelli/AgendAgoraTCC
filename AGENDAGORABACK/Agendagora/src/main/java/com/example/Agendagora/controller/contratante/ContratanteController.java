@@ -37,7 +37,7 @@ public class ContratanteController {
     public UsuarioDAO usuarioDAO;
 
     @PostMapping()
-    public ResponseEntity<HttpStatus> addcontratante(@RequestBody ContratanteDTO dto) throws SQLException {
+    public ResponseEntity<ContratanteDTO> addcontratante(@RequestBody ContratanteDTO dto) throws SQLException {
 
         final EnderecoConverter converterE = enderecoConverter;
         final ContratanteConverter converterC = contratanteConverter;
@@ -46,11 +46,17 @@ public class ContratanteController {
             EnderecoEntity enderecoEntity =endrecoDAO.addendereco(converterE.toEntity(dto));
             ContratanteEntity contratanteEntity= contratanteDAO.addcontratante(converterC.toEntity(dto,enderecoEntity));
             usuarioDAO.addlongincont(converterU.toEntity(dto,contratanteEntity));
-            return ResponseEntity.ok().body(HttpStatus.CREATED);
+            ContratanteDTO dtoResponse = new ContratanteDTO();
+            dtoResponse.id= contratanteEntity.id;
+            dtoResponse.nome=contratanteEntity.nome;
+            dtoResponse.sobrenome=contratanteEntity.sobrenome;
+            dtoResponse.telefone=contratanteEntity.telefone;
+            dtoResponse.idendereco= enderecoEntity.idendereco;
+            return ResponseEntity.ok().body(dtoResponse);
         }
-        return ResponseEntity.ok().body(HttpStatus.BAD_REQUEST);
+        return ResponseEntity.badRequest().build();
     }
-    @GetMapping("pequisar")
+    @GetMapping()
     public ResponseEntity<ContratanteDTO>pesquisacontratante( @RequestHeader(HttpHeaders.AUTHORIZATION) String auth) throws SQLException {
         final ContratanteConverter converterC = contratanteConverter;
         int idusuario =usuarioDAO.existetoken(auth);
@@ -80,7 +86,7 @@ public class ContratanteController {
         dtoResponse.lng= enderecoEntity.lng;
         return ResponseEntity.ok().body(dtoResponse);
     }
-    @PutMapping("put/{id}")
+    @PutMapping("{id}")
     public ResponseEntity<ContratanteDTO>putcontratante(@RequestBody ContratanteDTO dto, @PathVariable int id,  @RequestHeader(HttpHeaders.AUTHORIZATION) String auth) throws SQLException {
         int idusuario =usuarioDAO.existetoken(auth);
         boolean tipousuario= true;
@@ -106,12 +112,16 @@ public class ContratanteController {
         dtoResponse.nome =contratanteEntity.nome;
         dtoResponse.sobrenome =contratanteEntity.sobrenome;
         dtoResponse.telefone =contratanteEntity.telefone;
+        dtoResponse.idendereco =enderecoEntity.idendereco;
         dtoResponse.rua =enderecoEntity.rua;
         dtoResponse.cidade =enderecoEntity.cidade;
         dtoResponse.bairo =enderecoEntity.bairo;
         dtoResponse.numero =enderecoEntity.numero;
         dtoResponse.lat =enderecoEntity.lat;
         dtoResponse.lng =enderecoEntity.lng;
+        dtoResponse.login=usuarioEntity.login;
+        dtoResponse.senha=usuarioEntity.senha;
+        dtoResponse.id= contratanteEntity.id;
         return ResponseEntity.ok().body(dtoResponse);
 
     }

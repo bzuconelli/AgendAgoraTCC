@@ -43,7 +43,7 @@ document.getElementById('cadastro').addEventListener('submit', function (event) 
         
 
         postPrestador(nome, telefone, cidade, rua, bairro, numero, recebecartao, recebedinheiro, recebepix, servico, email, senha, sobrenome, latitude,longitude).then(prestador => {
-          if (prestador == "CREATED") {
+          if (prestador != null) {
           const myModal = new bootstrap.Modal(document.getElementById('modal'), {})
           myModal.show();
           document.getElementById("cadastro").reset();
@@ -69,7 +69,7 @@ document.getElementById('cadastro').addEventListener('submit', function (event) 
         });
       } else {
         postContratante(nome, telefone, cidade, rua, bairro, numero, latitude, longitude, email, senha, sobrenome).then(contratante => {
-          if (contratante == "CREATED") {
+          if (contratante !=null) {
             const myModal = new bootstrap.Modal(document.getElementById('modal'), {})
             myModal.show();
             document.getElementById("cadastro").reset();

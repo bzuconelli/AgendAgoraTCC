@@ -1,5 +1,5 @@
 async function getContratante() {
-    let response = await fetch("http://localhost:8080/contratante/pequisar", {
+    let response = await fetch("http://localhost:8080/contratante/", {
         method: "GET",
         headers: {
             'Accept': 'application/json',
@@ -58,7 +58,7 @@ getContratante().then(contratante => {
                         
                         setTimeout(function () {
                             window.location.href = "login.html";
-                        }, 5000);
+                        }, 3000);
                         
 
 

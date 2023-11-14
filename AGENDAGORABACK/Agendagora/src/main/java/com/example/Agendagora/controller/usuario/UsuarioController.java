@@ -1,5 +1,6 @@
 package com.example.Agendagora.controller.usuario;
 
+import com.example.Agendagora.controller.login.LoginDTO;
 import com.example.Agendagora.model.usuario.UsuarioDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,8 +15,7 @@ public class UsuarioController {
     @Autowired
     public UsuarioDAO usuarioDAO;
     @PostMapping()
-    public ResponseEntity<String> usuarioexiste(@RequestBody UsuarioDTO dto) throws SQLException {
-        String tipousuario;
+    public ResponseEntity<LoginDTO> usuarioexiste(@RequestBody UsuarioDTO dto) throws SQLException {
 
         final int usuarioexiste = usuarioDAO.pesquisar(dto.login, dto.senha);
         if (usuarioexiste == -1) {
@@ -24,13 +24,16 @@ public class UsuarioController {
             String token = UUID.randomUUID().toString();
             usuarioDAO.adicionarnatabela(usuarioexiste, token);
             boolean prestador = usuarioDAO.eprestador(usuarioexiste);
+            LoginDTO loginDTO=new LoginDTO();
+            loginDTO.token=token;
             if (prestador) {
-                tipousuario = "prestador";
+
+                loginDTO.niveldeacesso = "prestador";
 
             } else {
-                tipousuario = "contratante";
+                loginDTO.niveldeacesso = "contratante";
             }
-            return ResponseEntity.ok().body(token+"|"+ tipousuario);
+            return ResponseEntity.ok().body(loginDTO);
 
         }
     }
