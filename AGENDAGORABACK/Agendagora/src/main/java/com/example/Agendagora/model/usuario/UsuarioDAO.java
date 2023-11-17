@@ -73,7 +73,7 @@ public class UsuarioDAO {
         try (final PreparedStatement preparedStatement = connectionSingleton.getConnection().prepareStatement("insert into usuario (login, senha,contratante_idcontratante ) values ( ?, ?, ?)", Statement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setString(1, usuario.login);
             preparedStatement.setString(2, usuario.senha);
-            preparedStatement.setInt(3, usuario.contratante.id);
+            preparedStatement.setInt(3, usuario.prestador.id);
             preparedStatement.executeUpdate();
             try (ResultSet rs = preparedStatement.getGeneratedKeys()) {
                 rs.next();
@@ -118,7 +118,7 @@ public class UsuarioDAO {
                     usuario.login = rs.getString(2);
                     usuario.senha = rs.getString(3);
                     usuario.contratante = new ContratanteEntity();
-                    usuario.contratante.id = rs.getInt(4);
+                    usuario.prestador.id = rs.getInt(4);
 
                     return usuario;
                 } else {
@@ -146,7 +146,7 @@ public class UsuarioDAO {
             try (final PreparedStatement preparedStatement = connectionSingleton.getConnection().prepareStatement(sql)) {
                 preparedStatement.setString(1, entity.login);
                 preparedStatement.setString(2, entity.senha);
-                preparedStatement.setInt(3, entity.contratante.id);
+                preparedStatement.setInt(3, entity.prestador.id);
                 int qtdlinhas = preparedStatement.executeUpdate();;
                 if(qtdlinhas==0){
                     return null;

@@ -26,12 +26,6 @@ async function postLogin(email, senha) {
     }
 
 }
-
-
-
-
-
-
 async function postPrestador(nome, telefone, cidade, rua, bairro, numero, recebecartao, recebedinheiro, recebepix, servico, login, senha, sobrenome, latitude, longitude) {
     let response = await fetch("http://localhost:8080/prestador/", {
         method: "POST",
@@ -91,11 +85,7 @@ async function postContratante(nome, telefone, cidade, rua, bairro, numero, lati
     let contratante = await response.json();
     return contratante
 
-
-
-
 }
-
 async function putcontratante(id, nome, sobrenome, telefone, cidade, rua, bairro, numero, email, senha, latitude, longitude, idendereco) {
     let response = await fetch("http://localhost:8080/contratante/" + id, {
         method: "PUT",
@@ -122,10 +112,23 @@ async function putcontratante(id, nome, sobrenome, telefone, cidade, rua, bairro
 
         })
     });
-
     let pessoa = await response.json();
-
     return pessoa;
+}
+async function getPretadores(data, tipoPagamento, tipoServico, distancia, lat, lng) {
+    let url = `http://localhost:8080/prestador/?data=${data}&tipopag=${tipoPagamento}&tiposervico=${tipoServico}&distancia=${distancia}&lat=${lat}&lng=${lng}`;
+    let response = await fetch(url, {
+        method: "GET",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.getItem('token')
+        },
+    });
+
+    let contratante = await response.json();
+
+    return contratante;
 }
 
 

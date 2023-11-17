@@ -1,36 +1,48 @@
-document.getElementById('agendarservico').addEventListener('submit', function (event) {
-    event.preventDefault();
-    let servicoaserrealizado = document.getElementById('Saf').value;
-    let distancia = document.getElementById('filtroDistancia').value;
+async function getContratante() {
+    let response = await fetch("http://localhost:8080/contratante/", {
+        method: "GET",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.getItem('token')
+        },
+    });
 
-    let data = document.getElementById('data').value;
-    let formasdepagamento = document.querySelector('#filtroPagamento');
-    let formadepagamento = formasdepagamento.options[formasdepagamento.selectedIndex].value;
-    const myModal = new bootstrap.Modal(document.getElementById('modalp'), {})
-    myModal.show();
-    initMap();
+    let contratante = await response.json();
 
-
-});
-function agendarservico() {
-    let servicoaserrealizado = document.getElementById('Saf').value;
-    let distancia = document.getElementById('filtroDistancia').value;
-
-    let data = document.getElementById('data').value;
-    let formasdepagamento = document.querySelector('#filtroPagamento');
-    let formadepagamento = formasdepagamento.options[formasdepagamento.selectedIndex].value;
+    return contratante;
 }
 
 
 
 
+document.getElementById('agendarservico').addEventListener('submit', function (event) {
+    event.preventDefault();
+    getContratante().then(contratante => {
+        let tipoServico=1
+        let latitudecontratente = contratante.lat;
+        let longitudecontratente = contratante.lng;
+        let distancia = document.getElementById('filtroDistancia').value;
+        let data = document.getElementById('data').value;
+        let formasdepagamento = document.querySelector('#filtroPagamento');
+        let formadepagamento = formasdepagamento.options[formasdepagamento.selectedIndex].value;
+        getPretadores(data,formadepagamento,tipoServico,distancia,latitudecontratente,longitudecontratente)
+        
+        const myModal = new bootstrap.Modal(document.getElementById('modalp'), {})
+        myModal.show();
+        initMap(latitudecontratente, longitudecontratente);
+    })
+
+
+});
+
 var map;
 
 
-function initMap() {
+function initMap(latitudecontratente, longitudecontratente) {
     var mapOptions = {
-        center: { lat: -26.826162, lng: -49.300635 },
-        zoom: 13,
+        center: { lat: latitudecontratente, lng: longitudecontratente },
+        zoom: 9,
     };
 
     map = new google.maps.Map(document.getElementById('map'), mapOptions);
@@ -50,13 +62,21 @@ function initMap() {
         marker.setMap(map);
     }));
 }
+function agendarservico() {
 
+    let servicoaserrealizado = document.getElementById('Saf').value;
+    let distancia = document.getElementById('filtroDistancia').value;
+
+    let data = document.getElementById('data').value;
+    let formasdepagamento = document.querySelector('#filtroPagamento');
+    let formadepagamento = formasdepagamento.options[formasdepagamento.selectedIndex].value;
+}
 
 function selecionar(element) {
     let proximoelemento = element.parentNode;
     var idprestador = proximoelemento.childNodes[0];
     console.log(idprestador);
-    document.getElementById('agendar').style.display= "block"
+    document.getElementById('agendar').style.display = "block"
 
 
 }

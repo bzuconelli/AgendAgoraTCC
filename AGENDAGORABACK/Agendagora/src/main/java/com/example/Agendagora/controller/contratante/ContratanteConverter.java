@@ -23,9 +23,9 @@ public class ContratanteConverter {
     }
 
    public ContratanteDTO toDTO(UsuarioEntity entity) {
-       return new ContratanteDTO(entity.contratante.id,entity.contratante.nome,entity.contratante.sobrenome,entity.contratante.telefone,entity.contratante.enderecoEntity.idendereco,
-               entity.contratante.enderecoEntity.rua, entity.contratante.enderecoEntity.cidade, entity.contratante.enderecoEntity.bairo, entity.contratante.enderecoEntity.numero,
-               entity.contratante.enderecoEntity.lat,  entity.contratante.enderecoEntity.lng,entity.login, entity.senha);
+       return new ContratanteDTO(entity.prestador.id,entity.prestador.nome,entity.prestador.sobrenome,entity.prestador.telefone,entity.prestador.enderecoEntity.idendereco,
+               entity.prestador.enderecoEntity.rua, entity.prestador.enderecoEntity.cidade, entity.prestador.enderecoEntity.bairo, entity.prestador.enderecoEntity.numero,
+               entity.prestador.enderecoEntity.lat,  entity.prestador.enderecoEntity.lng,entity.login, entity.senha);
    }
 
     public ContratanteEntity toEntity(ContratanteDTO dto, EnderecoEntity enderecoEntity) {

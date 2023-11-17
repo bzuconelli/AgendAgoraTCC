@@ -12,8 +12,10 @@ public class PrestadorEntity {
     public String recebepix;
     public String dinheiro;
     public String recebecartao;
-    public  int idtiposervico;
     public int nota;
+    public int idagenda;
+
+
 
     public PrestadorEntity() {
     }
@@ -23,10 +25,12 @@ public class PrestadorEntity {
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.telefone = telefone;
-        this.enderecoEntity = enderecoEntity;
         this.recebecartao = recebecartao;
         this.recebepix = recebepix;
         this.dinheiro = dinheiro;
+        this.enderecoEntity = enderecoEntity;
 
     }
+
+
 }

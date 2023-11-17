@@ -1,14 +1,17 @@
 package com.example.Agendagora.model.prestador;
 
 import com.example.Agendagora.ConnectionSingleton;
+import com.example.Agendagora.model.endereco.EnderecoEntity;
+import com.example.Agendagora.model.usuario.UsuarioEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
 public class PrestadorDAO {
     @Autowired
@@ -39,6 +42,37 @@ public class PrestadorDAO {
             preparedStatement.setInt(1, id);
             preparedStatement.setInt(2, servico);
             preparedStatement.execute();
+
+        }
+    }
+    public List<PrestadorEntity> pesquisarprestadores(LocalDate date, int distancia, int tiposervico, String pagamento, String lat, String lng) throws SQLException {
+        String sql= "{call BuscarPrestadores(?, ?, ?, ?, ?, ?)}";
+        try (final PreparedStatement preparedStatement = connectionSingleton.getConnection().prepareStatement(sql)) {
+            preparedStatement.setDouble(1, Double.parseDouble(lat));
+            preparedStatement.setDouble(2, Double.parseDouble(lng));
+            preparedStatement.setInt(3,distancia);
+            preparedStatement.setInt(4,tiposervico);
+            preparedStatement.setString(5,pagamento);
+            preparedStatement.setDate(6, Date.valueOf(date));
+            try (final ResultSet rs = preparedStatement.executeQuery()) {
+
+                List<PrestadorEntity> resultado= new ArrayList<>();
+                while (rs.next()){
+                    PrestadorEntity prestador = new PrestadorEntity();
+                    prestador=new PrestadorEntity();
+                    prestador.id=rs.getInt(1);
+                    prestador.nome= rs.getString(2);
+                    prestador.sobrenome= rs.getString(3);
+                    prestador.enderecoEntity= new EnderecoEntity();
+                    prestador.enderecoEntity.idendereco= rs.getInt(4);
+                    prestador.enderecoEntity.lat= rs.getString(5);
+                    prestador.enderecoEntity.lng= rs.getString(6);
+                    prestador.idagenda= rs.getInt(7);
+                    prestador.nota= rs.getInt(8);
+                    resultado.add(prestador);
+                }
+                return resultado;
+            }
 
         }
     }
