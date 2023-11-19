@@ -118,7 +118,7 @@ public class UsuarioDAO {
                     usuario.login = rs.getString(2);
                     usuario.senha = rs.getString(3);
                     usuario.contratante = new ContratanteEntity();
-                    usuario.prestador.id = rs.getInt(4);
+                    usuario.contratante.id = rs.getInt(4);
 
                     return usuario;
                 } else {

@@ -18,6 +18,7 @@ import com.example.Agendagora.model.usuario.UsuarioDAO;
 import com.example.Agendagora.model.usuario.UsuarioEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -70,8 +71,11 @@ public class PrestadorController {
    @GetMapping()
    public ResponseEntity<List<PrestadorDTO>>pesquisarprestadores(@RequestParam (value = "data",required = false)  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate data, @RequestParam(value = "tipopag",required = false)String tipopag,
                                                                     @RequestParam (value = "tiposervico",required = false)int tiposervico, @RequestParam (value = "distancia",required = false) int distancia,
-                                                                    @RequestParam (value = "lat",required = false)String lat, @RequestParam (value = "lng",required = false)String lng) throws SQLException {
-
+                                                                    @RequestParam (value = "lat",required = false)String lat, @RequestParam (value = "lng",required = false)String lng,@RequestHeader(HttpHeaders.AUTHORIZATION) String auth) throws SQLException {
+       int idusuario =usuarioDAO.existetoken(auth);
+       if (idusuario==0) {
+           return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+       }
         List<PrestadorEntity> prestadorEntityList= prestadorDAO.pesquisarprestadores(data,distancia,tiposervico,tipopag,lat,lng);
         if(prestadorEntityList.size()==0 ){
             return ResponseEntity.notFound().build();

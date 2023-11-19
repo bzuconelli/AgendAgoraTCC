@@ -59,14 +59,13 @@ public class PrestadorDAO {
                 List<PrestadorEntity> resultado= new ArrayList<>();
                 while (rs.next()){
                     PrestadorEntity prestador = new PrestadorEntity();
-                    prestador=new PrestadorEntity();
                     prestador.id=rs.getInt(1);
                     prestador.nome= rs.getString(2);
                     prestador.sobrenome= rs.getString(3);
                     prestador.enderecoEntity= new EnderecoEntity();
                     prestador.enderecoEntity.idendereco= rs.getInt(4);
-                    prestador.enderecoEntity.lat= rs.getString(5);
-                    prestador.enderecoEntity.lng= rs.getString(6);
+                    prestador.enderecoEntity.lng= rs.getString(5);
+                    prestador.enderecoEntity.lat= rs.getString(6);
                     prestador.idagenda= rs.getInt(7);
                     prestador.nota= rs.getInt(8);
                     resultado.add(prestador);

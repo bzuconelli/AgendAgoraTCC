@@ -20,7 +20,7 @@ public class ContratanteDAO {
     public ContratanteEntity pesquisarporid(UsuarioEntity usuarioEntity) throws SQLException{
         String sql =" SELECT * FROM contratante where idcontratante = ? ";
         try (final PreparedStatement preparedStatement = connectionSingleton.getConnection().prepareStatement(sql)){
-            preparedStatement.setInt(1, usuarioEntity.prestador.id);
+            preparedStatement.setInt(1, usuarioEntity.contratante.id);
             try (final ResultSet rs = preparedStatement.executeQuery()) {
                 rs.next();
                 ContratanteEntity contratante= new ContratanteEntity();

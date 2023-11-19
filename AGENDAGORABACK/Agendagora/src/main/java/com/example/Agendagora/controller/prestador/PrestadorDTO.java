@@ -54,14 +54,8 @@ public class PrestadorDTO {
 
 
 
-    public PrestadorDTO(int id, String nome, String sobrenome, String telefone, int idendereco, String rua, String cidade, String bairo, int numero, String lat, String lng, String login, String senha, String dinheiro, String recebepix, String recebecartao, int nota, int idagenda) {
-    }
 
 
-
-
-    public PrestadorDTO(int id, String nome, String sobrenome, String telefone, int idendereco, String rua, String cidade, String bairo, int numero, String lat, String lng, String dinheiro, String recebepix, String recebecartao, int nota, int idagenda) {
-    }
 
 
 }

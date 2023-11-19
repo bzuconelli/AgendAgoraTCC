@@ -125,10 +125,35 @@ async function getPretadores(data, tipoPagamento, tipoServico, distancia, lat, l
             'Authorization': localStorage.getItem('token')
         },
     });
+    if (response.status === 404) { return null; }
 
-    let contratante = await response.json();
+    let prestadores = await response.json();
 
-    return contratante;
+    return prestadores;
+}
+async function postOrdendeservico(idprestador,idcontratante,data,formadepagamento,servicoaserrealizado,tipoServico) {
+    let response = await fetch("http://localhost:8080/ordendeservico/", {
+        method: "POST",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.getItem('token')
+        },
+
+        body: JSON.stringify({
+            descricao:servicoaserrealizado,
+            data:data,
+            idtiposervico:tipoServico,
+            formapagamento:formadepagamento,
+            idprerst:idprestador,
+            idcontratante: idcontratante 
+        })
+    });
+    if (response.status === 400) { return null; }
+
+    let ordendeservico = await response.json();
+    return ordendeservico
+
 }
 
 

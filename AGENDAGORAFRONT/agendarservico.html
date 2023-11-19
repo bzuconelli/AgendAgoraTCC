@@ -67,7 +67,7 @@
                             <label for="filtroDistancia" class="form-label text-white required">Agendar por distância
                                 (km)</label>
                             <input type="number" class="form-control" id="filtroDistancia"
-                                placeholder="Distância máxima" required>
+                                placeholder="Distância máxima" required min="0">
                         </div>
                         <div class="mb-3">
                             <label for="data" class="form-label text-white required"> Escolha a data</label>
@@ -79,38 +79,101 @@
                             <select class="form-select required" id="filtroPagamento" required>
                                 <option value="" select> Escolha uma forma de Pagamento</option>
                                 <option value="pix">Pix</option>
-                                <option value="credito">Cartão de Crédito</option>
-                                <option value="debito">Cartão de Débito</option>
+                                <option value="cartão">Cartão</option>
                                 <option value="dinheiro">Dinheiro</option>
                             </select>
                         </div>
                         <div class="div-1">
-                            <button type="submit" class="btn btn-custom btn-block" id="Filtrar">Filtrar</button>
-                            <button class="btn btn-custom btn-block" id="agendar" onclick="agendarservico()"
-                                style="display: none;">Agendar</button>
-
+                            <button type="submit" class="btn btn-custom btn-block" id="Filtrar" ><span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"
+                            id="spinner" style="display:none"></span>Filtrar</button>
                         </div>
                     </form>
+                    <div class="mb-3">
+                        <label for="nomep" class="form-label text-white" id="labelnome" style="display: none;">Nome
+                            Perstador</label>
+                        <input type="text" class="form-control" id="nomep" placeholder="Nome Perstador"
+                            style="display: none;">
+                    </div>
+
+                    <div class="div-1">
+                        <button type="submit" class="btn btn-custom btn-block" id="agendar" onclick="agendarservico()"
+                            style="display: none;"><span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"
+                            id="spinner1" style="display:none"></span>Agendar</button>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="modal" tabindex="-1" id="modalp">
-            <div class="modal-dialog modal-dialog-scrollable">
+            <div div class="modal-dialog modal-xl">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title">Informações</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body" id="map" style="height:600px"></div>
+                    <div class="modal-body" id="map" style="height:800px"></div>
                 </div>
 
             </div>
         </div>
-        
+        <div class="modal" tabindex="-1" id="modalnadaencontrado">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Informações</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Nenhum prestador encontado de acordo com os filtros </p>
+                    </div>
 
+                </div>
+            </div>
+        </div>
+        <div class="modal" tabindex="-1" id="vagasocupadas">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Informações</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>As vagas foram ocupadas </p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="modal" tabindex="-1" id="osgerada">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Informações</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Serviço agendado com sucesso </p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="modal" tabindex="-1" id="datapassada">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Informações</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>A escolha uma data futura  </p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
 
     </div>
-    </div>
+
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDpddblAFVXI6kT9mVTf4PfXmo_fhTabFM&callback=initMap"
         defer></script>
     <script src="agendar.js"></script>
