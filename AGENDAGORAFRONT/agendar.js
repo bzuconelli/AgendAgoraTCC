@@ -61,11 +61,13 @@ document.getElementById('agendarservico').addEventListener('submit', function (e
         let latitudecontratente = contratante.lat;
         let longitudecontratente = contratante.lng;
         let distancia = document.getElementById('filtroDistancia').value;
+        let data=document.getElementById('data').value;
         let dataInput = document.getElementById('data');
         let dataSelecionada = new Date(dataInput.value);
         let dataAtual = new Date();
+        console.log(dataSelecionada);
 
-        if (dataSelecionada < dataAtual) {
+        if (dataSelecionada <= dataAtual) {
             const myModal = new bootstrap.Modal(document.getElementById('datapassada'), {});
             myModal.show();
             
