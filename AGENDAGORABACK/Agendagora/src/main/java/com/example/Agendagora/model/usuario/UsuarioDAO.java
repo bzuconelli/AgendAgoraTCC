@@ -146,7 +146,7 @@ public class UsuarioDAO {
             try (final PreparedStatement preparedStatement = connectionSingleton.getConnection().prepareStatement(sql)) {
                 preparedStatement.setString(1, entity.login);
                 preparedStatement.setString(2, entity.senha);
-                preparedStatement.setInt(3, entity.prestador.id);
+                preparedStatement.setInt(3, entity.contratante.id);
                 int qtdlinhas = preparedStatement.executeUpdate();;
                 if(qtdlinhas==0){
                     return null;

@@ -16,6 +16,7 @@ public class OrdendeservicoEntity {
     public int nota;
     public String formapagamento;
 
+
     public OrdendeservicoEntity() {
     }
 

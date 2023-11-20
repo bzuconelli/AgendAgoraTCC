@@ -29,11 +29,6 @@ public class PrestadorConverter {
                }
                return prestadorDTOS;
     }
-
-
-
-
-
     public PrestadorEntity toEntity(PrestadorDTO dto, EnderecoEntity enderecoEntity) {
         return new PrestadorEntity(dto.id,dto.nome, dto.sobrenome, dto.telefone, enderecoEntity, dto.recebecartao, dto.recebepix,dto.dinheiro );
     }

@@ -1,6 +1,7 @@
 package com.example.Agendagora.controller.ordendeservico;
 
-import java.util.Date;
+import com.example.Agendagora.model.agenda.AgendaEntity;
+import com.example.Agendagora.model.contratante.ContratanteEntity;
 
 public class OrdendeservicoDTO {
     public int idos;
@@ -17,7 +18,26 @@ public class OrdendeservicoDTO {
     public String sobrenomeo;
     public String data;
     public String formapagamento;
+    public String nomec;
+    public String sobrenomec;
 
     public OrdendeservicoDTO() {
+    }
+
+    public OrdendeservicoDTO(int idos, int idtiposervico, String descricao, String formapagamento, String status, String observacao, int nota, AgendaEntity agenda, ContratanteEntity contratanteEntity,  Double valor) {
+        this.idos = idos;
+        this.status = status;
+        this.descricao = descricao;
+        this.valor = valor;
+        this.observacao = observacao;
+        this.nota = nota;
+        this.idtiposervico = idtiposervico;
+        this.idagenda = agenda.idagenda;
+        this.idprerst = agenda.prestadorEntity.id;
+        this.nomeo = agenda.prestadorEntity.nome;
+        this.sobrenomeo = agenda.prestadorEntity.sobrenome;
+        this.data = agenda.data;
+        this.formapagamento = formapagamento;
+
     }
 }

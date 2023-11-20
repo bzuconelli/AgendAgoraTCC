@@ -1,16 +1,19 @@
 package com.example.Agendagora.model.ordendeservico;
 
 import com.example.Agendagora.ConnectionSingleton;
+import com.example.Agendagora.model.agenda.AgendaEntity;
+import com.example.Agendagora.model.prestador.PrestadorEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class OrdendeservicoDAO {
     @Autowired
     public ConnectionSingleton connectionSingleton;
-
     public OrdendeservicoEntity addos (OrdendeservicoEntity entity) throws SQLException {
         final String sql= "INSERT INTO ordendeservico (statusordem, descservico,formapagamento, tiposervico_idtipodeservico, agenda_idagenda, contratante_idcontratante)" +
                 "SELECT 'aberto' , ? , ? , ? , a.idagenda, ? " +
@@ -39,7 +42,63 @@ public class OrdendeservicoDAO {
                 return entity;
             }
         }
-
     }
+    public List<OrdendeservicoEntity> findbyidcotratante(int id) throws SQLException {
+        final String sql ="select os.idordendeservico, p.nomeprestador,p.sobrenomeprestador," +
+                "os.descservico,os.statusordem,a.dataserv,os.formapagamento " +
+                "from ordendeservico os " +
+                "inner join agenda a on os.agenda_idagenda= a.idagenda " +
+                "inner join prestador p on a.prestador_idprestador = p.idprestador " +
+                "where contratante_idcontratante = ?  " +
+                "and os.statusordem ='aberto' ";
+        try (final PreparedStatement preparedStatement = connectionSingleton.getConnection().prepareStatement(sql)) {
+            preparedStatement.setInt(1,id);
+            try (final ResultSet rs = preparedStatement.executeQuery()) {
+                List<OrdendeservicoEntity> resultado= new ArrayList<>();
+                while (rs.next()){
+                    OrdendeservicoEntity entity =new OrdendeservicoEntity();
+                    entity.idos=rs.getInt(1);
+                    entity.agenda= new AgendaEntity();
+                    entity.agenda.prestadorEntity=new PrestadorEntity();
+                    entity.agenda.prestadorEntity.nome= rs.getString(2);
+                    entity.agenda.prestadorEntity.sobrenome= rs.getString(3);
+                    entity.descricao=rs.getString(4);
+                    entity.status=rs.getString(5);
+                    entity.agenda.data= rs.getString(6);
+                    entity.formapagamento=rs.getString(7);
+                    resultado.add(entity);
+                }
+                return resultado;
+            }
+        }
+    }
+    public OrdendeservicoEntity findbyidordendesrvico(int id) throws SQLException {
+        final String sql=  "select idordendeservico, statusordem, descservico, formapagamento from ordendeservico where idordendeservico= ? ";
+        try (final PreparedStatement preparedStatement = connectionSingleton.getConnection().prepareStatement(sql)) {
+            preparedStatement.setInt(1, id);
+            try (final ResultSet rs = preparedStatement.executeQuery()) {
+                rs.next();
+                OrdendeservicoEntity entity = new OrdendeservicoEntity();
+                entity.idos = rs.getInt(1);
+                entity.status = rs.getString(2);
+                entity.descricao = rs.getString(3);
+                entity.formapagamento = rs.getString(4);
+                return entity;
+            }
+        }
+    }
+    public OrdendeservicoEntity delete(int id) throws SQLException {
+        final OrdendeservicoEntity osaserapagada = findbyidordendesrvico(id);
+        final String sql = "delete from ordendeservico where idordendeservico = ? ";
+        try (final PreparedStatement preparedStatement = connectionSingleton.getConnection().prepareStatement(sql)) {
+            preparedStatement.setInt(1, id);
+            int qtdlinhas = preparedStatement.executeUpdate();
+            if (qtdlinhas == 0) {
+                return null;
+            }
+            return osaserapagada;
+        }
+    }
+
 
 }

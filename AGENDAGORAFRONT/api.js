@@ -131,7 +131,7 @@ async function getPretadores(data, tipoPagamento, tipoServico, distancia, lat, l
 
     return prestadores;
 }
-async function postOrdendeservico(idprestador,idcontratante,data,formadepagamento,servicoaserrealizado,tipoServico) {
+async function postOrdendeservico(idprestador, idcontratante, data, formadepagamento, servicoaserrealizado, tipoServico) {
     let response = await fetch("http://localhost:8080/ordendeservico/", {
         method: "POST",
         headers: {
@@ -141,19 +141,30 @@ async function postOrdendeservico(idprestador,idcontratante,data,formadepagament
         },
 
         body: JSON.stringify({
-            descricao:servicoaserrealizado,
-            data:data,
-            idtiposervico:tipoServico,
-            formapagamento:formadepagamento,
-            idprerst:idprestador,
-            idcontratante: idcontratante 
+            descricao: servicoaserrealizado,
+            data: data,
+            idtiposervico: tipoServico,
+            formapagamento: formadepagamento,
+            idprerst: idprestador,
+            idcontratante: idcontratante
         })
     });
     if (response.status === 400) { return null; }
 
     let ordendeservico = await response.json();
     return ordendeservico
-
+}
+async function deleteOrdendeservico(id) {
+    let response = await fetch("http://localhost:8080/ordendeservico/" + id, {
+        method: "DELETE",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.getItem('token')
+        },
+        
+    })
+    
 }
 
 

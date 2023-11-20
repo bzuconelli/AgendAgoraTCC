@@ -1,7 +1,4 @@
 package com.example.Agendagora.controller.contratante;
-
-
-
 import com.example.Agendagora.controller.enderco.EnderecoConverter;
 import com.example.Agendagora.controller.usuario.UsuarioConverter;
 import com.example.Agendagora.model.contratante.ContratanteDAO;
@@ -15,9 +12,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.sql.SQLException;
-
 @RestController
 @CrossOrigin("*")
 @RequestMapping("/contratante/")
@@ -58,7 +53,6 @@ public class ContratanteController {
     }
     @GetMapping()
     public ResponseEntity<ContratanteDTO>pesquisacontratante( @RequestHeader(HttpHeaders.AUTHORIZATION) String auth) throws SQLException {
-        final ContratanteConverter converterC = contratanteConverter;
         int idusuario =usuarioDAO.existetoken(auth);
         boolean tipousuario= true;
         if (idusuario==0) {
@@ -67,10 +61,7 @@ public class ContratanteController {
         UsuarioEntity usuarioEntity= usuarioDAO.findbyid(idusuario,tipousuario);
         ContratanteEntity contratanteEntity= contratanteDAO.pesquisarporid(usuarioEntity);
         EnderecoEntity enderecoEntity= endrecoDAO.pesquisar(contratanteEntity.enderecoEntity.idendereco);
-
-
         ContratanteDTO dtoResponse = new ContratanteDTO();
-
         dtoResponse.login= usuarioEntity.login;
         dtoResponse.senha= usuarioEntity.senha;
         dtoResponse.id= contratanteEntity.id;
@@ -123,7 +114,6 @@ public class ContratanteController {
         dtoResponse.senha=usuarioEntity.senha;
         dtoResponse.id= contratanteEntity.id;
         return ResponseEntity.ok().body(dtoResponse);
-
     }
 }
 

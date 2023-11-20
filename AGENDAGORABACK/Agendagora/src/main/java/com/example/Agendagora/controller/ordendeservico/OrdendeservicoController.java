@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
+import java.util.List;
 
 @RestController
 @CrossOrigin("*")
@@ -27,18 +28,22 @@ public class OrdendeservicoController {
     public AgendaConverter agendaConverter;
     @Autowired
     public OrdendeservicoConverter ordendeservicoConverter;
+
     @PostMapping()
     public ResponseEntity<OrdendeservicoDTO> addos(@RequestHeader(HttpHeaders.AUTHORIZATION) String auth, @RequestBody OrdendeservicoDTO dto) throws SQLException {
         int idusuario =usuarioDAO.existetoken(auth);
         if (idusuario==0) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
+        final AgendaConverter convertera =agendaConverter;
+        final OrdendeservicoConverter converteros =ordendeservicoConverter;
+
         PrestadorEntity prestadorEntity=new PrestadorEntity();
         prestadorEntity.id=dto.idprerst;
         ContratanteEntity contratanteEntity=new ContratanteEntity();
         contratanteEntity.id=dto.idcontratante;
-        AgendaEntity agendaEntity = agendaConverter.toEntity(dto,prestadorEntity);
-        OrdendeservicoEntity ordendeservicoEntity =ordendeservicoDAO.addos(ordendeservicoConverter.toEntity(dto,contratanteEntity,agendaEntity));
+        AgendaEntity agendaEntity = convertera.toEntity(dto,prestadorEntity);
+        OrdendeservicoEntity ordendeservicoEntity =ordendeservicoDAO.addos(converteros.toEntity(dto,contratanteEntity,agendaEntity));
         if (ordendeservicoEntity==null){
             return ResponseEntity.badRequest().build();
         }
@@ -50,8 +55,36 @@ public class OrdendeservicoController {
         dtoResponse.idagenda=ordendeservicoEntity.agenda.idagenda;
         dtoResponse.descricao=ordendeservicoEntity.descricao;
         return ResponseEntity.ok().body(dtoResponse);
+    }
+    @GetMapping
+    public ResponseEntity<List<OrdendeservicoDTO>> pesquisar(@RequestHeader(HttpHeaders.AUTHORIZATION) String auth) throws SQLException {
 
+        final OrdendeservicoConverter converteros =ordendeservicoConverter;
+        int idusuario =usuarioDAO.existetoken(auth);
+        if (idusuario==0) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+        List<OrdendeservicoEntity> ordendeservicoEntityList= ordendeservicoDAO.findbyidcotratante(idusuario);
+        return ResponseEntity.ok(converteros.toDTO(ordendeservicoEntityList));
 
+    }
+    @DeleteMapping("{id}")
+    public ResponseEntity<OrdendeservicoDTO> cancelarc(@RequestHeader(HttpHeaders.AUTHORIZATION) String auth,@PathVariable int id) throws SQLException {
+
+        int idusuario =usuarioDAO.existetoken(auth);
+        if (idusuario==0) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+        OrdendeservicoEntity entity=ordendeservicoDAO.delete(id);
+        if(entity ==null){
+            return ResponseEntity.notFound().build();
+        }
+        OrdendeservicoDTO responseDTO =new OrdendeservicoDTO();
+        responseDTO.idos=entity.idos;
+        responseDTO.status= entity.status;
+        responseDTO.descricao=entity.descricao;
+        responseDTO.formapagamento= entity.formapagamento;
+        return ResponseEntity.ok(responseDTO);
     }
 
 
