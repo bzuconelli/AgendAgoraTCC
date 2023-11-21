@@ -26,7 +26,7 @@ getOrdendeservico().then(ordendesservico => ordendesservico.forEach(ordendeservi
     let colunaFormadepagamento = linha.insertCell();
     let colunaacao = linha.insertCell();
     colunacodigo.innerHTML = ordendeservico.idos;
-    colunaPrestador.innerHTML = ordendeservico.nomeo + "  " +ordendeservico.sobrenomeo;
+    colunaPrestador.innerHTML = ordendeservico.nomeo + "  " + ordendeservico.sobrenomeo;
     colunaServico.innerHTML = ordendeservico.descricao;
     colunaStatus.innerHTML = ordendeservico.status;
     colunaData.innerHTML = ordendeservico.data;
@@ -41,9 +41,12 @@ function cancelar(element) {
     let trelement = tdelement.parentNode;
     let id = trelement.childNodes[0].innerHTML;
     let tabela = trelement.parentNode;
-    deleteOrdendeservico(id).then(() => {
-        tabela.deleteRow(trelement.rowIndex);
-    });
-
-
+    const modalConfirma = new bootstrap.Modal(document.getElementById('modalconfirma'), {});
+    modalConfirma.show();
+    document.getElementById('btnConfirmarCancelamento').addEventListener('click', function () {
+        modalConfirma.hide();
+        deleteOrdendeservico(id).then(() => {
+            tabela.deleteRow(trelement.rowIndex);
+        });
+    })
 }

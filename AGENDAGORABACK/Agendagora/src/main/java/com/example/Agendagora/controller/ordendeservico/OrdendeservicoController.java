@@ -7,6 +7,7 @@ import com.example.Agendagora.model.ordendeservico.OrdendeservicoDAO;
 import com.example.Agendagora.model.ordendeservico.OrdendeservicoEntity;
 import com.example.Agendagora.model.prestador.PrestadorEntity;
 import com.example.Agendagora.model.usuario.UsuarioDAO;
+import com.example.Agendagora.model.usuario.UsuarioEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -57,14 +58,15 @@ public class OrdendeservicoController {
         return ResponseEntity.ok().body(dtoResponse);
     }
     @GetMapping
-    public ResponseEntity<List<OrdendeservicoDTO>> pesquisar(@RequestHeader(HttpHeaders.AUTHORIZATION) String auth) throws SQLException {
-
+    public ResponseEntity<List<OrdendeservicoDTO>> pesquisaroscontratante(@RequestHeader(HttpHeaders.AUTHORIZATION) String auth) throws SQLException {
+        boolean tipousuario= true;
         final OrdendeservicoConverter converteros =ordendeservicoConverter;
         int idusuario =usuarioDAO.existetoken(auth);
         if (idusuario==0) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
-        List<OrdendeservicoEntity> ordendeservicoEntityList= ordendeservicoDAO.findbyidcotratante(idusuario);
+        UsuarioEntity usuarioEntity= usuarioDAO.findbyid(idusuario,tipousuario);
+        List<OrdendeservicoEntity> ordendeservicoEntityList= ordendeservicoDAO.findbyidcotratante(usuarioEntity.contratante.id);
         return ResponseEntity.ok(converteros.toDTO(ordendeservicoEntityList));
 
     }

@@ -106,7 +106,7 @@ function agendarservico() {
     let formadepagamento = formasdepagamento.options[formasdepagamento.selectedIndex].value;
 
     document.getElementById("spinner1").style.display = 'inline-block';
-    document.getElementById('Filtrar').disabled = true;
+    document.getElementById('agendar').disabled = true;
     postOrdendeservico(idprerst, idcontratante, data, formadepagamento, servicoaserrealizado, tipoServico).then(ordendeservico => {
         if (ordendeservico == null) {
             const myModal = new bootstrap.Modal(document.getElementById('vagasocupadas'), {});
@@ -114,7 +114,10 @@ function agendarservico() {
             document.getElementById('Filtrar').disabled = false;
             document.getElementById("spinner").style.display = 'none';
             document.getElementById('agendar').disabled = false;
+            document.getElementById('agendar').style.display= 'none';
             document.getElementById("spinner1").style.display = 'none';
+            document.getElementById('labelnome').style.display = "none"
+            document.getElementById('nomep').style.display = "none"
 
 
         } else {
@@ -128,12 +131,8 @@ function agendarservico() {
             document.getElementById("spinner").style.display = 'none';
             document.getElementById('agendar').disabled = false;
             document.getElementById("spinner1").style.display = 'none';
-
         }
     })
-
-
-
 }
 
 function selecionar(element) {
@@ -147,8 +146,4 @@ function selecionar(element) {
     document.getElementById('agendar').style.display = "block"
     idprestador = id.textContent.trim()
     console.log(idprestador)
-
-
-
-
 }
