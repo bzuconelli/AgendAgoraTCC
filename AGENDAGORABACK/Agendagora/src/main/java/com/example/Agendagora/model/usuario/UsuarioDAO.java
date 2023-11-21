@@ -73,7 +73,7 @@ public class UsuarioDAO {
         try (final PreparedStatement preparedStatement = connectionSingleton.getConnection().prepareStatement("insert into usuario (login, senha,contratante_idcontratante ) values ( ?, ?, ?)", Statement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setString(1, usuario.login);
             preparedStatement.setString(2, usuario.senha);
-            preparedStatement.setInt(3, usuario.prestador.id);
+            preparedStatement.setInt(3, usuario.contratante.id);
             preparedStatement.executeUpdate();
             try (ResultSet rs = preparedStatement.getGeneratedKeys()) {
                 rs.next();
