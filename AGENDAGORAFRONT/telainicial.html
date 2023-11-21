@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <title>Tela do Contratante</title>
+</head>
+<body style="background-color: gray;">
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-8 offset-2">
+                <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="servicos-hidraulicos-o-encanador-funcoes-e-atribuicoes.jpeg" class="d-block w-100" alt="Imagem 1">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="pintor-pode-ser-mei.jpg" class="d-block w-100" alt="Imagem 2">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="contratar-eletricista-scaled.jpg" class="d-block w-100" alt="Imagem 2">
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Anterior</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Próximo</span>
+                    </button>
+                </div>
+
+                <div class="card bg-dark text-white mt-3">
+                    <div class="card-header">
+                        <h4>Notícias</h4>
+                    </div>
+                    <div class="card-body">
+                        <ul id="news-list">
+                            <!-- Notícias serão adicionadas dinamicamente aqui -->
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card bg-dark text-white mt-3">
+                    <div class="card-header">
+                        <h4>Dia da Semana</h4>
+                    </div>
+                    <div class="card-body">
+                        <p id="day-of-week">Carregando...</p>
+                    </div>
+                </div>
+
+                <div class="card bg-dark text-white mt-3">
+                    <div class="card-header">
+                        <h4>Temperatura</h4>
+                    </div>
+                    <div class="card-body">
+                        <p id="temperature">Carregando...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        // Exemplo de integração com a API de notícias do Google
+    const googleNewsApiKey = '4e57322369d843fa89021a660e3995d9';
+    const googleNewsApiUrl = 'https://newsapi.org/v2/top-headlines?sources=google-news&apiKey=${googleNewsApiKey}';
+
+    $.get(googleNewsApiUrl, function(data) {
+        // Atualizar a lista de notícias
+        $("#news-list").empty();
+        data.articles.forEach(function(article) {
+            $("#news-list").append(`<li><a href="${article.url}" target="_blank">${article.title}</a></li>`);
+        });
+    });      
+
+        
+            // Obter o dia da semana
+            const daysOfWeek = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'];
+            const today = new Date();
+            const dayOfWeek = daysOfWeek[today.getDay()];
+
+            // Atualizar o dia da semana
+            $("#day-of-week").text(`Hoje é ${dayOfWeek}.`);
+
+
+
+            const apiKey = 'eec93f0daa62e0291feb388e96e4b2bc';
+            const city = 'timbo';
+            const openWeatherMapApiUrl = 'https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric';
+
+            // Exemplo de integração com a API OpenWeatherMap
+            $.get(openWeatherMapApiUrl, function(data) {
+                const temperature = data.main.temp;
+                const weatherDescription = data.weather[0].description;
+
+                // Atualizar a temperatura
+                $("#temperature").text(`A temperatura atual é de ${temperature}°C.`);
+
+                // Atualizar a descrição do tempo
+                $("#weather-description").text(`Condição do tempo: ${weatherDescription}.`);
+            });
+
+    </script>
+</body>
+</html>
+
