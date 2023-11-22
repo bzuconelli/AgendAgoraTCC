@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,13 +7,17 @@
     <title>Meus Serviços Contratados</title>
 </head>
 
-<body style="background-color: gray;">
+<body style="background-color: #666;">
     <div class="container mt-5">
         <div class="row">
-            <div class="col-8 offset-2">
+            <div class="col-10 offset-2">
                 <div class="card bg-dark text-white">
                     <div class="card-header">
                         <h4>Meus Serviços Contratados</h4>
+                        <input type="checkbox" class="form-check-input" id="apenasemaberto" onclick="apenasemaberto()">
+                        <label class="form-check-label text-white" for="apenasemaberto">Vizualizar apenas serviços não
+                            realizados </label>
+
                     </div>
                     <div class="card-body">
                         <table class="table table-bordered table-dark" id="tabeladados">
@@ -52,6 +55,8 @@
                 </div>
             </div>
         </div>
+
+
     </div>
     <script src="contratanteservicos.js"></script>
     <script src="api.js"></script>

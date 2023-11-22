@@ -52,16 +52,8 @@ getContratante().then(contratante => {
                     let email = document.getElementById('email').value;
                     let senha = document.getElementById('senha').value;
                     putcontratante(id, nome, sobrenome, telefone, cidade, rua, bairro, numero, email, senha, latitude, longitude, idendereco).then(() => {
-                        const myModal = new bootstrap.Modal(document.getElementById('modalconfigcont'), {})
-                        myModal.show();
                         document.getElementById("spinner").style.display = 'none';
-                        
-                        setTimeout(function () {
-                            window.location.href = "login.html";
-                        }, 3000);
-                        
-
-
+                        window.location.href = "login.html";
                     })
 
 
@@ -88,13 +80,13 @@ function visualizar() {
 let handlePhone = (event) => {
     let input = event.target
     input.value = phoneMask(input.value)
-  }
-  
-  let phoneMask = (value) => {
+}
+
+let phoneMask = (value) => {
     if (!value) return ""
     value = value.replace(/\D/g, '')
     value = value.replace(/(\d{2})(\d)/, "($1) $2")
     value = value.replace(/(\d)(\d{4})$/, "$1-$2")
     return value
-  }
+}
 

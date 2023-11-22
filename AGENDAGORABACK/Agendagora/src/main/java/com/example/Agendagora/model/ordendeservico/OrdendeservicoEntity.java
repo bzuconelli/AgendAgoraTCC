@@ -33,4 +33,7 @@ public class OrdendeservicoEntity {
         this.agenda=agendaEntity;
 
     }
+
+    public OrdendeservicoEntity(int nota, String observacao) {
+    }
 }

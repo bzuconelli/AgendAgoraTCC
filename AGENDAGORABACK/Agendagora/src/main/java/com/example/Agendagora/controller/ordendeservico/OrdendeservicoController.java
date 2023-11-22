@@ -58,7 +58,7 @@ public class OrdendeservicoController {
         return ResponseEntity.ok().body(dtoResponse);
     }
     @GetMapping
-    public ResponseEntity<List<OrdendeservicoDTO>> pesquisaroscontratante(@RequestHeader(HttpHeaders.AUTHORIZATION) String auth) throws SQLException {
+    public ResponseEntity<List<OrdendeservicoDTO>> pesquisaroscontratante(@RequestHeader(HttpHeaders.AUTHORIZATION) String auth,@RequestParam (value = "servicos",required = false) boolean apenasemaberto ) throws SQLException {
         boolean tipousuario= true;
         final OrdendeservicoConverter converteros =ordendeservicoConverter;
         int idusuario =usuarioDAO.existetoken(auth);
@@ -66,7 +66,7 @@ public class OrdendeservicoController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
         UsuarioEntity usuarioEntity= usuarioDAO.findbyid(idusuario,tipousuario);
-        List<OrdendeservicoEntity> ordendeservicoEntityList= ordendeservicoDAO.findbyidcotratante(usuarioEntity.contratante.id);
+        List<OrdendeservicoEntity> ordendeservicoEntityList= ordendeservicoDAO.findbyidcotratante(usuarioEntity.contratante.id,apenasemaberto);
         return ResponseEntity.ok(converteros.toDTO(ordendeservicoEntityList));
 
     }
@@ -86,6 +86,19 @@ public class OrdendeservicoController {
         responseDTO.status= entity.status;
         responseDTO.descricao=entity.descricao;
         responseDTO.formapagamento= entity.formapagamento;
+        return ResponseEntity.ok(responseDTO);
+    }
+    @PutMapping("/avaliacao/{id}")
+    public  ResponseEntity<OrdendeservicoDTO>avalicao(@RequestHeader(HttpHeaders.AUTHORIZATION) String auth,@PathVariable int id,@RequestBody OrdendeservicoDTO dto) throws SQLException {
+        final OrdendeservicoConverter converteros =ordendeservicoConverter;
+        OrdendeservicoEntity ordendeservicoEntity =ordendeservicoDAO.avaliacao(converteros.toEntitya(dto),id);
+        if(ordendeservicoEntity ==null){
+            return ResponseEntity.notFound().build();
+        }
+        OrdendeservicoDTO responseDTO =new OrdendeservicoDTO();
+        responseDTO.idos=ordendeservicoEntity.idos;
+        responseDTO.nota=ordendeservicoEntity.nota;
+        responseDTO.observacao=ordendeservicoEntity.observacao;
         return ResponseEntity.ok(responseDTO);
     }
 

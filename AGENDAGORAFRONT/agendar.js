@@ -76,7 +76,7 @@ document.getElementById('agendarservico').addEventListener('submit', function (e
         let formasdepagamento = document.querySelector('#filtroPagamento');
         let formadepagamento = formasdepagamento.options[formasdepagamento.selectedIndex].value;
         document.getElementById("spinner").style.display = 'inline-block';
-        document.getElementById('Filtrar').disabled = true;
+        
 
         getPretadores(data, formadepagamento, tipoServico, distancia, latitudecontratente, longitudecontratente).then(prestadores => {
             if (prestadores == null) {

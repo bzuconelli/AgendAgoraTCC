@@ -37,4 +37,7 @@ public class OrdendeservicoConverter {
     public OrdendeservicoEntity toEntity(OrdendeservicoDTO dto, ContratanteEntity contratanteEntity,AgendaEntity agendaEntity) {
         return new OrdendeservicoEntity(dto.idos,dto.descricao,dto.formapagamento,dto.idtiposervico,dto.valor,dto.status,dto.nota,dto.observacao, contratanteEntity,agendaEntity);
     }
+    public OrdendeservicoEntity toEntitya(OrdendeservicoDTO dto) {
+        return new OrdendeservicoEntity(dto.nota,dto.observacao);
+    }
 }

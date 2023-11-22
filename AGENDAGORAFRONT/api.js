@@ -162,9 +162,24 @@ async function deleteOrdendeservico(id) {
             'Content-Type': 'application/json',
             'Authorization': localStorage.getItem('token')
         },
-        
     })
-    
+}
+async function putavaliacao(idos, nota, observacao) {
+    let response = await fetch("http://localhost:8080/ordendeservico/avaliacao" + idos, {
+        method: "PUT",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.getItem('token')
+        },
+
+        body: JSON.stringify({
+            nota: nota,
+            observacao: observacao
+        })
+    });
+    let avaliacao = await response.json();
+    return avaliacao;
 }
 
 
