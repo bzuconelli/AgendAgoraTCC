@@ -59,6 +59,15 @@
                     <h2 class="text-center">Agendar serviço</h2>
                     <form id="agendarservico">
                         <div class="mb-3">
+                            <label for="tiposervico" class="form-label text-white required">Escolha o tipo de serviço</label>
+                            <select class="form-select required" id="tiposervico" required>
+                                <option value="" select> Escolha o tipo de serviço</option>
+                                <option value="1">Eletricista</option>
+                                <option value="2">Encanador</option>
+                                <option value="3">Pintor</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
                             <label for="Saf" class="form-label text-white required">Serviço à ser realizado</label>
                             <input type="text" class="form-control" id="Saf" placeholder="Serviço a ser realizado"
                                 required>
