@@ -56,27 +56,28 @@ var idcontratante;
 document.getElementById('agendarservico').addEventListener('submit', function (event) {
     event.preventDefault();
     getContratante().then(contratante => {
-        let tipoServico = 1
+        let tiposServicos = document.querySelector('#tiposervico');
+        let tipoServico = tiposServicos.options[tiposServicos.selectedIndex].value;
         idcontratante = contratante.id;
         let latitudecontratente = contratante.lat;
         let longitudecontratente = contratante.lng;
         let distancia = document.getElementById('filtroDistancia').value;
-        let data=document.getElementById('data').value;
+        let data = document.getElementById('data').value;
         let dataInput = document.getElementById('data');
         let dataSelecionada = new Date(dataInput.value);
         let dataAtual = new Date();
-        console.log(dataSelecionada);
+        let formasdepagamento = document.querySelector('#filtroPagamento');
+        let formadepagamento = formasdepagamento.options[formasdepagamento.selectedIndex].value;
 
         if (dataSelecionada <= dataAtual) {
             const myModal = new bootstrap.Modal(document.getElementById('datapassada'), {});
             myModal.show();
-            
+
             return;
         }
-        let formasdepagamento = document.querySelector('#filtroPagamento');
-        let formadepagamento = formasdepagamento.options[formasdepagamento.selectedIndex].value;
+
         document.getElementById("spinner").style.display = 'inline-block';
-        
+
 
         getPretadores(data, formadepagamento, tipoServico, distancia, latitudecontratente, longitudecontratente).then(prestadores => {
             if (prestadores == null) {
@@ -114,7 +115,7 @@ function agendarservico() {
             document.getElementById('Filtrar').disabled = false;
             document.getElementById("spinner").style.display = 'none';
             document.getElementById('agendar').disabled = false;
-            document.getElementById('agendar').style.display= 'none';
+            document.getElementById('agendar').style.display = 'none';
             document.getElementById("spinner1").style.display = 'none';
             document.getElementById('labelnome').style.display = "none"
             document.getElementById('nomep').style.display = "none"
