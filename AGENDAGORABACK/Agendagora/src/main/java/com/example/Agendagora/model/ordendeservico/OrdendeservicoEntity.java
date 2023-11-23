@@ -35,5 +35,7 @@ public class OrdendeservicoEntity {
     }
 
     public OrdendeservicoEntity(int nota, String observacao) {
+        this.nota= nota;
+        this.observacao= observacao;
     }
 }

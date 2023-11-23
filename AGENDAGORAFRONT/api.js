@@ -165,7 +165,7 @@ async function deleteOrdendeservico(id) {
     })
 }
 async function putavaliacao(idos, nota, observacao) {
-    let response = await fetch("http://localhost:8080/ordendeservico/avaliacao" + idos, {
+    let response = await fetch("http://localhost:8080/ordendeservico/avaliacao/" + idos, {
         method: "PUT",
         headers: {
             'Accept': 'application/json',

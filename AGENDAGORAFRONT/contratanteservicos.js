@@ -45,6 +45,8 @@ function apenasemaberto() {
             colunaacao.innerHTML = "  <button class='btn btn-info'onclick='avaliar(this)'>Avaliar </button>"
         } else if (ordendeservico.status == 'aberto') {
             colunaacao.innerHTML = "  <button class='btn btn-danger'onclick='cancelar(this)'>Cancelar</button>"
+        } else{
+            colunaacao.innerHTML = "  <button class='btn btn-info' disabled >Avaliado</button>"
         }
 
 
