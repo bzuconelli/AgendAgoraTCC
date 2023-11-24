@@ -1,6 +1,7 @@
 package com.example.Agendagora.model.prestador;
 
 import com.example.Agendagora.ConnectionSingleton;
+import com.example.Agendagora.model.contratante.ContratanteEntity;
 import com.example.Agendagora.model.endereco.EnderecoEntity;
 import com.example.Agendagora.model.usuario.UsuarioEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,6 +75,53 @@ public class PrestadorDAO {
             }
 
         }
+    }
+    public PrestadorEntity pesquisarporid(UsuarioEntity usuarioEntity) throws SQLException{
+        String sql =" select p.idprestador,p.nomeprestador,p.sobrenomeprestador, " +
+                "p.telefone,p.pix,p.cartao,p.dinheiro,p.endereco_idendereco,pp.tiposervico_idtipodeservico " +
+                "from prestador p " +
+                "JOIN prestadorpresta pp ON p.idprestador = pp.prestador_idprestador " +
+                "JOIN tiposervico ts ON pp.tiposervico_idtipodeservico = ts.idtipodeservico " +
+                "WHERE " +
+                "p.idprestador = ? ";
+        try (final PreparedStatement preparedStatement = connectionSingleton.getConnection().prepareStatement(sql)){
+            preparedStatement.setInt(1, usuarioEntity.prestador.id);
+            try (final ResultSet rs = preparedStatement.executeQuery()) {
+                rs.next();
+                PrestadorEntity prestador= new PrestadorEntity();
+                prestador.id=rs.getInt(1);
+                prestador.nome=rs.getString(2);
+                prestador.sobrenome=rs.getString(3);
+                prestador.telefone=rs.getString(4);
+                prestador.recebepix= rs.getString(5);
+                prestador.recebecartao= rs.getString(6);
+                prestador.dinheiro=rs.getString(7);
+                prestador.enderecoEntity= new EnderecoEntity();
+                prestador.enderecoEntity.idendereco=rs.getInt(8);
+                prestador.idservico= rs.getInt(9);
+                return prestador;
+            }
+        }
+    }
+    public PrestadorEntity updatecontratante(int id,PrestadorEntity entity) throws SQLException {
+        String sql ="update prestador set nomeprestador = ?, sobrenomeprestador = ?, telefone = ?, pix = ?, cartao = ?, dinheiro =  ? where idprestador = ? ";
+        try (final PreparedStatement preparedStatement = connectionSingleton.getConnection().prepareStatement(sql)){
+            preparedStatement.setString(1, entity.nome);
+            preparedStatement.setString(2, entity.sobrenome);
+            preparedStatement.setString(3, entity.telefone);
+            preparedStatement.setString(4, entity.recebepix);
+            preparedStatement.setString(5, entity.recebecartao);
+            preparedStatement.setString(6, entity.dinheiro);
+            preparedStatement.setInt(7, id);
+            int qtdlinhas = preparedStatement.executeUpdate();;
+            if(qtdlinhas==0){
+                return null;
+            }
+            entity.id=id;
+            return entity;
+
+        }
+
     }
 
 }

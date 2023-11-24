@@ -1,5 +1,3 @@
-
-
 document.getElementById('formulario').addEventListener('submit', function (event) {
     event.preventDefault();
     let email = document.getElementById("email").value;
@@ -8,17 +6,11 @@ document.getElementById('formulario').addEventListener('submit', function (event
     document.getElementById("entrar").disabled = true;
     postLogin(email, senha).then(login => {
 
-
         if (login != "Usuário não autorizado") {
                 let token= login.token
                 let tipousario= login.niveldeacesso
-                localStorage.setItem('token',token)
-
-
-          
-            
-            
-
+                sessionStorage.setItem('token',token)       
+                  
             if ( tipousario== "contratante") {
                 window.location.href = "telademenuinicialcont.html"
                 document.getElementById("spinner").style.display = 'none';
@@ -38,12 +30,7 @@ document.getElementById('formulario').addEventListener('submit', function (event
             document.getElementById("email").focus;
         }
     })
-
-
-
 });
-
-
 function visualizar() {
     let checkbox = document.getElementById('versenha');
     if (checkbox.checked) {

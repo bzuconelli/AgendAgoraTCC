@@ -14,13 +14,14 @@ public class PrestadorEntity {
     public String recebecartao;
     public int nota;
     public int idagenda;
+    public  int idservico;
 
 
 
     public PrestadorEntity() {
     }
 
-    public PrestadorEntity(int id, String nome, String sobrenome, String telefone, EnderecoEntity enderecoEntity, String recebecartao, String recebepix, String dinheiro) {
+    public PrestadorEntity(int id, String nome, String sobrenome, String telefone, EnderecoEntity enderecoEntity, String recebecartao, String recebepix, String dinheiro, int idservico) {
         this.id = id;
         this.nome = nome;
         this.sobrenome = sobrenome;
@@ -29,7 +30,7 @@ public class PrestadorEntity {
         this.recebepix = recebepix;
         this.dinheiro = dinheiro;
         this.enderecoEntity = enderecoEntity;
-
+        this.idservico= idservico;
     }
 
 

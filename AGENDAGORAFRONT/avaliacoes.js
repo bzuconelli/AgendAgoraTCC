@@ -1,5 +1,9 @@
-let nomep = window.localStorage.getItem('nomeprestador');
-let idos = window.localStorage.getItem('idorden');
+if (sessionStorage.getItem("token") === null) {
+    window.location.href = "login.html"
+
+}
+let nomep = window.sessionStorage.getItem('nomeprestador');
+let idos = window.sessionStorage.getItem('idorden');
 document.getElementById('prestador').value = nomep;
 document.getElementById('avaliacao').addEventListener('submit', function (event) {
     event.preventDefault();
@@ -13,7 +17,6 @@ document.getElementById('avaliacao').addEventListener('submit', function (event)
     }
     let observacao = document.getElementById('avaliacaot').value;
     putavaliacao(idos, nota, observacao).then(() => {
-        const modalConfirma = new bootstrap.Modal(document.getElementById('avaliacaoconcluida'), {});
         modalConfirma.show();
         
         setTimeout(function () {
@@ -21,3 +24,9 @@ document.getElementById('avaliacao').addEventListener('submit', function (event)
         }, 2000);
     });
 });
+function deslogar() {
+    deletetoken().then(() => {
+        sessionStorage.clear();
+        window.location.href = "login.html"
+    })
+}

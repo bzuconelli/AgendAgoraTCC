@@ -2,6 +2,7 @@ package com.example.Agendagora.model.usuario;
 
 import com.example.Agendagora.ConnectionSingleton;
 import com.example.Agendagora.model.contratante.ContratanteEntity;
+import com.example.Agendagora.model.prestador.PrestadorEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -125,8 +126,8 @@ public class UsuarioDAO {
                     usuario.id = rs.getInt(1);
                     usuario.login = rs.getString(2);
                     usuario.senha = rs.getString(3);
+                    usuario.prestador=new PrestadorEntity();
                     usuario.prestador.id = rs.getInt(5);
-                    usuario.id = id;
                     return usuario;
                 }
             }
@@ -145,8 +146,9 @@ public class UsuarioDAO {
                 preparedStatement.setString(1, entity.login);
                 preparedStatement.setString(2, entity.senha);
                 preparedStatement.setInt(3, entity.contratante.id);
-                int qtdlinhas = preparedStatement.executeUpdate();;
-                if(qtdlinhas==0){
+                int qtdlinhas = preparedStatement.executeUpdate();
+                ;
+                if (qtdlinhas == 0) {
                     return null;
                 }
                 return entity;
@@ -156,18 +158,32 @@ public class UsuarioDAO {
             preparedStatement.setString(1, entity.login);
             preparedStatement.setString(2, entity.senha);
             preparedStatement.setInt(3, entity.prestador.id);
-            int qtdlinhas = preparedStatement.executeUpdate();;
-            if(qtdlinhas==0){
+            int qtdlinhas = preparedStatement.executeUpdate();
+            if (qtdlinhas == 0) {
                 return null;
             }
             return entity;
         }
     }
-    public void deletetoken(String token){
-        final String sql = ""
 
+    public Integer deletetoken(String token) throws SQLException {
+        final String sql = "delete from token where token = ? ";
+        try (final PreparedStatement preparedStatement = connectionSingleton.getConnection().prepareStatement(sql)) {
+            preparedStatement.setString(1, token);
+            int qtdlinhas = preparedStatement.executeUpdate();
+            if (qtdlinhas == 0) {
+                return null;
+            }
+            return 1;
+        }
     }
 }
+
+
+
+
+
+
 
 
 

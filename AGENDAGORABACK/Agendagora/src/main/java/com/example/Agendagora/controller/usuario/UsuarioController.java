@@ -44,7 +44,13 @@ public class UsuarioController {
         if (idusuario==0) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
-        usuarioDAO.
+        Integer tokenfoiexcluido = usuarioDAO.deletetoken(auth);
+        if (tokenfoiexcluido==0){
+            return ResponseEntity.notFound().build();
+        }
+        LoginDTO responseDTO =new LoginDTO();
+        responseDTO.token=auth;
+        return ResponseEntity.ok().body(responseDTO);
     }
 
 }

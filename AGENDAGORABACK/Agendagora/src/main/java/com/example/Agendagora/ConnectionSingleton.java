@@ -24,9 +24,9 @@ public class ConnectionSingleton {
 
         if (connection == null) {
             connection = DriverManager.getConnection( //
-                    "jdbc:mariadb://127.0.0.1:3310/agendagora", //
+                    "jdbc:mysql://localhost:3306/agendagora", //
                     "root", //
-                    "cedup123");
+                    "");
         }
 
         return connection;

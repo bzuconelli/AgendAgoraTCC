@@ -1,3 +1,6 @@
+if (sessionStorage.getItem("token") === null) {
+    window.location.href = "login.html"
+}
 async function getOrdendeservico(osemaberto) {
     let url = "http://localhost:8080/ordendeservico/";
 
@@ -10,7 +13,7 @@ async function getOrdendeservico(osemaberto) {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'Authorization': localStorage.getItem('token')
+            'Authorization': sessionStorage.getItem('token')
         },
     });
     if (response.status === 404) { return null; }
@@ -71,9 +74,15 @@ function avaliar(element) {
     let trelement = tdelement.parentNode;
     let idorden = trelement.childNodes[0].innerHTML;
     let nomeprestador = trelement.childNodes[1].innerHTML;
-    window.localStorage.setItem('nomeprestador', nomeprestador);
-    window.localStorage.setItem('idorden', idorden);
+    window.sessionStorage.setItem('nomeprestador', nomeprestador);
+    window.sessionStorage.setItem('idorden', idorden);
     window.location.href = "avaliacoes.html";
+}
+function deslogar() {
+    deletetoken().then(() => {
+        sessionStorage.clear();
+        window.location.href = "login.html"
+    })
 }
 apenasemaberto();
 

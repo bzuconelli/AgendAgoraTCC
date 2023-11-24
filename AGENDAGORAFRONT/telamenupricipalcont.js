@@ -8,3 +8,4 @@ function deslogar() {
         window.location.href = "login.html"
     })
 }
+

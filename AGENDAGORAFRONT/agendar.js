@@ -1,10 +1,14 @@
+if (sessionStorage.getItem("token") === null) {
+    window.location.href = "login.html"
+
+}
 async function getContratante() {
     let response = await fetch("http://localhost:8080/contratante/", {
         method: "GET",
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'Authorization': localStorage.getItem('token')
+            'Authorization': sessionStorage.getItem('token')
         },
     });
 
@@ -74,11 +78,7 @@ document.getElementById('agendarservico').addEventListener('submit', function (e
             myModal.show();
 
             return;
-        }
-
-        document.getElementById("spinner").style.display = 'inline-block';
-
-
+        }     
         getPretadores(data, formadepagamento, tipoServico, distancia, latitudecontratente, longitudecontratente).then(prestadores => {
             if (prestadores == null) {
                 const myModal = new bootstrap.Modal(document.getElementById('modalnadaencontrado'), {});
@@ -147,4 +147,10 @@ function selecionar(element) {
     document.getElementById('agendar').style.display = "block"
     idprestador = id.textContent.trim()
     console.log(idprestador)
+}
+function deslogar() {
+    deletetoken().then(() => {
+        sessionStorage.clear();
+        window.location.href = "login.html"
+    })
 }

@@ -1,9 +1,5 @@
-if (sessionStorage.getItem("token") === null) {
-    window.location.href = "login.html"
-
-}
-async function getContratante() {
-    let response = await fetch("http://localhost:8080/contratante/", {
+async function getPrestador() {
+    let response = await fetch("http://localhost:8080/prestador/prestador", {
         method: "GET",
         headers: {
             'Accept': 'application/json',
@@ -12,36 +8,49 @@ async function getContratante() {
         },
     });
 
-    let contratante = await response.json();
+    let prestador = await response.json();
 
-    return contratante;
+    return prestador;
 }
-
-
-getContratante().then(contratante => {
-
-    let id = contratante.id
-    let idendereco = contratante.idendereco
-    document.getElementById('nome').value = contratante.nome;
-    document.getElementById('sobrenome').value = contratante.sobrenome;
-    document.getElementById('telefone').value = contratante.telefone;
-    document.getElementById('cidade').value = contratante.cidade;
-    document.getElementById('rua').value = contratante.rua;
-    document.getElementById('bairro').value = contratante.bairo;
-    document.getElementById('numero').value = contratante.numero;
-    document.getElementById('email').value = contratante.login;
-    document.getElementById('senha').value = contratante.senha;
-    document.getElementById('editarconfigcontra').addEventListener('submit', function (event) {
+getPrestador().then(prestador => {
+    let id = prestador.id
+    let idendereco = prestador.idendereco
+    document.getElementById('nome').value = prestador.nome;
+    document.getElementById('sobrenome').value = prestador.sobrenome;
+    document.getElementById('telefone').value = prestador.telefone;
+    document.getElementById('cidade').value = prestador.cidade;
+    document.getElementById('rua').value = prestador.rua;
+    document.getElementById('bairro').value = prestador.bairo;
+    document.getElementById('numero').value = prestador.numero;
+    document.getElementById('email').value = prestador.login;
+    document.getElementById('senha').value = prestador.senha;
+    if (prestador.recebepix == "sim") {
+        let checkboxpix = document.getElementById('pix');
+        checkboxpix.checked = true
+    }
+    if (prestador.recebecartao == "sim") {
+        let checkboxcartao = document.getElementById('cartao');
+        checkboxcartao.checked = true
+    }
+    if (prestador.dinheiro == "sim") {
+        let checkboxdinheiro = document.getElementById('dinheiro');
+        checkboxdinheiro.checked = true
+    }
+    let servicoSelect = document.getElementById("servico");
+    for (let i = 0; i < servicoSelect.options.length; i++) {
+        if (servicoSelect.options[i].value == prestador.idtiposervico) {
+            servicoSelect.options[i].selected = true;
+            break;
+        }
+    }
+    document.getElementById('editarconfigpresta').addEventListener('submit', function (event) {
         event.preventDefault();
         const modalConfirma = new bootstrap.Modal(document.getElementById('modalconfirma'), {});
         modalConfirma.show();
         document.getElementById('btnConfirmarAlteracoes').addEventListener('click', function () {
             modalConfirma.hide();
-
             document.getElementById("spinner").style.display = 'inline-block';
             document.getElementById("Salvarconfig").disabled = true;
-
-
             if ("geolocation" in navigator) {
                 navigator.geolocation.getCurrentPosition(function (position) {
                     var latitude = position.coords.latitude;
@@ -59,18 +68,13 @@ getContratante().then(contratante => {
                         document.getElementById("spinner").style.display = 'none';
                         window.location.href = "login.html";
                     })
-
-
                 }, function (error) {
                     console.error("Erro ao obter localização: " + error.message);
                 });
-
             } else {
                 console.error("Navegador não suporta geolocalização.");
             }
         })
-
-
     });
 });
 function visualizar() {
@@ -85,7 +89,6 @@ let handlePhone = (event) => {
     let input = event.target
     input.value = phoneMask(input.value)
 }
-
 let phoneMask = (value) => {
     if (!value) return ""
     value = value.replace(/\D/g, '')
@@ -99,4 +102,3 @@ function deslogar() {
         window.location.href = "login.html"
     })
 }
-

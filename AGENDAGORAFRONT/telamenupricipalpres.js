@@ -1,3 +1,7 @@
+if (sessionStorage.getItem("token") === null) {
+    window.location.href = "login.html"
+
+}
 var year, month
 function escolherAnoMes() {
     [year, month] = document.getElementById('month').value.split('-');
@@ -58,5 +62,11 @@ function coletarDados() {
     });
 
     console.log(dadosSalvos);
+}
+function deslogar() {
+    deletetoken().then(() => {
+        sessionStorage.clear();
+        window.location.href = "login.html"
+    })
 }
 

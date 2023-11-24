@@ -50,7 +50,7 @@ public class ContratanteDAO {
         return entity;
     }
     public ContratanteEntity updatecontratante(int id,ContratanteEntity entity) throws SQLException {
-        String sql ="update contratante set nome=?, sobrenome=?, telefone=? where idcontratante=?";
+        String sql ="update contratante set nome = ?, sobrenome = ?, telefone = ? where idcontratante = ?";
         try (final PreparedStatement preparedStatement = connectionSingleton.getConnection().prepareStatement(sql)){
             preparedStatement.setString(1, entity.nome);
             preparedStatement.setString(2, entity.sobrenome);

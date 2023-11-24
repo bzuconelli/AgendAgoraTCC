@@ -92,7 +92,7 @@ async function putcontratante(id, nome, sobrenome, telefone, cidade, rua, bairro
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'Authorization': localStorage.getItem('token')
+            'Authorization': sessionStorage.getItem('token')
         },
 
         body: JSON.stringify({
@@ -122,7 +122,7 @@ async function getPretadores(data, tipoPagamento, tipoServico, distancia, lat, l
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'Authorization': localStorage.getItem('token')
+            'Authorization': sessionStorage.getItem('token')
         },
     });
     if (response.status === 404) { return null; }
@@ -137,7 +137,7 @@ async function postOrdendeservico(idprestador, idcontratante, data, formadepagam
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'Authorization': localStorage.getItem('token')
+            'Authorization': sessionStorage.getItem('token')
         },
 
         body: JSON.stringify({
@@ -160,7 +160,7 @@ async function deleteOrdendeservico(id) {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'Authorization': localStorage.getItem('token')
+            'Authorization': sessionStorage.getItem('token')
         },
     })
 }
@@ -170,7 +170,7 @@ async function putavaliacao(idos, nota, observacao) {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'Authorization': localStorage.getItem('token')
+            'Authorization': sessionStorage.getItem('token')
         },
 
         body: JSON.stringify({
@@ -181,7 +181,16 @@ async function putavaliacao(idos, nota, observacao) {
     let avaliacao = await response.json();
     return avaliacao;
 }
-
+async function deletetoken() {
+    let response = await fetch("http://localhost:8080/login/", {
+        method: "DELETE",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': sessionStorage.getItem('token')
+        },
+    })
+}
 
 
 
