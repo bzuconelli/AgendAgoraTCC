@@ -6,8 +6,166 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <title>Meus Serviços Contratados</title>
 </head>
+<style>
+    body {
+        background-color: #868686;
+    }
+
+    .calendar-container {
+        background-color: #333;
+        padding: 20px;
+        border-radius: 10px;
+        margin-top: 50px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .calendar-container h2 {
+        color: #fff;
+        text-align: center;
+    }
+
+    .calendar {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 5px;
+        margin: 10px;
+    }
+
+    .day {
+        background-color: #fff;
+        padding: 10px;
+        border-radius: 5px;
+    }
+
+    .btn-custom {
+        background-color: #d29f06;
+        border-color: #d29f06;
+        color: #fff;
+    }
+
+    .day-text {
+        width: 100%;
+    }
+
+    .div-1 {
+        text-align: center;
+
+    }
+    .navbar {
+        background-color: #333;
+    }
+
+    .navbar-dark .navbar-nav .nav-link {
+        color: #fff;
+    }
+
+    .navbar-dark .navbar-toggler-icon {
+        background-color: #fff;
+    }
+
+    .account-settings {
+        color: #fff;
+        margin-right: 30px
+    }
+
+    .top-rated-providers {
+        background-color: #333;
+        padding: 20px;
+        border-radius: 10px;
+        margin-top: 50px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .top-rated-providers h2 {
+        color: #fff;
+    }
+
+    body {
+        background-color: #868686;
+    }
+
+    .menu-container {
+        background-color: #333;
+        padding: 20px;
+        border-radius: 10px;
+        margin-top: 50px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .menu-container h2 {
+        color: #d29f06;
+    }
+
+    .provider-card {
+        background-color: #fff;
+        border-radius: 10px;
+        padding: 10px;
+        margin-top: 10px;
+        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-custom {
+        background-color: #d29f06;
+        border-color: #d29f06;
+        color: #fff;
+    }
+
+    .div-1 {
+        text-align: center;
+
+    }
+    .img-thumbnail {
+        width: 75px;
+        align-items: left;
+
+    }
+    .img-voltar {
+        width: 50px;
+        align-items: left;
+
+    }
+    .imagem007{
+        width: 50px;
+        align-items: left;
+    }
+    .card-header{
+        background-color: #333;
+    }
+    .card-body{
+        background-color: #333;
+    }
+    .table-dark-custom {
+    background-color: #333; /* Altere para a cor desejada */
+    color: #fff; /* Altere para a cor desejada para o texto na tabela */
+}
+
+</style>
 
 <body style="background-color: #666;">
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <img src="AgenA.png" class="img-thumbnail" h>
+        <div class="container">                        
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <ul class="navbar-nav">                    
+                        <li class="nav-item">
+                            <a class="nav-link" href="agendarservico.html">Agendar Serviço</a>
+                        </li>                       
+                        <li class="nav-item">
+                            <a class="nav-link" href="contratanteservicos.html">Meus Serviços Contratados</a>
+                        </li>
+                    </ul>
+                </ul>
+            </div>                        
+                <a class="account-settings" href="contratanteconfig.html" ><img src="Bazaart_20231122_091830_231.png" class="imagem007" ></a>
+                <a class="account-settings" href="login.html" ><img src="Bazaart_20231122_092328_048.png" class="imagem007" ></a> 
+            </li>
+        </div>
+    </nav>
     <div class="container mt-5">
         <div class="row">
             <div class="col-10 offset-2">
@@ -20,16 +178,18 @@
 
                     </div>
                     <div class="card-body">
-                        <table class="table table-bordered table-dark" id="tabeladados">
+                        <table class="table table-bordered table-dark table-dark-custom" id="tabeladados">
                             <thead>
                                 <tr>
-                                    <th>Codigo</th>
-                                    <th>Prestador</th>
-                                    <th>Serviço</th>
-                                    <th>Status</th>
-                                    <th>Data</th>
-                                    <th>Forma de pagamento</th>
-                                    <th>Ações</th>
+                                    <tr>
+                                        <th>Codigo</th>
+                                        <th>Prestador</th>
+                                        <th>Serviço</th>
+                                        <th>Status</th>
+                                        <th>Data</th>
+                                        <th>Forma de pagamento</th>
+                                        <th>Ações</th>
+                                    </tr>
                                 </tr>
                             </thead>
 

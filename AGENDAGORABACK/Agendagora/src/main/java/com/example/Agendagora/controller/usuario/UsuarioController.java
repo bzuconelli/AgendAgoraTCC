@@ -3,6 +3,7 @@ package com.example.Agendagora.controller.usuario;
 import com.example.Agendagora.controller.login.LoginDTO;
 import com.example.Agendagora.model.usuario.UsuarioDAO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -37,6 +38,13 @@ public class UsuarioController {
 
         }
     }
-
+    @DeleteMapping()
+    public ResponseEntity<LoginDTO> excluirtoken(@RequestHeader(HttpHeaders.AUTHORIZATION) String auth) throws SQLException {
+        int idusuario =usuarioDAO.existetoken(auth);
+        if (idusuario==0) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+        usuarioDAO.
+    }
 
 }

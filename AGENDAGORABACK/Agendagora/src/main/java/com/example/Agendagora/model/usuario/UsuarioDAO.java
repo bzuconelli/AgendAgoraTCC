@@ -106,7 +106,6 @@ public class UsuarioDAO {
     }
 
     public UsuarioEntity findbyid(int id, boolean contratante) throws SQLException {
-
         final String sql = "select * from usuario where idusuario = ?  ";
         try (final PreparedStatement preparedStatement = connectionSingleton.getConnection().prepareStatement(sql)) {
             preparedStatement.setInt(1, id);
@@ -130,7 +129,6 @@ public class UsuarioDAO {
                     usuario.id = id;
                     return usuario;
                 }
-
             }
         }
     }
@@ -152,7 +150,6 @@ public class UsuarioDAO {
                     return null;
                 }
                 return entity;
-
             }
         }
         try (final PreparedStatement preparedStatement = connectionSingleton.getConnection().prepareStatement(sql)) {
@@ -165,6 +162,10 @@ public class UsuarioDAO {
             }
             return entity;
         }
+    }
+    public void deletetoken(String token){
+        final String sql = ""
+
     }
 }
 
