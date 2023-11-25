@@ -17,7 +17,8 @@ document.getElementById('avaliacao').addEventListener('submit', function (event)
     }
     let observacao = document.getElementById('avaliacaot').value;
     putavaliacao(idos, nota, observacao).then(() => {
-        modalConfirma.show();
+        const myModal = new bootstrap.Modal(document.getElementById('avaliacaoconcluida'), {});
+        myModal.show();
         
         setTimeout(function () {
             window.location.href = "contratanteservicos.html"
