@@ -14,15 +14,10 @@ function daysInMonth(month, year) {
 }
 function createCalendar(month, year) {
     let calendar = document.querySelector(".calendar");
-
-    // Remova os elementos antigos do calendário
     while (calendar.firstChild) {
         calendar.removeChild(calendar.firstChild);
     }
-
-
     let daysInThisMonth = daysInMonth(month, year);
-
     for (let day = 1; day <= daysInThisMonth; day++) {
         let dayElement = document.createElement("div");
         dayElement.classList.add("day");
@@ -37,36 +32,29 @@ function createCalendar(month, year) {
 function obterAnoMesAtual() {
     let dataAtual = new Date();
     year = dataAtual.getFullYear();
-    month = dataAtual.getMonth() + 1; // Lembre-se que os meses em JavaScript são baseados em zero (janeiro = 0).
-    //Converte de numero para string 
+    month = dataAtual.getMonth() + 1;     
     let mesFormatado = month < 10 ? `0${month}` : month.toString();
-    // Cria uma string no formato 'yyyy-mm' (ano-mês).
     let valorInput = `${year}-${mesFormatado}`;
     document.getElementById('month').value = valorInput;
-    console.log(mesFormatado);
-
+    
 }
 obterAnoMesAtual();
 createCalendar(month, year);
 function coletarDados() {
-
-    let dayElements = document.querySelectorAll(".day"); // Seleciona todos os elementos de dia
-
+    let dayElements = document.querySelectorAll(".day"); 
     let dadosSalvos = {};
-
-
     dayElements.forEach(function (dayElement) {
         let dayNumber = parseInt(dayElement.querySelector("strong").textContent);
         let inputValue = parseInt(dayElement.querySelector(".day-text").value);
         dadosSalvos[dayNumber] = inputValue;
     });
-
     console.log(dadosSalvos);
 }
 function deslogar() {
     deletetoken().then(() => {
         sessionStorage.clear();
-        window.location.href = "login.html"
+        window.location.href="../login.html"
+
     })
 }
 

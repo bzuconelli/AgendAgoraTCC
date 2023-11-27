@@ -1,9 +1,6 @@
 package com.example.Agendagora.controller.prestador;
-import com.example.Agendagora.controller.contratante.ContratanteConverter;
-import com.example.Agendagora.controller.contratante.ContratanteDTO;
 import com.example.Agendagora.controller.enderco.EnderecoConverter;
 import com.example.Agendagora.controller.usuario.UsuarioConverter;
-import com.example.Agendagora.model.contratante.ContratanteEntity;
 import com.example.Agendagora.model.endereco.EnderecoEntity;
 import com.example.Agendagora.model.endereco.EndrecoDAO;
 import com.example.Agendagora.model.prestador.PrestadorDAO;
@@ -118,7 +115,7 @@ public class PrestadorController {
         if (enderecoEntity == null) {
             return ResponseEntity.notFound().build();
         }
-        PrestadorEntity prestadorEntity = prestadorDAO.updatecontratante(id, (converterC.toEntity(dto, enderecoEntity)));
+        PrestadorEntity prestadorEntity = prestadorDAO.updateprestador(id, (converterC.toEntity(dto, enderecoEntity)),dto.idtiposervico);
         if (prestadorEntity == null) {
             return ResponseEntity.notFound().build();
         }

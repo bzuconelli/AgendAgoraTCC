@@ -1,7 +1,6 @@
 package com.example.Agendagora.model.prestador;
 
 import com.example.Agendagora.ConnectionSingleton;
-import com.example.Agendagora.model.contratante.ContratanteEntity;
 import com.example.Agendagora.model.endereco.EnderecoEntity;
 import com.example.Agendagora.model.usuario.UsuarioEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,7 +55,6 @@ public class PrestadorDAO {
             preparedStatement.setString(5,pagamento);
             preparedStatement.setDate(6, Date.valueOf(date));
             try (final ResultSet rs = preparedStatement.executeQuery()) {
-
                 List<PrestadorEntity> resultado= new ArrayList<>();
                 while (rs.next()){
                     PrestadorEntity prestador = new PrestadorEntity();
@@ -73,7 +71,6 @@ public class PrestadorDAO {
                 }
                 return resultado;
             }
-
         }
     }
     public PrestadorEntity pesquisarporid(UsuarioEntity usuarioEntity) throws SQLException{
@@ -103,7 +100,16 @@ public class PrestadorDAO {
             }
         }
     }
-    public PrestadorEntity updatecontratante(int id,PrestadorEntity entity) throws SQLException {
+    public void upadatetipodeservico(int iddoservico, int idprestador) throws SQLException {
+        String sql ="update prestadorpresta set tiposervico_idtipodeservico = ?  where prestador_idprestador = ? ";
+        try (final PreparedStatement preparedStatement = connectionSingleton.getConnection().prepareStatement(sql)){
+            preparedStatement.setInt(1,iddoservico);
+            preparedStatement.setInt(2,idprestador);
+            preparedStatement.executeUpdate();
+        }
+    }
+    public PrestadorEntity updateprestador(int id, PrestadorEntity entity,int idtiposervico) throws SQLException {
+        upadatetipodeservico(idtiposervico,id);
         String sql ="update prestador set nomeprestador = ?, sobrenomeprestador = ?, telefone = ?, pix = ?, cartao = ?, dinheiro =  ? where idprestador = ? ";
         try (final PreparedStatement preparedStatement = connectionSingleton.getConnection().prepareStatement(sql)){
             preparedStatement.setString(1, entity.nome);
@@ -118,6 +124,7 @@ public class PrestadorDAO {
                 return null;
             }
             entity.id=id;
+            entity.idservico=idtiposervico;
             return entity;
 
         }

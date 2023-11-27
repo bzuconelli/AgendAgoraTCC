@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
         body {
             background-color: #868686;
         }
+
         .services-container {
             background-color: #333;
             padding: 20px;
@@ -16,18 +18,22 @@
             margin-top: 50px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
         }
+
         .services-container h2 {
             color: #fff;
         }
+
         .service {
             background-color: #fff;
             padding: 10px;
             margin: 10px 0;
             border-radius: 5px;
         }
+
         .custom-checkbox .custom-control-label::before {
             background-color: #d29f06;
         }
+
         body {
             background-color: #868686;
         }
@@ -94,15 +100,18 @@
             text-align: center;
 
         }
+
         .img-thumbnail {
             width: 75px;
             align-items: left;
 
         }
+
         .div-1 {
             text-align: center;
 
         }
+
         .navbar {
             background-color: #333;
         }
@@ -114,49 +123,58 @@
         .navbar-dark .navbar-toggler-icon {
             background-color: #fff;
         }
+
         .img-thumbnail {
             width: 75px;
             align-items: left;
 
         }
+
         .img-voltar {
             width: 50px;
             align-items: left;
 
         }
-        .imagem007{
+
+        .imagem007 {
             width: 50px;
             align-items: left;
         }
+
         .account-settings {
             color: #fff;
             margin-right: 30px
         }
-        
     </style>
 </head>
+
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark">
-        <img src="AgenA.png" class="img-thumbnail" >
-        <div class="container">                        
+        <img src="../AgenA.png" class="img-thumbnail">
+        <div class="container">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
-                    <ul class="navbar-nav">                    
+                    <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" href="agendarservico.html">Agendar Serviço</a>
-                        </li>                       
+                            <a class="nav-link" href="agedarservicocomoprestador.html">Agendar Serviço</a>
+                        </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="contratanteservicos.html">Meus Serviços Contratados</a>
+                            <a class="nav-link" href="prestadorservicos.html">Meus Serviços Contratados</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="prestadorservicosdodia.html">Meus serviços a fazer</a>
                         </li>
                     </ul>
                 </ul>
-            </div>                        
-                <a class="account-settings" href="contratanteconfig.html" ><img src="Bazaart_20231122_091830_231.png" class="imagem007" ></a>
-                <a class="account-settings"  onclick="deslogar()" ><img src="Bazaart_20231122_092328_048.png" class="imagem007" ></a> 
+            </div>
+            <a class="account-settings" href="prestadorconfig.html"><img src="../Bazaart_20231122_091830_231.png"
+                    class="imagem007"></a>
+            <a class="account-settings" onclick="deslogar()"><img src="../Bazaart_20231122_092328_048.png"
+                    class="imagem007"></a>
             </li>
         </div>
     </nav>
@@ -171,49 +189,17 @@
                             Serviços do dia
                         </label>
                     </div>
-                    <div class="service">
-                        <h4>Serviço 1</h4>
-                        <p>Data: 01/11/2023 </p>
-                        <p>Cliente: Nome do Cliente 1</p>
-                    </div>
-                    <div class="service">
-                        <h4>Serviço 2</h4>
-                        <p>Data: 01/11/2023</p>
-                        <p>Cliente: Nome do Cliente 2</p>
-                    </div>
-                    <div class="service">
-                        <h4>Serviço 1</h4>
-                        <p>Data: 01/11/2023 </p>
-                        <p>Cliente: Nome do Cliente 1</p>
-                    </div>
-                    <div class="service">
-                        <h4>Serviço 3</h4>
-                        <p>Data: 01/11/2023</p>
-                        <p>Cliente: Nome do Cliente 2</p>
-                    </div>
-                    <div class="service">
-                        <h4>Serviço 4</h4>
-                        <p>Data: 01/11/2023 </p>
-                        <p>Cliente: Nome do Cliente 1</p>
-                    </div>
-                    <div class="service">
-                        <h4>Serviço 5</h4>
-                        <p>Data: 01/11/2023</p>
-                        <p>Cliente: Nome do Cliente 2</p>
-                    </div>
-                    <div class="service">
-                        <h4>Serviço 6</h4>
-                        <p>Data: 01/11/2023 </p>
-                        <p>Cliente: Nome do Cliente 1</p>
-                    </div>
-                    <div class="service">
-                        <h4>Serviço 7</h4>
-                        <p>Data: 01/11/2023</p>
-                        <p>Cliente: Nome do Cliente 2</p>
-                    </div>
+                    <div id="servicesList" class="services-list"></div>
                 </div>
             </div>
         </div>
     </div>
+    <script src="prestadoresservicosdodia.js"></script>
+    <script src="api.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    </div>
 </body>
+
 </html>

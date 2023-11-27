@@ -112,8 +112,39 @@ async function putcontratante(id, nome, sobrenome, telefone, cidade, rua, bairro
 
         })
     });
-    let pessoa = await response.json();
-    return pessoa;
+    let contratante = await response.json();
+    return contratante;
+}
+async function putprestador(id, nome, sobrenome, telefone, cidade, rua, bairro, numero, email, senha, latitude, longitude, idendereco,recebecartao, recebedinheiro, recebepix, servico) {
+    let response = await fetch("http://localhost:8080/prestador/" + id, {
+        method: "PUT",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': sessionStorage.getItem('token')
+        },
+        body: JSON.stringify({
+            nome: nome,
+            sobrenome: sobrenome,
+            telefone: telefone,
+            idendereco: idendereco,
+            rua: rua,
+            cidade: cidade,
+            bairo: bairro,
+            numero: numero,
+            lat: latitude,
+            lng: longitude,
+            login: email,
+            senha: senha,
+            recebepix: recebepix,
+            dinheiro: recebedinheiro,
+            recebecartao: recebecartao,
+            idtiposervico: servico,
+
+        })
+    });
+    let prestador = await response.json();
+    return prestador;
 }
 async function getPretadores(data, tipoPagamento, tipoServico, distancia, lat, lng) {
     let url = `http://localhost:8080/prestador/?data=${data}&tipopag=${tipoPagamento}&tiposervico=${tipoServico}&distancia=${distancia}&lat=${lat}&lng=${lng}`;
@@ -133,6 +164,29 @@ async function getPretadores(data, tipoPagamento, tipoServico, distancia, lat, l
 }
 async function postOrdendeservico(idprestador, idcontratante, data, formadepagamento, servicoaserrealizado, tipoServico) {
     let response = await fetch("http://localhost:8080/ordendeservico/", {
+        method: "POST",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': sessionStorage.getItem('token')
+        },
+
+        body: JSON.stringify({
+            descricao: servicoaserrealizado,
+            data: data,
+            idtiposervico: tipoServico,
+            formapagamento: formadepagamento,
+            idprerst: idprestador,
+            idcontratante: idcontratante
+        })
+    });
+    if (response.status === 400) { return null; }
+
+    let ordendeservico = await response.json();
+    return ordendeservico
+}
+async function postOrdendeservico1(idprestador, idcontratante, data, formadepagamento, servicoaserrealizado, tipoServico) {
+    let response = await fetch("http://localhost:8080/ordendeservico/prestador", {
         method: "POST",
         headers: {
             'Accept': 'application/json',

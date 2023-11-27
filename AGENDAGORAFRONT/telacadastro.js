@@ -8,9 +8,6 @@ document.getElementById('cadastro').addEventListener('submit', function (event) 
     navigator.geolocation.getCurrentPosition(function (position) {
       var latitude = position.coords.latitude;
       var longitude = position.coords.longitude;
-
-
-
       let nome = document.getElementById('nome').value;
       let sobrenome = document.getElementById('sobrenome').value;
       let telefone = document.getElementById('telefone').value;
@@ -40,25 +37,23 @@ document.getElementById('cadastro').addEventListener('submit', function (event) 
         }
         let tipodeserviço = document.querySelector('#servico');
         let servico = tipodeserviço.options[tipodeserviço.selectedIndex].value;
-        
-
-        postPrestador(nome, telefone, cidade, rua, bairro, numero, recebecartao, recebedinheiro, recebepix, servico, email, senha, sobrenome, latitude,longitude).then(prestador => {
+        postPrestador(nome, telefone, cidade, rua, bairro, numero, recebecartao, recebedinheiro, recebepix, servico, email, senha, sobrenome, latitude, longitude).then(prestador => {
           if (prestador != null) {
-          const myModal = new bootstrap.Modal(document.getElementById('modal'), {})
-          myModal.show();
-          document.getElementById("cadastro").reset();
-          document.getElementById("spinner").style.display = 'none';
-          document.getElementById("cadastrar").disabled = false;
-          document.getElementById("servico").style.display = "none";
-          document.getElementById("servicolabel").style.display = "none";
-          document.getElementById("cartao").style.display = "none";
-          document.getElementById("pix").style.display = "none";
-          document.getElementById("dinheiro").style.display = "none";
-          document.getElementById("pag").style.display = "none";
-          document.getElementById("labelc").style.display = "none";
-          document.getElementById("labelp").style.display = "none";
-          document.getElementById("labeld").style.display = "none";
-          }else{
+            const myModal = new bootstrap.Modal(document.getElementById('modal'), {})
+            myModal.show();
+            document.getElementById("cadastro").reset();
+            document.getElementById("spinner").style.display = 'none';
+            document.getElementById("cadastrar").disabled = false;
+            document.getElementById("servico").style.display = "none";
+            document.getElementById("servicolabel").style.display = "none";
+            document.getElementById("cartao").style.display = "none";
+            document.getElementById("pix").style.display = "none";
+            document.getElementById("dinheiro").style.display = "none";
+            document.getElementById("pag").style.display = "none";
+            document.getElementById("labelc").style.display = "none";
+            document.getElementById("labelp").style.display = "none";
+            document.getElementById("labeld").style.display = "none";
+          } else {
             const myModal = new bootstrap.Modal(document.getElementById('modaljacadastrado'), {})
             myModal.show();
             document.getElementById("spinner").style.display = 'none';
@@ -69,13 +64,13 @@ document.getElementById('cadastro').addEventListener('submit', function (event) 
         });
       } else {
         postContratante(nome, telefone, cidade, rua, bairro, numero, latitude, longitude, email, senha, sobrenome).then(contratante => {
-          if (contratante !=null) {
+          if (contratante != null) {
             const myModal = new bootstrap.Modal(document.getElementById('modal'), {})
             myModal.show();
             document.getElementById("cadastro").reset();
             document.getElementById("spinner").style.display = 'none';
             document.getElementById("cadastrar").disabled = false;
-          }else{
+          } else {
             const myModal = new bootstrap.Modal(document.getElementById('modaljacadastrado'), {})
             myModal.show();
             document.getElementById("spinner").style.display = 'none';

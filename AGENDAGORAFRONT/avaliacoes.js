@@ -21,13 +21,18 @@ document.getElementById('avaliacao').addEventListener('submit', function (event)
         myModal.show();
         
         setTimeout(function () {
-            window.location.href = "contratanteservicos.html"
+            if(sessionStorage.getItem('tipousuario')=="contratante"){
+                window.location.href = "contratante/contratanteservicos.html"
+            }else{
+                window.location.href = "prestador/prestadorservicos.html"
+            }
+            
         }, 2000);
     });
 });
 function deslogar() {
     deletetoken().then(() => {
         sessionStorage.clear();
-        window.location.href = "login.html"
+        window.location.href.replace( "../login.html") 
     })
 }

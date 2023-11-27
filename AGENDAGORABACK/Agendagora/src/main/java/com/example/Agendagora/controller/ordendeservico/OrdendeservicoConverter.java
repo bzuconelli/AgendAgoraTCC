@@ -12,14 +12,7 @@ import java.util.stream.Collectors;
 @Component
 public class OrdendeservicoConverter {
     public List<OrdendeservicoDTO> toDTO(List<OrdendeservicoEntity> entities) {
-        //        List<PessoaDTO> pessoasDto = new ArrayList<>();
-        //        for (PessoaEntity entity : pessoasEntity) {
-        //            PessoaDTO dto = new PessoaDTO();
-        //            dto.id = entity.id;
-        //            dto.nome = entity.nome;
-        //            dto.idade = entity.idade;
-        //            pessoasDto.add(dto);
-        //        }
+
 
         return entities //
                 .stream() //
@@ -27,6 +20,13 @@ public class OrdendeservicoConverter {
                 , entity.valor)) //
                 .collect(Collectors.toList());
     }
+    public List<OrdendeservicoDTO> toDTO1(List<OrdendeservicoEntity> entities) {
+        return entities //
+                .stream() //
+                .map(entity -> new OrdendeservicoDTO(entity.idos,entity.contratanteEntity,entity.agenda, entity.descricao)) //
+                .collect(Collectors.toList());
+    }
+
 
     public OrdendeservicoDTO toDTO(OrdendeservicoEntity entity) {
         return new OrdendeservicoDTO(entity.idos, entity.idtiposervico, entity.descricao,entity.formapagamento,entity.status,entity.observacao,entity.nota,entity.agenda,entity.contratanteEntity

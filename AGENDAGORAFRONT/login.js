@@ -9,14 +9,15 @@ document.getElementById('formulario').addEventListener('submit', function (event
         if (login != "Usuário não autorizado") {
                 let token= login.token
                 let tipousario= login.niveldeacesso
+                sessionStorage.setItem('tipousuario',tipousario)
                 sessionStorage.setItem('token',token)       
                   
             if ( tipousario== "contratante") {
-                window.location.href = "telademenuinicialcont.html"
+                window.location.href = "contratante/telademenuinicialcont.html"
                 document.getElementById("spinner").style.display = 'none';
                 document.getElementById("entrar").disabled = false;
             } else {
-                window.location.href = "telamenuinicialpres.html"
+                window.location.href = "prestador/telamenuinicialpres.html"
                 document.getElementById("spinner").style.display = 'none';
                 document.getElementById("entrar").disabled = false;
 

@@ -42,14 +42,11 @@
 
         }
 
-        #permitir {
-            text-align: center;
-            color: #fff;
-        }
         .div-1 {
             text-align: center;
 
         }
+
         .navbar {
             background-color: #333;
         }
@@ -61,20 +58,24 @@
         .navbar-dark .navbar-toggler-icon {
             background-color: #fff;
         }
+
         .img-thumbnail {
             width: 75px;
             align-items: left;
 
         }
+
         .img-voltar {
             width: 50px;
             align-items: left;
 
         }
-        .imagem007{
+
+        .imagem007 {
             width: 50px;
             align-items: left;
         }
+
         .account-settings {
             color: #fff;
             margin-right: 30px
@@ -84,26 +85,31 @@
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark">
-        <img src="AgenA.png" class="img-thumbnail" >
-        <div class="container">                        
+        <img src="../AgenA.png" class="img-thumbnail">
+        <div class="container">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
-                    <ul class="navbar-nav">                    
+                    <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" href="agendarservico.html">Agendar Serviço</a>
-                        </li>                       
+                            <a class="nav-link" href="agedarservicocomoprestador.html">Agendar Serviço</a>
+                        </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="contratanteservicos.html">Meus Serviços Contratados</a>
+                            <a class="nav-link" href="prestadorservicos.html">Meus Serviços Contratados</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="prestadorservicosdodia.html">Meus serviços a fazer</a>
                         </li>
                     </ul>
                 </ul>
-            </div>                        
-                <a class="account-settings" href="contratanteconfig.html" ><img src="Bazaart_20231122_091830_231.png" class="imagem007" ></a>
-                <a class="account-settings"  onclick="deslogar()" ><img src="Bazaart_20231122_092328_048.png" class="imagem007" ></a> 
+            </div>
+            <a class="account-settings" href="prestadorconfig.html"><img src="../Bazaart_20231122_091830_231.png"
+                    class="imagem007"></a>
+            <a class="account-settings" onclick="deslogar()"><img src="../Bazaart_20231122_092328_048.png"
+                    class="imagem007"></a>
             </li>
         </div>
     </nav>
@@ -112,7 +118,7 @@
             <div class="col-md-6">
                 <div class="settings-container">
                     <h2 class="text-center">Configurações de Conta</h2>
-                    <form id="editarconfigcontra">
+                    <form id="editarconfigpresta">
                         <div class="mb-3">
                             <label for="nome" class="form-label">Nome</label>
                             <input type="text" class="form-control" id="nome" placeholder="Seu Nome" required>
@@ -155,6 +161,34 @@
                             <label for="numero" class="form-label text-white required">Número</label>
                             <input type="numero" class="form-control" id="numero" placeholder="Seu Numero" required>
                         </div>
+                        <div class="mb-3">
+                            <label for="servico" class="text-white" id="teste">Tipo de
+                                Serviço:</label>
+                            <select class="form-control" id="servico" required>
+                                <option value="">Que tipo de serviço você presta</option>
+                                <option value="1">Eletricista</option>
+                                <option value="2">Encanador</option>
+                                <option value="3">Pintor</option>
+                            </select>
+                        </div>
+                        <label class="text-white" id="pag">Quais formas de pagamento você aceita ?</label>
+                        <fieldset name="formapag">
+                            <div class="mb-3 form-check">
+
+                                <input type="checkbox" class="form-check-input" id="cartao" name="formapag"
+                                    value="cartao">
+                                <label class="form-check-label text-white" for="cartao" id="labelc">Cartão</label>
+                            </div>
+                            <div class="mb-3 form-check">
+                                <input type="checkbox" class="form-check-input" id="pix" name="formapag" value="pix">
+                                <label class="form-check-label text-white" for="pix" id="labelp">PIX</label>
+                            </div>
+                            <div class="mb-3 form-check">
+                                <input type="checkbox" class="form-check-input" id="dinheiro" name="formapag"
+                                    value="dinheiro">
+                                <label class="form-check-label text-white" for="dinheiro" id="labeld">Dinheiro</label>
+                            </div>
+                        </fieldset>
                         <div class="div-1">
                             <button type="submit" class="btn btn-custom" id="Salvarconfig"><span
                                     class="spinner-border spinner-border-sm" role="status" aria-hidden="true"
@@ -165,11 +199,8 @@
                     <p id="permitir">É necessário preencher todos os campos com * vermelho e permitir a localização para
                         continuar a edição. </p>
                 </div>
-
             </div>
-
         </div>
-
         <div class="modal" tabindex="-1" id="modalconfirma">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -188,11 +219,12 @@
             </div>
         </div>
     </div>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
-    <script src="contratanteconfig.js"></script>
-    <script src="api.js"></script>
+    <script src="prestadorconfig.js"></script>
+    <script src="../api.js"></script>
 </body>
 
 </html>

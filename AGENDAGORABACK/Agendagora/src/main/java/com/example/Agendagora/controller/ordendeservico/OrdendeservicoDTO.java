@@ -21,6 +21,12 @@ public class OrdendeservicoDTO {
     public String nomec;
     public String sobrenomec;
 
+    public String rua;
+    public String cidade;
+    public String bairo;
+    public int numero;
+
+
     public OrdendeservicoDTO() {
     }
 
@@ -38,6 +44,18 @@ public class OrdendeservicoDTO {
         this.sobrenomeo = agenda.prestadorEntity.sobrenome;
         this.data = agenda.data;
         this.formapagamento = formapagamento;
-
     }
+    public OrdendeservicoDTO(int idos,ContratanteEntity contratante,AgendaEntity agenda, String descricao){
+        this.idos=idos;
+        this.nomec= contratante.nome;
+        this.sobrenomec= contratante.sobrenome;
+        this.rua=contratante.enderecoEntity.rua;
+        this.cidade=contratante.enderecoEntity.cidade;
+        this.bairo=contratante.enderecoEntity.bairo;
+        this.numero=contratante.enderecoEntity.numero;
+        this.data=agenda.data;
+        this.descricao=descricao;
+    }
+
+
 }

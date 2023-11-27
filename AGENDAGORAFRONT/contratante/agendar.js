@@ -1,5 +1,5 @@
 if (sessionStorage.getItem("token") === null) {
-    window.location.href = "login.html"
+    window.location.href="../login.html"
 
 }
 async function getContratante() {
@@ -55,8 +55,6 @@ function initMap(latitudecontratente, longitudecontratente, prestadores) {
 
 }
 var idcontratante;
-
-
 document.getElementById('agendarservico').addEventListener('submit', function (event) {
     event.preventDefault();
     getContratante().then(contratante => {
@@ -100,7 +98,8 @@ document.getElementById('agendarservico').addEventListener('submit', function (e
 var idprestador;
 function agendarservico() {
     let idprerst = idprestador
-    let tipoServico = 1;
+    let tiposServicos = document.querySelector('#tiposervico');
+    let tipoServico = tiposServicos.options[tiposServicos.selectedIndex].value;
     let servicoaserrealizado = document.getElementById('Saf').value;
     let data = document.getElementById('data').value;
     let formasdepagamento = document.querySelector('#filtroPagamento');
@@ -151,6 +150,6 @@ function selecionar(element) {
 function deslogar() {
     deletetoken().then(() => {
         sessionStorage.clear();
-        window.location.href = "login.html"
+        window.location.href="../login.html"
     })
 }

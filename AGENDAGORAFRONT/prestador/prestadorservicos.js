@@ -1,13 +1,8 @@
-if (sessionStorage.getItem("token") === null) {
-    window.location.href = "login.html"
-}
 async function getOrdendeservico(osemaberto) {
-    let url = "http://localhost:8080/ordendeservico/";
-
+    let url = "http://localhost:8080/ordendeservico/prestador";
     if (osemaberto) {
         url += "?servicos=true";
     }
-
     let response = await fetch(url, {
         method: "GET",
         headers: {
@@ -27,8 +22,6 @@ function apenasemaberto() {
     let apenasemaberto = checkboxAberto.checked;
     document.getElementById("tabeladados").innerHTML = "";
     getOrdendeservico(apenasemaberto).then(ordendesservico => ordendesservico.forEach(ordendeservico => {
-
-
         let tabela = document.getElementById("tabeladados");
         let linha = tabela.insertRow();
         let colunacodigo = linha.insertCell();
@@ -51,8 +44,6 @@ function apenasemaberto() {
         } else{
             colunaacao.innerHTML = "  <button class='btn btn-info' disabled >Avaliado</button>"
         }
-
-
     }));
 }
 function cancelar(element) {
@@ -76,12 +67,12 @@ function avaliar(element) {
     let nomeprestador = trelement.childNodes[1].innerHTML;
     window.sessionStorage.setItem('nomeprestador', nomeprestador);
     window.sessionStorage.setItem('idorden', idorden);
-    window.location.href = "avaliacoes.html";
+    window.location.href = "../avaliacoes.html";
 }
 function deslogar() {
     deletetoken().then(() => {
         sessionStorage.clear();
-        window.location.href = "login.html"
+        window.location.href="../login.html"
     })
 }
 apenasemaberto();

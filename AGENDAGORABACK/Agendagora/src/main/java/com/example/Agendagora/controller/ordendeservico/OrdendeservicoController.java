@@ -38,7 +38,6 @@ public class OrdendeservicoController {
         }
         final AgendaConverter convertera =agendaConverter;
         final OrdendeservicoConverter converteros =ordendeservicoConverter;
-
         PrestadorEntity prestadorEntity=new PrestadorEntity();
         prestadorEntity.id=dto.idprerst;
         ContratanteEntity contratanteEntity=new ContratanteEntity();
@@ -66,13 +65,11 @@ public class OrdendeservicoController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
         UsuarioEntity usuarioEntity= usuarioDAO.findbyid(idusuario,tipousuario);
-        List<OrdendeservicoEntity> ordendeservicoEntityList= ordendeservicoDAO.findbyidcotratante(usuarioEntity.contratante.id,apenasemaberto);
+        List<OrdendeservicoEntity> ordendeservicoEntityList= ordendeservicoDAO.findbyidcotratante(usuarioEntity.contratante.id,apenasemaberto,tipousuario);
         return ResponseEntity.ok(converteros.toDTO(ordendeservicoEntityList));
-
     }
     @DeleteMapping("{id}")
     public ResponseEntity<OrdendeservicoDTO> cancelarc(@RequestHeader(HttpHeaders.AUTHORIZATION) String auth,@PathVariable int id) throws SQLException {
-
         int idusuario =usuarioDAO.existetoken(auth);
         if (idusuario==0) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
@@ -101,6 +98,57 @@ public class OrdendeservicoController {
         responseDTO.observacao=ordendeservicoEntity.observacao;
         return ResponseEntity.ok(responseDTO);
     }
+    @PostMapping("/prestador")
+    public ResponseEntity<OrdendeservicoDTO> addosp(@RequestHeader(HttpHeaders.AUTHORIZATION) String auth, @RequestBody OrdendeservicoDTO dto) throws SQLException {
+        int idusuario =usuarioDAO.existetoken(auth);
+        if (idusuario==0) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+        final AgendaConverter convertera =agendaConverter;
+        final OrdendeservicoConverter converteros =ordendeservicoConverter;
+        PrestadorEntity prestadorEntity=new PrestadorEntity();
+        prestadorEntity.id=dto.idprerst;
+        ContratanteEntity contratanteEntity=new ContratanteEntity();
+        contratanteEntity.id=dto.idcontratante;
+        AgendaEntity agendaEntity = convertera.toEntity(dto,prestadorEntity);
+        OrdendeservicoEntity ordendeservicoEntity =ordendeservicoDAO.addosp(converteros.toEntity(dto,contratanteEntity,agendaEntity));
+        if (ordendeservicoEntity==null){
+            return ResponseEntity.badRequest().build();
+        }
+        OrdendeservicoDTO dtoResponse = new OrdendeservicoDTO();
+        dtoResponse.idos=ordendeservicoEntity.idos;
+        dtoResponse.idtiposervico= ordendeservicoEntity.idtiposervico;
+        dtoResponse.formapagamento= ordendeservicoEntity.formapagamento;
+        dtoResponse.idcontratante= ordendeservicoEntity.contratanteEntity.id;
+        dtoResponse.idagenda=ordendeservicoEntity.agenda.idagenda;
+        dtoResponse.descricao=ordendeservicoEntity.descricao;
+        return ResponseEntity.ok().body(dtoResponse);
+    }
+    @GetMapping("prestador")
+    public ResponseEntity<List<OrdendeservicoDTO>> pesquisarosprestador(@RequestHeader(HttpHeaders.AUTHORIZATION) String auth,@RequestParam (value = "servicos",required = false) boolean apenasemaberto ) throws SQLException {
+        boolean tipousuario= false;
+        final OrdendeservicoConverter converteros =ordendeservicoConverter;
+        int idusuario =usuarioDAO.existetoken(auth);
+        if (idusuario==0) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+        UsuarioEntity usuarioEntity= usuarioDAO.findbyid(idusuario,tipousuario);
+        List<OrdendeservicoEntity> ordendeservicoEntityList= ordendeservicoDAO.findbyidcotratante(usuarioEntity.prestador.id,apenasemaberto,tipousuario);
+        return ResponseEntity.ok(converteros.toDTO(ordendeservicoEntityList));
+    }
+    @GetMapping("servicos")
+    public ResponseEntity<List<OrdendeservicoDTO>> consultarPorIdPrestador(@RequestHeader(HttpHeaders.AUTHORIZATION) String auth,@RequestParam (value = "servicos",required = false) boolean apenasdodia ) throws SQLException {
+        final OrdendeservicoConverter converteros =ordendeservicoConverter;
+        boolean tipousuario= false;
+        int idusuario =usuarioDAO.existetoken(auth);
+        if (idusuario==0) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+        UsuarioEntity usuarioEntity= usuarioDAO.findbyid(idusuario,tipousuario);
+        List<OrdendeservicoEntity> ordendeservicoEntityList = ordendeservicoDAO.consultarPorIdPrestador(usuarioEntity.id,apenasdodia);
+        return ResponseEntity.ok(converteros.toDTO1(ordendeservicoEntityList));
+    }
+
 
 
 
