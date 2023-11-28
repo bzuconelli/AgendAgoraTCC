@@ -21,24 +21,31 @@ function createServiceElements() {
     let servicesListContainer = document.getElementById("servicesList");
 
     getOrdendeservico(apenasdodia).then(ordendesservico => ordendesservico.forEach(ordendeservico => {
-        let serviceElement = document.createElement("div");
-        serviceElement.className = "service";
-        let h4 = document.createElement("h4");
-        h4.textContent = ordendeservico.descricao;
-        let dataservico = document.createElement("p");
-        dataservico.textContent = "Data: " + ordendeservico.data;
-        let nomecliente = document.createElement("p");
-        nomecliente.textContent = "Cliente: " + ordendeservico.nomec + " " + ordendeservico.sobrenomec;
-        let endereco = document.createElement("p");
-        endereco.textContent = "Endereço: Rua " + ordendeservico.rua + " " + "bairro: " + ordendeservico.bairo + " " + "numero: " + ordendeservico.numero + " " + "cidadae: " + ordendeservico.cidade
-        serviceElement.appendChild(h4);
-        serviceElement.appendChild(dataservico);
-        serviceElement.appendChild(nomecliente);
-        serviceElement.appendChild(endereco);
-        servicesListContainer.appendChild(serviceElement);
+        let tabela = document.getElementById("tabeladados");
+        let linha = tabela.insertRow();
+        let colunacodigo = linha.insertCell();
+        let colunacliente = linha.insertCell();
+        let colunaServico = linha.insertCell();
+        let colunafone = linha.insertCell();
+        let colunaendereco = linha.insertCell();
+        let colunaData = linha.insertCell();
+        let colunaacao = linha.insertCell();
+        colunacodigo.innerHTML = ordendeservico.idos;
+        colunacliente.innerHTML = ordendeservico.nomec + "  " + ordendeservico.sobrenomec;
+        colunaServico.innerHTML = ordendeservico.descricao;
+        colunafone.innerHTML = ordendeservico.telefone;
+        colunaendereco.innerHTML ="Rua "+ ordendeservico.rua+" "+ordendeservico.numero+" "+ordendeservico.bairo+" "+ordendeservico.cidade+" ";
+        colunaData.innerHTML = ordendeservico.data;
+        colunaacao.innerHTML = "  <button class='btn btn-danger'onclick='cancelar(this)'>Cancelar</button>"
+       
     }));
 }
 apenasdodia= false;
-
+function deslogar() {
+    deletetoken().then(() => {
+        sessionStorage.clear();
+        window.location.href="../login.html"
+    })
+}
 createServiceElements();
 

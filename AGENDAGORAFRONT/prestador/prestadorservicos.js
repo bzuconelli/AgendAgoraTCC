@@ -20,7 +20,7 @@ async function getOrdendeservico(osemaberto) {
 function apenasemaberto() {
     let checkboxAberto = document.getElementById('apenasemaberto');
     let apenasemaberto = checkboxAberto.checked;
-    document.getElementById("tabeladados").innerHTML = "";
+    
     getOrdendeservico(apenasemaberto).then(ordendesservico => ordendesservico.forEach(ordendeservico => {
         let tabela = document.getElementById("tabeladados");
         let linha = tabela.insertRow();

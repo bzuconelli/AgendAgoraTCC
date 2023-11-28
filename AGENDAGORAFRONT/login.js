@@ -13,11 +13,11 @@ document.getElementById('formulario').addEventListener('submit', function (event
                 sessionStorage.setItem('token',token)       
                   
             if ( tipousario== "contratante") {
-                window.location.href = "contratante/telademenuinicialcont.html"
+                window.location.href = "contratante/agendarservico.html"
                 document.getElementById("spinner").style.display = 'none';
                 document.getElementById("entrar").disabled = false;
             } else {
-                window.location.href = "prestador/telamenuinicialpres.html"
+                window.location.href = "prestador/prestadorservicosdodia.html"
                 document.getElementById("spinner").style.display = 'none';
                 document.getElementById("entrar").disabled = false;
 

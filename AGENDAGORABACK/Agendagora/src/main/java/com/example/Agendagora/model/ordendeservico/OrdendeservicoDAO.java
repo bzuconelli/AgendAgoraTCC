@@ -160,7 +160,7 @@ public class OrdendeservicoDAO {
                 "    endereco.Rua, " +
                 "    endereco.cidade, " +
                 "    endereco.bairo, " +
-                "    endereco.numero, " +
+                "    endereco.numero,  " +
                 "    agenda.dataserv, +agenda.idagenda, " +
                 "    ordendeservico.descservico " +
                 "FROM " +

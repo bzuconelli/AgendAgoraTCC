@@ -10,50 +10,64 @@
         body {
             background-color: #868686;
         }
-
-        .services-container {
+    
+        .calendar-container {
             background-color: #333;
             padding: 20px;
             border-radius: 10px;
             margin-top: 50px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
         }
-
-        .services-container h2 {
+    
+        .calendar-container h2 {
             color: #fff;
+            text-align: center;
         }
-
-        .service {
+    
+        .calendar {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+            margin: 10px;
+        }
+    
+        .day {
             background-color: #fff;
             padding: 10px;
-            margin: 10px 0;
             border-radius: 5px;
         }
-
-        .custom-checkbox .custom-control-label::before {
+    
+        .btn-custom {
             background-color: #d29f06;
+            border-color: #d29f06;
+            color: #fff;
         }
-
-        body {
-            background-color: #868686;
+    
+        .day-text {
+            width: 100%;
         }
-
+    
+        .div-1 {
+            text-align: center;
+    
+        }
         .navbar {
             background-color: #333;
         }
-
+    
         .navbar-dark .navbar-nav .nav-link {
             color: #fff;
         }
-
+    
         .navbar-dark .navbar-toggler-icon {
             background-color: #fff;
         }
-
+    
         .account-settings {
             color: #fff;
+            margin-right: 30px
         }
-
+    
         .top-rated-providers {
             background-color: #333;
             padding: 20px;
@@ -61,15 +75,15 @@
             margin-top: 50px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
         }
-
+    
         .top-rated-providers h2 {
             color: #fff;
         }
-
+    
         body {
             background-color: #868686;
         }
-
+    
         .menu-container {
             background-color: #333;
             padding: 20px;
@@ -77,11 +91,11 @@
             margin-top: 50px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
         }
-
+    
         .menu-container h2 {
             color: #d29f06;
         }
-
+    
         .provider-card {
             background-color: #fff;
             border-radius: 10px;
@@ -89,113 +103,117 @@
             margin-top: 10px;
             box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
         }
-
+    
         .btn-custom {
             background-color: #d29f06;
             border-color: #d29f06;
             color: #fff;
         }
-
+    
         .div-1 {
             text-align: center;
-
+    
         }
-
         .img-thumbnail {
             width: 75px;
             align-items: left;
-
+    
         }
-
-        .div-1 {
-            text-align: center;
-
-        }
-
-        .navbar {
-            background-color: #333;
-        }
-
-        .navbar-dark .navbar-nav .nav-link {
-            color: #fff;
-        }
-
-        .navbar-dark .navbar-toggler-icon {
-            background-color: #fff;
-        }
-
-        .img-thumbnail {
-            width: 75px;
-            align-items: left;
-
-        }
-
         .img-voltar {
             width: 50px;
             align-items: left;
-
+    
         }
-
-        .imagem007 {
+        .imagem007{
             width: 50px;
             align-items: left;
         }
-
-        .account-settings {
-            color: #fff;
-            margin-right: 30px
+        .card-header{
+            background-color: #333;
+            text-align: center;
         }
+        .card-body{
+            background-color: #333;
+            text-align: center;
+
+        }
+        .table-dark-custom {
+        background-color: #333; /* Altere para a cor desejada */
+        color: #fff; /* Altere para a cor desejada para o texto na tabela */
+    }
+    .imagem008{
+            width: 75px;
+            align-items: left;
+        }
+    
     </style>
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark">
-        <img src="../AgenA.png" class="img-thumbnail">
-        <div class="container">
+        <img src="../AgenA.png" class="img-thumbnail" >     
+        <div class="container">                        
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link" href="agedarservicocomoprestador.html">Agendar Serviço</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="prestadorservicos.html">Meus Serviços Contratados</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="prestadorservicosdodia.html">Meus serviços a fazer</a>
-                        </li>
-                    </ul>
+                <ul class="navbar-nav">                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="agedarservicocomoprestador.html">Agendar Serviço</a>
+                    </li>
+                    <h2 style="color: #fff;">|</h2>
+                    <li class="nav-item">
+                        <a class="nav-link" href="prestadorservicos.html">Meus Serviços Contratados</a>
+                    </li>
+                    <h2 style="color: #fff;">|</h2>
+                    <li class="nav-item">
+                        <a class="nav-link" href="prestadorservicosdodia.html">Meus serviços a fazer</a>
+                    </li>
+                    <h2 style="color: #fff;">|</h2>
+                    <li class="nav-item">
+                        <a class="nav-link" href="telamenuinicialpres.html">Calendário de vagas</a>
+                    </li>
                 </ul>
-            </div>
-            <a class="account-settings" href="prestadorconfig.html"><img src="../Bazaart_20231122_091830_231.png"
-                    class="imagem007"></a>
-            <a class="account-settings" onclick="deslogar()"><img src="../Bazaart_20231122_092328_048.png"
-                    class="imagem007"></a>
+            </div>                        
+            <a class="account-settings" href="prestadorconfig.html" ><img src="../Bazaart_20231122_091830_231.png" class="imagem007" ></a>
+            <a class="account-settings"  onclick="deslogar()" ><img src="../Bazaart_20231122_092328_048.png" class="imagem007" ></a> 
             </li>
         </div>
     </nav>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="services-container">
-                    <h2 class="text-center">Serviços Agendados</h2>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="selectDay">
-                        <label class="form-check-label text text-white" for="selectDay">
-                            Serviços do dia
-                        </label>
+    <div class="container mt-5">        
+        <div class="row">
+            <div class="col-10 offset-2">
+                <div class="card bg-dark text-white">                            
+                    <div class="card-header">
+                        <h4>Serviços do dia</h4>
+                        <input type="checkbox" class="form-check-input" id="apenasemaberto" onclick="apenasemaberto()">
+                        <label class="form-check-label text-white" for="apenasemaberto">Apenas serviços  do dia </label>
+
                     </div>
-                    <div id="servicesList" class="services-list"></div>
+                    <div class="card-body">
+                        <table class="table table-bordered table-dark table-dark-custom" id="tabeladados">
+                            <thead>
+                                <tr>
+                                    <tr>
+                                        <th>Codigo</th>
+                                        <th>Cliente</th>
+                                        <th>Serviço</th>
+                                        <th>Telefone</th>
+                                        <th>Endereço</th>
+                                        <th>Data</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                </tr>
+                            </thead>
+
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     <script src="prestadoresservicosdodia.js"></script>
-    <script src="api.js"></script>
+    <script src="../api.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>

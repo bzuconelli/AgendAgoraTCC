@@ -130,20 +130,28 @@
     }
     .card-header{
         background-color: #333;
+        text-align: center;
+
     }
     .card-body{
         background-color: #333;
+        text-align: center;
+
     }
     .table-dark-custom {
     background-color: #333; /* Altere para a cor desejada */
     color: #fff; /* Altere para a cor desejada para o texto na tabela */
 }
+.imagem008{
+            width: 75px;
+            align-items: left;
+        }
 
 </style>
 
 <body style="background-color: #666;">
     <nav class="navbar navbar-expand-lg navbar-dark">
-        <img src="../AgenA.png" class="img-thumbnail" h>
+        <img src="../AgenA.png" class="img-thumbnail"> 
         <div class="container">                        
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -154,7 +162,8 @@
                     <ul class="navbar-nav">                    
                         <li class="nav-item">
                             <a class="nav-link" href="agendarservico.html">Agendar Serviço</a>
-                        </li>                       
+                        </li>      
+                        <h2 style="color: #fff;">|</h2>                 
                         <li class="nav-item">
                             <a class="nav-link" href="contratanteservicos.html">Meus Serviços Contratados</a>
                         </li>
@@ -181,18 +190,15 @@
                         <table class="table table-bordered table-dark table-dark-custom" id="tabeladados">
                             <thead>
                                 <tr>
-                                    <tr>
-                                        <th>Codigo</th>
-                                        <th>Prestador</th>
-                                        <th>Serviço</th>
-                                        <th>Status</th>
-                                        <th>Data</th>
-                                        <th>Forma de pagamento</th>
-                                        <th>Ações</th>
-                                    </tr>
+                                    <th scope="col">Codigo</th>
+                                    <th scope="col">Prestador</th>
+                                    <th scope="col">Serviço</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Data</th>
+                                    <th scope="col">Forma de pagamento</th>
+                                    <th scope="col">Ações</th>
                                 </tr>
                             </thead>
-
                         </table>
                     </div>
                 </div>
