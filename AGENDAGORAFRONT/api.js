@@ -245,6 +245,23 @@ async function deletetoken() {
         },
     })
 }
+async function putfinalizacao(idos,valor) {
+    let response = await fetch("http://localhost:8080/ordendeservico/" + idos, {
+        method: "PUT",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': sessionStorage.getItem('token')
+        },
+
+        body: JSON.stringify({
+            valor: valor
+            
+        })
+    });
+    let avaliacao = await response.json();
+    return avaliacao;
+}
 
 
 

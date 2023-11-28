@@ -31,7 +31,7 @@ public class OrdendeservicoController {
     public OrdendeservicoConverter ordendeservicoConverter;
 
     @PostMapping()
-    public ResponseEntity<OrdendeservicoDTO> addos(@RequestHeader(HttpHeaders.AUTHORIZATION) String auth, @RequestBody OrdendeservicoDTO dto) throws SQLException {
+    public ResponseEntity<OrdendeservicoDTO> agedarcomocontratante(@RequestHeader(HttpHeaders.AUTHORIZATION) String auth, @RequestBody OrdendeservicoDTO dto) throws SQLException {
         int idusuario =usuarioDAO.existetoken(auth);
         if (idusuario==0) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
@@ -57,7 +57,7 @@ public class OrdendeservicoController {
         return ResponseEntity.ok().body(dtoResponse);
     }
     @GetMapping
-    public ResponseEntity<List<OrdendeservicoDTO>> pesquisaroscontratante(@RequestHeader(HttpHeaders.AUTHORIZATION) String auth,@RequestParam (value = "servicos",required = false) boolean apenasemaberto ) throws SQLException {
+    public ResponseEntity<List<OrdendeservicoDTO>> pesquisaroscontratante(@RequestHeader(HttpHeaders.AUTHORIZATION) String auth,@RequestParam (value = "servicos",required = false) boolean apenasconcluido ) throws SQLException {
         boolean tipousuario= true;
         final OrdendeservicoConverter converteros =ordendeservicoConverter;
         int idusuario =usuarioDAO.existetoken(auth);
@@ -65,11 +65,11 @@ public class OrdendeservicoController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
         UsuarioEntity usuarioEntity= usuarioDAO.findbyid(idusuario,tipousuario);
-        List<OrdendeservicoEntity> ordendeservicoEntityList= ordendeservicoDAO.findbyidcotratante(usuarioEntity.contratante.id,apenasemaberto,tipousuario);
+        List<OrdendeservicoEntity> ordendeservicoEntityList= ordendeservicoDAO.findbyidcotratante(usuarioEntity.contratante.id,apenasconcluido,tipousuario);
         return ResponseEntity.ok(converteros.toDTO(ordendeservicoEntityList));
     }
     @DeleteMapping("{id}")
-    public ResponseEntity<OrdendeservicoDTO> cancelarc(@RequestHeader(HttpHeaders.AUTHORIZATION) String auth,@PathVariable int id) throws SQLException {
+    public ResponseEntity<OrdendeservicoDTO> cancelar(@RequestHeader(HttpHeaders.AUTHORIZATION) String auth,@PathVariable int id) throws SQLException {
         int idusuario =usuarioDAO.existetoken(auth);
         if (idusuario==0) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
@@ -99,7 +99,7 @@ public class OrdendeservicoController {
         return ResponseEntity.ok(responseDTO);
     }
     @PostMapping("/prestador")
-    public ResponseEntity<OrdendeservicoDTO> addosp(@RequestHeader(HttpHeaders.AUTHORIZATION) String auth, @RequestBody OrdendeservicoDTO dto) throws SQLException {
+    public ResponseEntity<OrdendeservicoDTO> agedarcomoprestador(@RequestHeader(HttpHeaders.AUTHORIZATION) String auth, @RequestBody OrdendeservicoDTO dto) throws SQLException {
         int idusuario =usuarioDAO.existetoken(auth);
         if (idusuario==0) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
@@ -125,15 +125,16 @@ public class OrdendeservicoController {
         return ResponseEntity.ok().body(dtoResponse);
     }
     @GetMapping("prestador")
-    public ResponseEntity<List<OrdendeservicoDTO>> pesquisarosprestador(@RequestHeader(HttpHeaders.AUTHORIZATION) String auth,@RequestParam (value = "servicos",required = false) boolean apenasemaberto ) throws SQLException {
+    public ResponseEntity<List<OrdendeservicoDTO>> pesquisarosprestador(@RequestHeader(HttpHeaders.AUTHORIZATION) String auth,@RequestParam (value = "servicos",required = false) boolean apenasconcluido ) throws SQLException {
         boolean tipousuario= false;
         final OrdendeservicoConverter converteros =ordendeservicoConverter;
         int idusuario =usuarioDAO.existetoken(auth);
+
         if (idusuario==0) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
         UsuarioEntity usuarioEntity= usuarioDAO.findbyid(idusuario,tipousuario);
-        List<OrdendeservicoEntity> ordendeservicoEntityList= ordendeservicoDAO.findbyidcotratante(usuarioEntity.prestador.id,apenasemaberto,tipousuario);
+        List<OrdendeservicoEntity> ordendeservicoEntityList= ordendeservicoDAO.findbyidcotratante(usuarioEntity.prestador.id,apenasconcluido,tipousuario);
         return ResponseEntity.ok(converteros.toDTO(ordendeservicoEntityList));
     }
     @GetMapping("servicos")
@@ -148,6 +149,22 @@ public class OrdendeservicoController {
         List<OrdendeservicoEntity> ordendeservicoEntityList = ordendeservicoDAO.consultarPorIdPrestador(usuarioEntity.id,apenasdodia);
         return ResponseEntity.ok(converteros.toDTO1(ordendeservicoEntityList));
     }
+    @PutMapping("{id}")
+    public  ResponseEntity<OrdendeservicoDTO> finalizar(@RequestHeader(HttpHeaders.AUTHORIZATION) String auth,@PathVariable int id,@RequestBody OrdendeservicoDTO dto) throws SQLException {
+        final OrdendeservicoConverter converteros =ordendeservicoConverter;
+        OrdendeservicoEntity entity = new OrdendeservicoEntity();
+        entity.valor= dto.valor;
+        OrdendeservicoEntity ordendeservicoEntity =ordendeservicoDAO.finalizar(entity,id);
+        if(ordendeservicoEntity ==null){
+            return ResponseEntity.notFound().build();
+        }
+        OrdendeservicoDTO responseDTO =new OrdendeservicoDTO();
+        responseDTO.idos=ordendeservicoEntity.idos;
+        responseDTO.valor=ordendeservicoEntity.valor;
+        return ResponseEntity.ok(responseDTO);
+    }
+
+
 
 
 

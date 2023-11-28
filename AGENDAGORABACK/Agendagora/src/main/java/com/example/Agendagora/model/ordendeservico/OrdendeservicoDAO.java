@@ -46,7 +46,7 @@ public class OrdendeservicoDAO {
             }
         }
     }
-    public List<OrdendeservicoEntity> findbyidcotratante(int id, boolean apenasemaberto,boolean tipousuario) throws SQLException {
+    public List<OrdendeservicoEntity> findbyidcotratante(int id, boolean apenasconcluido,boolean tipousuario) throws SQLException {
         String sql = "select os.idordendeservico, p.nomeprestador,p.sobrenomeprestador," +
                 " os.descservico,os.statusordem,a.dataserv,os.formapagamento,os.avaliacao " +
                 " from ordendeservico os " +
@@ -57,8 +57,10 @@ public class OrdendeservicoDAO {
         }else {
             sql+=" where os.prestador_idprestador = ? ";
         }
-        if (apenasemaberto) {
-            sql += "and os.statusordem ='aberto' ";
+        if (apenasconcluido) {
+            sql += "and os.statusordem ='concluido' ";
+        }else {
+            sql+="and os.statusordem ='aberto' ";
         }
         try (final PreparedStatement preparedStatement = connectionSingleton.getConnection().prepareStatement(sql)) {
             preparedStatement.setInt(1, id);
@@ -154,9 +156,9 @@ public class OrdendeservicoDAO {
     }
     public List<OrdendeservicoEntity> consultarPorIdPrestador(int id, boolean apenasdodia) throws SQLException {
         String sql ="SELECT  ordendeservico.idordendeservico," +
-
                 "    COALESCE(contratante.nome, prestador.nomeprestador) AS nome, " +
                 "    COALESCE(contratante.sobrenome, prestador.sobrenomeprestador) AS sobrenome, " +
+                "    COALESCE(contratante.telefone, prestador.telefone) AS telefone, "+
                 "    endereco.Rua, " +
                 "    endereco.cidade, " +
                 "    endereco.bairo, " +
@@ -190,18 +192,32 @@ public class OrdendeservicoDAO {
                     entity.contratanteEntity.nome = rs.getString(2);
                     entity.contratanteEntity.sobrenome = rs.getString(3);
                     entity.contratanteEntity.enderecoEntity = new EnderecoEntity();
-                    entity.contratanteEntity.enderecoEntity.rua = rs.getString(4);
-                    entity.contratanteEntity.enderecoEntity.cidade = rs.getString(5);
-                    entity.contratanteEntity.enderecoEntity.bairo = rs.getString(6);
-                    entity.contratanteEntity.enderecoEntity.numero = rs.getInt(7);
+                    entity.contratanteEntity.telefone= rs.getString(4);
+                    entity.contratanteEntity.enderecoEntity.rua = rs.getString(5);
+                    entity.contratanteEntity.enderecoEntity.cidade = rs.getString(6);
+                    entity.contratanteEntity.enderecoEntity.bairo = rs.getString(7);
+                    entity.contratanteEntity.enderecoEntity.numero = rs.getInt(8);
                     entity.agenda = new AgendaEntity();
-                    entity.agenda.data = rs.getString(8);
-                    entity.agenda.idagenda = rs.getInt(9);
-                    entity.descricao = rs.getString(10);
+                    entity.agenda.data = rs.getString(9);
+                    entity.agenda.idagenda = rs.getInt(10);
+                    entity.descricao = rs.getString(11);
                     resultado.add(entity);
                 }
                 return resultado;
             }
+        }
+    }
+    public OrdendeservicoEntity finalizar(OrdendeservicoEntity entity, int id) throws SQLException {
+        final String sql = "update ordendeservico set valorfinal = ?, statusordem = 'concluido'  where idordendeservico = ? ";
+        try (final PreparedStatement preparedStatement = connectionSingleton.getConnection().prepareStatement(sql)) {
+            preparedStatement.setDouble(1, entity.valor);
+            preparedStatement.setInt(2, id);
+            int qtdlinhas = preparedStatement.executeUpdate();
+            if (qtdlinhas == 0) {
+                return null;
+            }
+            entity.idos = id;
+            return entity;
         }
     }
 }

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -51,6 +52,7 @@
         text-align: center;
 
     }
+
     .navbar {
         background-color: #333;
     }
@@ -114,51 +116,59 @@
         text-align: center;
 
     }
+
     .img-thumbnail {
         width: 75px;
         align-items: left;
 
     }
+
     .img-voltar {
         width: 50px;
         align-items: left;
 
     }
-    .imagem007{
+
+    .imagem007 {
         width: 50px;
         align-items: left;
     }
-    .card-header{
+
+    .card-header {
         background-color: #333;
         text-align: center;
 
     }
-    .card-body{
+
+    .card-body {
         background-color: #333;
         text-align: center;
 
     }
+
     .table-dark-custom {
-    background-color: #333; /* Altere para a cor desejada */
-    color: #fff; /* Altere para a cor desejada para o texto na tabela */
-}
-.imagem008{
-            width: 75px;
-            align-items: left;
-        }
+        background-color: #333;
+        /* Altere para a cor desejada */
+        color: #fff;
+        /* Altere para a cor desejada para o texto na tabela */
+    }
 
+    .imagem008 {
+        width: 75px;
+        align-items: left;
+    }
 </style>
 
 <body style="background-color: #868686;">
     <nav class="navbar navbar-expand-lg navbar-dark">
-        <img src="../AgenA.png" class="img-thumbnail" >     
-        <div class="container">                        
+        <img src="../AgenA.png" class="img-thumbnail">
+        <div class="container">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">                    
+                <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link" href="agedarservicocomoprestador.html">Agendar Serviço</a>
                     </li>
@@ -175,9 +185,11 @@
                         <a class="nav-link" href="telamenuinicialpres.html">Calendário de vagas</a>
                     </li>
                 </ul>
-            </div>                        
-            <a class="account-settings" href="prestadorconfig.html" ><img src="../Bazaart_20231122_091830_231.png" class="imagem007" ></a>
-            <a class="account-settings"  onclick="deslogar()" ><img src="../Bazaart_20231122_092328_048.png" class="imagem007" ></a> 
+            </div>
+            <a class="account-settings" href="prestadorconfig.html"><img src="../Bazaart_20231122_091830_231.png"
+                    class="imagem007"></a>
+            <a class="account-settings" onclick="deslogar()"><img src="../Bazaart_20231122_092328_048.png"
+                    class="imagem007"></a>
             </li>
         </div>
     </nav>
@@ -188,23 +200,22 @@
                     <div class="card-header">
                         <h4>Meus Serviços Contratados</h4>
                         <input type="checkbox" class="form-check-input" id="apenasemaberto" onclick="apenasemaberto()">
-                        <label class="form-check-label text-white" for="apenasemaberto">Vizualizar apenas serviços não
-                            realizados </label>
+                        <label class="form-check-label text-white" for="apenasemaberto">Vizualizar  serviços realizados </label>
 
                     </div>
                     <div class="card-body">
                         <table class="table table-bordered table-dark table-dark-custom" id="tabeladados">
                             <thead>
                                 <tr>
-                                    <tr>
-                                        <th>Codigo</th>
-                                        <th>Prestador</th>
-                                        <th>Serviço</th>
-                                        <th>Status</th>
-                                        <th>Data</th>
-                                        <th>Forma de pagamento</th>
-                                        <th>Ações</th>
-                                    </tr>
+
+                                    <th scope="col">Codigo</th>
+                                    <th scope="col">Prestador</th>
+                                    <th scope="col">Serviço</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Data</th>
+                                    <th scope="col">Forma de pagamento</th>
+                                    <th scope="col">Ações</th>
+
                                 </tr>
                             </thead>
 

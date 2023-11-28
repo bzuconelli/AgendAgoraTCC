@@ -1,5 +1,5 @@
 if (sessionStorage.getItem("token") === null) {
-    window.location.href="../login.html"
+    window.location.href = "../login.html"
 }
 async function getOrdendeservico(osemaberto) {
     let url = "http://localhost:8080/ordendeservico/";
@@ -25,6 +25,11 @@ async function getOrdendeservico(osemaberto) {
 function apenasemaberto() {
     let checkboxAberto = document.getElementById('apenasemaberto');
     let apenasemaberto = checkboxAberto.checked;
+    let tabela = document.getElementById("tabeladados");
+    while (tabela.rows.length > 1) {
+        tabela.deleteRow(1);
+    }
+
     getOrdendeservico(apenasemaberto).then(ordendesservico => ordendesservico.forEach(ordendeservico => {
         let tabela = document.getElementById("tabeladados");
 
@@ -36,17 +41,18 @@ function apenasemaberto() {
         let colunaData = linha.insertCell();
         let colunaFormadepagamento = linha.insertCell();
         let colunaacao = linha.insertCell();
+        let dataFormatada = new Date(ordendeservico.data).toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' });
         colunacodigo.innerHTML = ordendeservico.idos;
         colunaPrestador.innerHTML = ordendeservico.nomeo + "  " + ordendeservico.sobrenomeo;
         colunaServico.innerHTML = ordendeservico.descricao;
         colunaStatus.innerHTML = ordendeservico.status;
-        colunaData.innerHTML = ordendeservico.data;
+        colunaData.innerHTML = dataFormatada;
         colunaFormadepagamento.innerHTML = ordendeservico.formapagamento;
         if (ordendeservico.status == 'concluido' && ordendeservico.nota == 0) {
             colunaacao.innerHTML = "  <button class='btn btn-info'onclick='avaliar(this)'>Avaliar </button>"
         } else if (ordendeservico.status == 'aberto') {
             colunaacao.innerHTML = "  <button class='btn btn-danger'onclick='cancelar(this)'>Cancelar</button>"
-        } else{
+        } else {
             colunaacao.innerHTML = "  <button class='btn btn-info' disabled >Avaliado</button>"
         }
     }));
@@ -77,7 +83,7 @@ function avaliar(element) {
 function deslogar() {
     deletetoken().then(() => {
         sessionStorage.clear();
-        window.location.href="../login.html"
+        window.location.href = "../login.html"
     })
 }
 apenasemaberto();

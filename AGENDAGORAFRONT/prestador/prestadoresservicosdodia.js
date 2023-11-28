@@ -17,9 +17,13 @@ async function getOrdendeservico(apenasdodia) {
     let ordendesservico = await response.json();
     return ordendesservico;
 }
-function createServiceElements() {
-    let servicesListContainer = document.getElementById("servicesList");
-
+function apenasdodia() {
+    let checkbox = document.getElementById('apenasdodia');
+    let apenasdodia = checkbox.checked;
+    let tabela = document.getElementById("tabeladados");
+    while (tabela.rows.length > 1) {
+        tabela.deleteRow(1);
+    }
     getOrdendeservico(apenasdodia).then(ordendesservico => ordendesservico.forEach(ordendeservico => {
         let tabela = document.getElementById("tabeladados");
         let linha = tabela.insertRow();
@@ -30,22 +34,62 @@ function createServiceElements() {
         let colunaendereco = linha.insertCell();
         let colunaData = linha.insertCell();
         let colunaacao = linha.insertCell();
+        let dataFormatada = new Date(ordendeservico.data).toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' });
         colunacodigo.innerHTML = ordendeservico.idos;
         colunacliente.innerHTML = ordendeservico.nomec + "  " + ordendeservico.sobrenomec;
         colunaServico.innerHTML = ordendeservico.descricao;
         colunafone.innerHTML = ordendeservico.telefone;
-        colunaendereco.innerHTML ="Rua "+ ordendeservico.rua+" "+ordendeservico.numero+" "+ordendeservico.bairo+" "+ordendeservico.cidade+" ";
-        colunaData.innerHTML = ordendeservico.data;
-        colunaacao.innerHTML = "  <button class='btn btn-danger'onclick='cancelar(this)'>Cancelar</button>"
-       
+        colunaendereco.innerHTML = "Rua " + ordendeservico.rua + " " + ordendeservico.numero + " " + ordendeservico.bairo + " " + ordendeservico.cidade + " ";
+        colunaData.innerHTML = dataFormatada;
+        colunaacao.innerHTML = "  <button class='btn btn-danger'onclick='cancelar(this)'>Cancelar</button>" + " " + "<button type='button' class='btn btn-success'onclick='finalizar(this)'>Finalizar servico </button>"+" "+ "<button type='button' class='btn btn-success'onclick='whats(this)'>whats</button>"
     }));
 }
-apenasdodia= false;
+function cancelar(element) {
+    let tdelement = element.parentNode;
+    let trelement = tdelement.parentNode;
+    let id = trelement.childNodes[0].innerHTML;
+    let tabela = trelement.parentNode;
+    let modalConfirma = new bootstrap.Modal(document.getElementById('modalconfirma'), {});
+    modalConfirma.show();
+    document.getElementById('btnConfirmarCancelamento').addEventListener('click', function () {
+        modalConfirma.hide();
+        deleteOrdendeservico(id).then(() => {
+            tabela.deleteRow(trelement.rowIndex);
+        });
+    })
+}
+function whats(element) {
+    let tdelement = element.parentNode;
+    let trelement = tdelement.parentNode;
+    let fone = trelement.childNodes[3].innerHTML;
+    let numeroFormatado = fone.replace(/\D/g, '');
+    window.open("https://wa.me/55"+numeroFormatado)
+
+}
+
+
+function finalizar(element) {
+    let tdelement = element.parentNode;
+    let trelement = tdelement.parentNode;
+    let id = trelement.childNodes[0].innerHTML;
+    const modalfinalizacao = new bootstrap.Modal(document.getElementById('modalfinalizacao'), {});
+    modalfinalizacao.show();
+    document.getElementById('btnConfirmarFinalizacao').addEventListener('click', function () {
+        let valorCobrado = document.getElementById('valorCobrado').value;
+        if (valorCobrado !== '') {
+            modalfinalizacao.hide();
+            putfinalizacao(id, valorCobrado).then(() => {
+                document.getElementById('valorCobrado').value = "";
+                apenasdodia()
+
+            });
+        }
+    });
+}
 function deslogar() {
     deletetoken().then(() => {
         sessionStorage.clear();
-        window.location.href="../login.html"
+        window.location.href = "../login.html"
     })
 }
-createServiceElements();
-
+apenasdodia() 

@@ -25,6 +25,7 @@ public class OrdendeservicoDTO {
     public String cidade;
     public String bairo;
     public int numero;
+    public String telefone;
 
 
     public OrdendeservicoDTO() {
@@ -49,12 +50,14 @@ public class OrdendeservicoDTO {
         this.idos=idos;
         this.nomec= contratante.nome;
         this.sobrenomec= contratante.sobrenome;
+        this.telefone=contratante.telefone;
         this.rua=contratante.enderecoEntity.rua;
         this.cidade=contratante.enderecoEntity.cidade;
         this.bairo=contratante.enderecoEntity.bairo;
         this.numero=contratante.enderecoEntity.numero;
         this.data=agenda.data;
         this.descricao=descricao;
+
     }
 
 
