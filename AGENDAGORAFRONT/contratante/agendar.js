@@ -67,10 +67,10 @@ document.getElementById('agendarservico').addEventListener('submit', function (e
         let data = document.getElementById('data').value;
         let dataInput = document.getElementById('data');
         let dataSelecionada = new Date(dataInput.value);
-        let dataAtual = new Date();
+        let dataAtual = new Date()
         let formasdepagamento = document.querySelector('#filtroPagamento');
         let formadepagamento = formasdepagamento.options[formasdepagamento.selectedIndex].value;
-
+        let  = new Date()
         if (dataSelecionada <= dataAtual) {
             const myModal = new bootstrap.Modal(document.getElementById('datapassada'), {});
             myModal.show();

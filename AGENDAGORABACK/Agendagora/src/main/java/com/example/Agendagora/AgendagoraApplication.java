@@ -10,4 +10,18 @@ public class AgendagoraApplication {
 		SpringApplication.run(AgendagoraApplication.class, args);
 	}
 
+
+//	List<AlgumacoisaDTO>
+//	[
+//		{
+//			"data": "01/01/2020",
+//			"qtdVagas": 2
+//		},
+//		{
+//			"data": "01/01/2020",
+//			"qtdVagas": 2
+//		}
+//	]
+
+
 }

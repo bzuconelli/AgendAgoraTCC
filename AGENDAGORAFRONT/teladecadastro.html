@@ -53,6 +53,10 @@
             width: 50px;
             align-items: left;
         }
+        .alert-warning{
+            text-align: center;
+        }
+    
     </style>
 </head>
 
@@ -150,7 +154,10 @@
                                     style="display: none;">Dinheiro</label>
                             </div>
                         </fieldset>
-                        <p id="permitir">É necessário preencher todos os campos com * vermelho e permitir a localização para continuar o cadastro. </p>
+                        <div class="alert alert-warning " role="alert" >
+                            É necessário preencher todos os campos com * vermelho e permitir a localização para continuar o cadastro. 
+                         </div>
+                        
                         
                         <div class="div-1">
                             <button type="submit" class="btn btn-custom btn-block" id="cadastrar">
