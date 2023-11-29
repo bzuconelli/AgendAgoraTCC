@@ -10,6 +10,7 @@ public class AgendaEntity {
 
     public String data;
     public PrestadorEntity prestadorEntity;
+    public int qtdVagas;
 
     public AgendaEntity(int idagenda, String data, PrestadorEntity prestadorEntity) {
         this.idagenda = idagenda;
