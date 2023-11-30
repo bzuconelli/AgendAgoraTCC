@@ -1,7 +1,10 @@
 package com.example.Agendagora.controller.agenda;
 
-import com.example.Agendagora.controller.ordendeservico.OrdendeservicoDTO;
+
+import com.example.Agendagora.model.agenda.AgendaDAO;
+import com.example.Agendagora.model.agenda.AgendaEntity;
 import com.example.Agendagora.model.usuario.UsuarioDAO;
+import com.example.Agendagora.model.usuario.UsuarioEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -9,23 +12,38 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @CrossOrigin("*")
 @RequestMapping("/agenda/")
 public class AgendaController {
+
     @Autowired
     public UsuarioDAO usuarioDAO;
+    @Autowired
+    public AgendaDAO agendaDAO;
     @Autowired
     public AgendaConverter agendaConverter;
     @PostMapping()
     public ResponseEntity<List<AgendaDTO>>adicionardiastrabalhados(@RequestHeader(HttpHeaders.AUTHORIZATION) String auth, @RequestBody List<AgendaDTO> dto) throws SQLException {
         int idusuario =usuarioDAO.existetoken(auth);
-        if (idusuario==0) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-        }
+        boolean tipousuario = false;
+         if (idusuario==0) {
+             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+         }
+         UsuarioEntity usuarioEntity= usuarioDAO.findbyid(idusuario,tipousuario);
+         List<AgendaEntity> agendaEntityList= agendaDAO.adicionardiastrabalhados(agendaConverter.toEntity2(dto),usuarioEntity.id);
+         return ResponseEntity.ok(agendaConverter.toDTO(agendaEntityList));
     }
-
+    @GetMapping()
+    public ResponseEntity<List<AgendaDTO>>pesquisar(){
+        List<AgendaDTO> agendaDTOS = new ArrayList<>();
+        AgendaDTO agendaDTO= new AgendaDTO();
+        agendaDTO.data="2023-11-29";
+        agendaDTO.quantidade=10;
+        agendaDTOS.add(agendaDTO);
+        return ResponseEntity.ok(agendaDTOS);    }
 
 }

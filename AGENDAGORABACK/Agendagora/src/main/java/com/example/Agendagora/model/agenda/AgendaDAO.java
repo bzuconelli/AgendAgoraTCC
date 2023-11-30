@@ -21,8 +21,6 @@ public class AgendaDAO {
                 for (int contador = 0; contador < qtdVagas; contador++) {
                     preparedStatement.setDate(1, java.sql.Date.valueOf(agendaEntity.data));
                     preparedStatement.setInt(2, idprestador);
-
-
                     preparedStatement.executeUpdate();
                 }
             }

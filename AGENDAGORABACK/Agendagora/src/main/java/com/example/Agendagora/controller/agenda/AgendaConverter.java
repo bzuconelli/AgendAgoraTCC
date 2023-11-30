@@ -1,21 +1,37 @@
 package com.example.Agendagora.controller.agenda;
-
-
-import com.example.Agendagora.controller.contratante.ContratanteDTO;
 import com.example.Agendagora.controller.ordendeservico.OrdendeservicoDTO;
+import com.example.Agendagora.controller.prestador.PrestadorDTO;
 import com.example.Agendagora.model.agenda.AgendaEntity;
-import com.example.Agendagora.model.contratante.ContratanteEntity;
-import com.example.Agendagora.model.endereco.EnderecoEntity;
 import com.example.Agendagora.model.prestador.PrestadorEntity;
-import com.example.Agendagora.model.usuario.UsuarioEntity;
 import org.springframework.stereotype.Component;
-
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+
 
 @Component
 
 public class AgendaConverter {
+    public List<AgendaDTO> toDTO(List<AgendaEntity> entities) {
+        List<AgendaDTO> agendaDTOS = new ArrayList<>();
+        for (AgendaEntity entity : entities) {
+            AgendaDTO dto = new AgendaDTO();
+            dto.data=entity.data;
+            dto.quantidade=entity.qtdVagas;
+            agendaDTOS.add(dto);
+        }
+        return agendaDTOS;
+    }
+    public List<AgendaEntity> toEntity2(List<AgendaDTO> dtos) {
+        List<AgendaEntity> agendaEntity = new ArrayList<>();
+        for (AgendaDTO dto : dtos) {
+            AgendaEntity agenda = new AgendaEntity();
+            agenda.data= dto.data;
+            agenda.qtdVagas=dto.quantidade;
+            agendaEntity.add(agenda);
+        }
+        return agendaEntity;
+    }
+
 
 
     public AgendaEntity toEntity(OrdendeservicoDTO dto, PrestadorEntity prestadorEntity) {
