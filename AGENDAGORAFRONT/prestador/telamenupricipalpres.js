@@ -1,38 +1,62 @@
-var year, month;
+if (sessionStorage.getItem("token") === null) {
+    window.location.href="../login.html"
 
+}
+async function getDiastrabalhados(mes, ano) {
+    let url = `http://localhost:8080/agenda/?mes=${mes}&ano=${ano}`
+    let response = await fetch(url, {
+        method: "GET",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': sessionStorage.getItem('token')
+        },
+    });
+
+    let diastrabalho = await response.json();
+
+    return diastrabalho;
+}
+var year, month;
 function escolherAnoMes() {
     [year, month] = document.getElementById('month').value.split('-');
     createCalendar(month, year);
 }
-
 function daysInMonth(month, year) {
     return new Date(year, month, 0).getDate();
 }
-
 function createCalendar(month, year) {
     let calendar = document.querySelector(".calendar");
     while (calendar.firstChild) {
         calendar.removeChild(calendar.firstChild);
     }
-    let daysInThisMonth = daysInMonth(month, year);
-    for (let day = 1; day <= daysInThisMonth; day++) {
-        let date = new Date(year, month - 1, day);
-        let formattedDate = `${(day < 10 ? '0' : '') + day}`;
-        let dayElement = document.createElement("div");
-        dayElement.classList.add("day");
-        dayElement.classList.add(`month-${month}`); // Adiciona uma classe única para o mês
-        dayElement.setAttribute("data-day", day);
-        dayElement.setAttribute("data-month", month);
-        dayElement.setAttribute("data-year", year);
-        dayElement.innerHTML = `
-            <div class="day h2">
-                <p><strong>${formattedDate}</strong></p> 
-                <input type="number" class="form-control day-text" min=0 value="0">
-            </div>`;
-        calendar.appendChild(dayElement);
-    }
-}
 
+    getDiastrabalhados(month, year).then(diastrabalho => {
+        let daysInThisMonth = daysInMonth(month, year);
+
+        for (let day = 1; day <= daysInThisMonth; day++) {
+            let date = new Date(year, month - 1, day);
+            let formattedDate = `${(day < 10 ? '0' : '') + day}`;
+
+
+            let dadosDia = diastrabalho.find(dados => dados.data === `${year}-${(month < 10 ? '0' : '') + month}-${formattedDate}`);
+            let valorVaga = dadosDia ? dadosDia.quantidade : 0;
+
+            let dayElement = document.createElement("div");
+            dayElement.classList.add("day");
+            dayElement.classList.add(`month-${month}`);
+            dayElement.setAttribute("data-day", day);
+            dayElement.setAttribute("data-month", month);
+            dayElement.setAttribute("data-year", year);
+            dayElement.innerHTML = `
+                <div class="day h2">
+                    <p><strong>${formattedDate}</strong></p> 
+                    <input type="number" class="form-control day-text" min="0" value="${valorVaga}">
+                </div>`;
+            calendar.appendChild(dayElement);
+        }
+    });
+}
 function obterAnoMesAtual() {
     let dataAtual = new Date();
     year = dataAtual.getFullYear();
@@ -42,9 +66,7 @@ function obterAnoMesAtual() {
     document.getElementById('month').value = valorInput;
     createCalendar(month, year);
 }
-
 obterAnoMesAtual();
-
 function coletarDados() {
     let dayElements = document.querySelectorAll(`.day.month-${month}`);
     let dadosSalvos = [];
@@ -55,18 +77,42 @@ function coletarDados() {
         let formattedDate = `${date.getFullYear()}-${(date.getMonth() + 1 < 10 ? '0' : '') + (date.getMonth() + 1)}-${(date.getDate() < 10 ? '0' : '') + date.getDate()}`;
         let dados = {
             "data": formattedDate,
-            "qtdVagas": inputValue
+            "quantidade": inputValue
         };
 
         dadosSalvos.push(dados);
     });
-
-    console.log(dadosSalvos);
+    postdias(dadosSalvos).then(() => {
+        let myModal = new bootstrap.Modal(document.getElementById('dias'), {});
+        myModal.show();
+    })
 }
-
 function deslogar() {
     deletetoken().then(() => {
         sessionStorage.clear();
         window.location.href = "../login.html";
     });
 }
+let path = window.location.pathname;
+
+
+function highlightActiveLink() {
+    document.querySelectorAll('.nav-link').forEach(function (link) {
+        link.classList.remove('ativo');
+    });   
+    if (path.includes("agedarservicocomoprestador.html")) {
+        document.getElementById('agendarLink').classList.add('ativo');
+    } else if (path.includes("prestadorservicos.html")) {
+        document.getElementById('meusServicosLink').classList.add('ativo');
+    } else if (path.includes("prestadorservicosdodia.html")) {
+        document.getElementById('servicosFazerLink').classList.add('ativo');
+    } else if (path.includes("telamenuinicialpres.html")) {
+        document.getElementById('calendarioVagasLink').classList.add('ativo');
+    }
+    else if (path.includes("prestadorconfig.html")) {
+        document.getElementById('configLink').classList.add('ativo');
+    }
+}
+
+
+window.onload = highlightActiveLink;

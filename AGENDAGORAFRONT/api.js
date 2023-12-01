@@ -262,6 +262,19 @@ async function putfinalizacao(idos,valor) {
     let avaliacao = await response.json();
     return avaliacao;
 }
+async function postdias(dadosSalvos) {
+    let response = await fetch("http://localhost:8080/agenda/", {
+        method: "POST",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': sessionStorage.getItem('token')
+        },
+        body: JSON.stringify(dadosSalvos)
+    });  
+    let diastrabalho = await response.json();
+    return diastrabalho
+}
 
 
 

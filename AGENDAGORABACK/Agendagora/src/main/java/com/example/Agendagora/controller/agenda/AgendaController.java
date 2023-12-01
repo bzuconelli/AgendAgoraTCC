@@ -36,19 +36,31 @@ public class AgendaController {
              return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
          }
          UsuarioEntity usuarioEntity= usuarioDAO.findbyid(idusuario,tipousuario);
-         List<AgendaEntity> agendaEntityList= agendaDAO.adicionardiastrabalhados(agendaConverter.toEntity2(dto),usuarioEntity.id);
+         List<AgendaEntity> agendaEntityList= agendaDAO.adicionardiastrabalhados(agendaConverter.toEntity2(dto),usuarioEntity.prestador.id);
          return ResponseEntity.ok(agendaConverter.toDTO(agendaEntityList));
     }
     @GetMapping()
-    public ResponseEntity<List<AgendaDTO>>pesquisar(@RequestHeader(HttpHeaders.AUTHORIZATION) String auth,@RequestParam (value = "mes",required = false)  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate mes) throws SQLException {
+    public ResponseEntity<List<AgendaDTO>>pesquisar(@RequestHeader(HttpHeaders.AUTHORIZATION) String auth,@RequestParam (value = "mes",required = false)  int mes,@RequestParam (value = "ano",required = false)  int ano) throws SQLException {
         int idusuario =usuarioDAO.existetoken(auth);
         boolean tipousuario = false;
         if (idusuario==0) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
         UsuarioEntity usuarioEntity= usuarioDAO.findbyid(idusuario,tipousuario);
-        List<AgendaEntity> agendaEntityList= agendaDAO.pesquisardiastrabalhados( mes,usuarioEntity.prestador.id);
+        List<AgendaEntity> agendaEntityList= agendaDAO.pesquisardiastrabalhados( mes,usuarioEntity.prestador.id,ano);
+        return ResponseEntity.ok(agendaConverter.toDTO(agendaEntityList));
+    }
+    @PutMapping()
+    public ResponseEntity<List<AgendaDTO>>editar(@RequestHeader(HttpHeaders.AUTHORIZATION) String auth, @RequestBody List<AgendaDTO>dtos,AgendaDTO dto) throws SQLException {
+        int idusuario =usuarioDAO.existetoken(auth);
+        boolean tipousuario = false;
+        if (idusuario==0) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+        UsuarioEntity usuarioEntity= usuarioDAO.findbyid(idusuario,tipousuario);
+        List<AgendaEntity> agendaEntityList= agendaDAO.editardiastrabalhados( agendaConverter.toEntity2(dtos),dto.mes,usuarioEntity.prestador.id,dto.ano);
 
-        return ResponseEntity.ok(agendaConverter.toDTO(agendaEntityList));    }
+        return ResponseEntity.ok(agendaConverter.toDTO(agendaEntityList));
+    }
 
 }

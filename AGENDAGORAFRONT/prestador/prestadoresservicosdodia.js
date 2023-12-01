@@ -1,3 +1,7 @@
+if (sessionStorage.getItem("token") === null) {
+    window.location.href="../login.html"
+
+}
 async function getOrdendeservico(apenasdodia) {
     let url = "http://localhost:8080/ordendeservico/servicos";
 

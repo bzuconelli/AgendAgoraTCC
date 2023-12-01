@@ -1,3 +1,7 @@
+if (sessionStorage.getItem("token") === null) {
+    window.location.href="../login.html"
+
+}
 async function getPrestador() {
     let response = await fetch("http://localhost:8080/prestador/prestador", {
         method: "GET",
