@@ -6,12 +6,14 @@ import com.example.Agendagora.model.agenda.AgendaEntity;
 import com.example.Agendagora.model.usuario.UsuarioDAO;
 import com.example.Agendagora.model.usuario.UsuarioEntity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,12 +40,15 @@ public class AgendaController {
          return ResponseEntity.ok(agendaConverter.toDTO(agendaEntityList));
     }
     @GetMapping()
-    public ResponseEntity<List<AgendaDTO>>pesquisar(){
-        List<AgendaDTO> agendaDTOS = new ArrayList<>();
-        AgendaDTO agendaDTO= new AgendaDTO();
-        agendaDTO.data="2023-11-29";
-        agendaDTO.quantidade=10;
-        agendaDTOS.add(agendaDTO);
-        return ResponseEntity.ok(agendaDTOS);    }
+    public ResponseEntity<List<AgendaDTO>>pesquisar(@RequestHeader(HttpHeaders.AUTHORIZATION) String auth,@RequestParam (value = "mes",required = false)  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate mes) throws SQLException {
+        int idusuario =usuarioDAO.existetoken(auth);
+        boolean tipousuario = false;
+        if (idusuario==0) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+        UsuarioEntity usuarioEntity= usuarioDAO.findbyid(idusuario,tipousuario);
+        List<AgendaEntity> agendaEntityList= agendaDAO.pesquisardiastrabalhados( mes,usuarioEntity.prestador.id);
+
+        return ResponseEntity.ok(agendaConverter.toDTO(agendaEntityList));    }
 
 }
