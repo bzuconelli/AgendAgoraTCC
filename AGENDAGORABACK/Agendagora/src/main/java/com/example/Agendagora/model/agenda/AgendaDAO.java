@@ -98,7 +98,7 @@ public class AgendaDAO {
                 }
             }
         }
-        return agendaatual;
+        return agenda;
     }
 }
 

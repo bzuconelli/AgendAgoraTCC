@@ -21,13 +21,7 @@ public class AgendaDTO {
     public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
     }
-    public int getAno() {
-        return Integer.parseInt(data.split("-")[0]);
-    }
 
-    public int getMes() {
-        return Integer.parseInt(data.split("-")[1]);
-    }
 
     public AgendaDTO() {
 

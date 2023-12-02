@@ -51,16 +51,16 @@ public class AgendaController {
         return ResponseEntity.ok(agendaConverter.toDTO(agendaEntityList));
     }
     @PutMapping()
-    public ResponseEntity<List<AgendaDTO>>editar(@RequestHeader(HttpHeaders.AUTHORIZATION) String auth, @RequestBody List<AgendaDTO>dtos,AgendaDTO dto) throws SQLException {
+    public ResponseEntity<List<AgendaDTO>>editar(@RequestHeader(HttpHeaders.AUTHORIZATION) String auth, @RequestBody List<AgendaDTO>dtos, @RequestParam (value = "mes",required = false)  int mes,@RequestParam (value = "ano",required = false)  int ano) throws SQLException {
         int idusuario =usuarioDAO.existetoken(auth);
         boolean tipousuario = false;
         if (idusuario==0) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
         UsuarioEntity usuarioEntity= usuarioDAO.findbyid(idusuario,tipousuario);
-        List<AgendaEntity> agendaEntityList= agendaDAO.editardiastrabalhados( agendaConverter.toEntity2(dtos),dto.mes,usuarioEntity.prestador.id,dto.ano);
-
+        List<AgendaEntity> agendaEntityList= agendaDAO.editardiastrabalhados( agendaConverter.toEntity2(dtos),mes,usuarioEntity.prestador.id,ano);
         return ResponseEntity.ok(agendaConverter.toDTO(agendaEntityList));
+
     }
 
 }
