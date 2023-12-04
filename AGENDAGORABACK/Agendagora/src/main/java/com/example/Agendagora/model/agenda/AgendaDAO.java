@@ -57,13 +57,13 @@ public class AgendaDAO {
         }
     }
 
-    public List<AgendaEntity> editardiastrabalhados( List<AgendaEntity> agenda,int mes, int idprestador, int ano) throws SQLException {
+    public List<AgendaEntity> editardiastrabalhados(List<AgendaEntity> agenda, int mes, int idprestador, int ano) throws SQLException {
         List<AgendaEntity> agendaatual = pesquisardiastrabalhados(mes, idprestador, ano);
-        final String sqlinsert = " insert into agenda (dataserv,prestador_idprestador) values (? , ?) ";
-        final String sqldelete = " DELETE FROM agenda " +
-                "WHERE idagenda IN ( " +
+        final String sqlinsert = "INSERT INTO agenda (dataserv, prestador_idprestador) VALUES (?, ?)";
+        final String sqldelete = "DELETE FROM agenda " +
+                "WHERE idagenda IN (" +
                 "    SELECT idagendaToDelete " +
-                "    FROM ( " +
+                "    FROM (" +
                 "        SELECT a.idagenda AS idagendaToDelete " +
                 "        FROM agenda a " +
                 "        LEFT JOIN ordendeservico o ON a.idagenda = o.agenda_idagenda " +
@@ -72,10 +72,13 @@ public class AgendaDAO {
                 "        AND o.agenda_idagenda IS NULL " +
                 "        LIMIT 1 " +
                 "    ) AS subquery " +
-                ") ";
-        for (AgendaEntity agendadobanco : agendaatual) {
-            for (AgendaEntity agendaeditada : agenda) {
+                ")";
+
+        for (AgendaEntity agendaeditada : agenda) {
+            boolean dataEncontrada = false;
+            for (AgendaEntity agendadobanco : agendaatual) {
                 if (agendaeditada.data.equals(agendadobanco.data)) {
+                    dataEncontrada = true;
                     if (agendaeditada.qtdVagas > agendadobanco.qtdVagas) {
                         int vagas = agendaeditada.qtdVagas - agendadobanco.qtdVagas;
                         try (final PreparedStatement preparedStatement = connectionSingleton.getConnection().prepareStatement(sqlinsert)) {
@@ -86,7 +89,7 @@ public class AgendaDAO {
                             }
                         }
                     } else if (agendaeditada.qtdVagas < agendadobanco.qtdVagas) {
-                        int vagas = agendadobanco.qtdVagas-agendaeditada.qtdVagas  ;
+                        int vagas = agendadobanco.qtdVagas - agendaeditada.qtdVagas;
                         try (final PreparedStatement preparedStatement = connectionSingleton.getConnection().prepareStatement(sqldelete)) {
                             for (int contador = 0; contador < vagas; contador++) {
                                 preparedStatement.setDate(1, Date.valueOf(agendaeditada.data));
@@ -97,10 +100,20 @@ public class AgendaDAO {
                     }
                 }
             }
+            if (!dataEncontrada) {
+                try (final PreparedStatement preparedStatement = connectionSingleton.getConnection().prepareStatement(sqlinsert)) {
+                    for (int contador = 0; contador < agendaeditada.qtdVagas; contador++) {
+                        preparedStatement.setDate(1, java.sql.Date.valueOf(agendaeditada.data));
+                        preparedStatement.setInt(2, idprestador);
+                        preparedStatement.executeUpdate();
+                    }
+                }
+            }
         }
         return agenda;
     }
 }
+
 
 
 

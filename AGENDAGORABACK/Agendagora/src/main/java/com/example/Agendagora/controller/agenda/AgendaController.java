@@ -50,8 +50,8 @@ public class AgendaController {
         List<AgendaEntity> agendaEntityList= agendaDAO.pesquisardiastrabalhados( mes,usuarioEntity.prestador.id,ano);
         return ResponseEntity.ok(agendaConverter.toDTO(agendaEntityList));
     }
-    @PutMapping()
-    public ResponseEntity<List<AgendaDTO>>editar(@RequestHeader(HttpHeaders.AUTHORIZATION) String auth, @RequestBody List<AgendaDTO>dtos, @RequestParam (value = "mes",required = false)  int mes,@RequestParam (value = "ano",required = false)  int ano) throws SQLException {
+    @PutMapping("{mes}/{ano}")
+    public ResponseEntity<List<AgendaDTO>>editar(@RequestHeader(HttpHeaders.AUTHORIZATION) String auth, @RequestBody List<AgendaDTO>dtos, @PathVariable int mes,@PathVariable int ano) throws SQLException {
         int idusuario =usuarioDAO.existetoken(auth);
         boolean tipousuario = false;
         if (idusuario==0) {

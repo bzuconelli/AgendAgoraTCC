@@ -1,5 +1,5 @@
 if (sessionStorage.getItem("token") === null) {
-    window.location.href="../login.html"
+    window.location.href = "../login.html"
 
 }
 async function getContratante() {
@@ -20,38 +20,27 @@ async function getContratante() {
 var map;
 
 function initMap(latitudecontratente, longitudecontratente, prestadores) {
-    if (latitudecontratente != "" || longitudecontratente != "") {
-
-
-        var mapOptions = {
-            center: { lat: parseFloat(latitudecontratente), lng: parseFloat(longitudecontratente) },
-            zoom: 13,
-        };
-
-        map = new google.maps.Map(document.getElementById('map'), mapOptions);
-
-        if (prestadores && prestadores.length > 0) {
-            prestadores.forEach(prestador => {
-                const marker = new google.maps.Marker({
-                    position: { lat: parseFloat(prestador.lat), lng: parseFloat(prestador.lng) },
-                    title: prestador.nome,
-                    map: map
-                });
-
-                let infoWindow = new google.maps.InfoWindow({
-                    content: '<div id="teste">' + prestador.id + '<h2>' + prestador.nome + '</h2>' + '<h2>' + prestador.sobrenome + '</h2>' + '<h2>' + prestador.nota + '</h2>' + ' <button type="button"  data-bs-dismiss="modal" aria-label="Close" onclick="selecionar(this)">Selecionar Prestador</button></div>'
-                });
-                marker.setMap(map);
-
-                marker.addListener('click', () => {
-                    infoWindow.open(map, marker);
-                });
-
-
+    var mapOptions = {
+        center: { lat: parseFloat(latitudecontratente), lng: parseFloat(longitudecontratente) },
+        zoom: 13,
+    };
+    map = new google.maps.Map(document.getElementById('map'), mapOptions);
+    if (prestadores && prestadores.length > 0) {
+        prestadores.forEach(prestador => {
+            const marker = new google.maps.Marker({
+                position: { lat: parseFloat(prestador.lat), lng: parseFloat(prestador.lng) },
+                title: prestador.nome,
+                map: map
             });
-        }
+            let infoWindow = new google.maps.InfoWindow({
+                content: '<div id="teste">' + prestador.id + '<h2>' + prestador.nome + '</h2>' + '<h2>' + prestador.sobrenome + '</h2>' + '<h2>' + prestador.nota + '</h2>' + ' <button type="button"  data-bs-dismiss="modal" aria-label="Close" onclick="selecionar(this)">Selecionar Prestador</button></div>'
+            });
+            marker.setMap(map);
+            marker.addListener('click', () => {
+                infoWindow.open(map, marker);
+            });
+        });
     }
-
 
 }
 var idcontratante;
@@ -65,18 +54,21 @@ document.getElementById('agendarservico').addEventListener('submit', function (e
         let longitudecontratente = contratante.lng;
         let distancia = document.getElementById('filtroDistancia').value;
         let data = document.getElementById('data').value;
-        let dataInput = document.getElementById('data');
-        let dataSelecionada = new Date(dataInput.value);
-        let dataAtual = new Date()
+        let dataAtual = new Date();
+        let ano = dataAtual.getFullYear();
+        let mes = (dataAtual.getMonth() + 1).toString().padStart(2, '0'); // Adiciona zero à esquerda, se necessário
+        let dia = dataAtual.getDate().toString().padStart(2, '0'); // Adiciona zero à esquerda, se necessário
+        let dataFormatada = `${ano}-${mes}-${dia}`;
+
+      
         let formasdepagamento = document.querySelector('#filtroPagamento');
         let formadepagamento = formasdepagamento.options[formasdepagamento.selectedIndex].value;
-        let  = new Date()
-        if (dataSelecionada <= dataAtual) {
+        if (data <= dataFormatada) {
             const myModal = new bootstrap.Modal(document.getElementById('datapassada'), {});
             myModal.show();
 
             return;
-        }     
+        }
         getPretadores(data, formadepagamento, tipoServico, distancia, latitudecontratente, longitudecontratente).then(prestadores => {
             if (prestadores == null) {
                 const myModal = new bootstrap.Modal(document.getElementById('modalnadaencontrado'), {});
@@ -150,6 +142,20 @@ function selecionar(element) {
 function deslogar() {
     deletetoken().then(() => {
         sessionStorage.clear();
-        window.location.href="../login.html"
+        window.location.href = "../login.html"
     })
 }
+let path = window.location.pathname;
+function highlightActiveLink() {
+    document.querySelectorAll('.nav-link').forEach(function (link) {
+        link.classList.remove('ativo');
+    });
+    if (path.includes("agendarservico.html")) {
+        document.getElementById('agendarLink').classList.add('ativo');
+    } else if (path.includes("contratanteservicos.html")) {
+        document.getElementById('meusServicosLink').classList.add('ativo');
+    } else if (path.includes("contratanteconfig.html")) {
+        document.getElementById('configLink').classList.add('ativo');
+    }
+}
+window.onload = highlightActiveLink;

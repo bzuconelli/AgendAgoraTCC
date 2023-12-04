@@ -11,17 +11,4 @@ public class AgendagoraApplication {
 	}
 
 
-//	List<AlgumacoisaDTO>
-//	[
-//		{
-//			"data": "01/01/2020",
-//			"qtdVagas": 2
-//		},
-//		{
-//			"data": "01/01/2020",
-//			"qtdVagas": 2
-//		}
-//	]
-
-
 }

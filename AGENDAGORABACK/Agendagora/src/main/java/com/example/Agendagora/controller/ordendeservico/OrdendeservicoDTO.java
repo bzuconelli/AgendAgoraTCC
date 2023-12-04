@@ -45,6 +45,7 @@ public class OrdendeservicoDTO {
         this.sobrenomeo = agenda.prestadorEntity.sobrenome;
         this.data = agenda.data;
         this.formapagamento = formapagamento;
+        this.telefone=agenda.prestadorEntity.telefone;
     }
     public OrdendeservicoDTO(int idos,ContratanteEntity contratante,AgendaEntity agenda, String descricao){
         this.idos=idos;

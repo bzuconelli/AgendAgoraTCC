@@ -85,6 +85,10 @@
             width: 75px;
             align-items: left;
         }
+        .navbar-dark .navbar-nav .nav-link.ativo {
+            color: #ed27ff;
+            /* Cor desejada para o link ativo */
+        }
     </style>
 </head>
 
@@ -99,25 +103,26 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">                    
                     <li class="nav-item">
-                        <a class="nav-link" href="agedarservicocomoprestador.html">Agendar Serviço</a>
-                    </li>
-                    <h2 style="color: #fff;">|</h2>
-                   
-                    <li class="nav-item">
-                        <a class="nav-link" href="prestadorservicos.html">Meus Serviços Contratados</a>
+                        <a id="agendarLink" class="nav-link" href="agedarservicocomoprestador.html">Agendar Serviço</a>
                     </li>
                     <h2 style="color: #fff;">|</h2>
                     <li class="nav-item">
-                        <a class="nav-link" href="prestadorservicosdodia.html">Meus serviços a fazer</a>
+                        <a  id="meusServicosLink" class="nav-link" href="prestadorservicos.html">Meus Serviços Contratados</a>
                     </li>
                     <h2 style="color: #fff;">|</h2>
                     <li class="nav-item">
-                        <a class="nav-link" href="telamenuinicialpres.html">Calendário de vagas</a>
+                        <a  id="servicosFazerLink" class="nav-link" href="prestadorservicosdodia.html">Meus serviços a fazer</a>
+                    </li>
+                    <h2 style="color: #fff;">|</h2>
+                    <li class="nav-item">
+                        <a id="calendarioVagasLink" class="nav-link" href="telamenuinicialpres.html">Calendário de vagas</a>
                     </li>
                 </ul>
-            </div>                        
-            <a class="account-settings" href="prestadorconfig.html" ><img src="../Bazaart_20231122_091830_231.png" class="imagem007" ></a>
-            <a class="account-settings"  onclick="deslogar()" ><img src="../Bazaart_20231122_092328_048.png" class="imagem007" ></a> 
+            </div>
+            <a id= "configLink"class="account-settings" href="prestadorconfig.html"><img src="../Bazaart_20231122_091830_231.png"
+                    class="imagem007"></a>
+            <a class="account-settings" onclick="deslogar()"><img src="../Bazaart_20231122_092328_048.png"
+                    class="imagem007"></a>
             </li>
         </div>
     </nav>
@@ -142,7 +147,7 @@
                                 required>
                         </div>
                         <div class="mb-3">
-                            <label for="filtroDistancia" class="form-label text-white required">Agendar por distância
+                            <label for="filtroDistancia" class="form-label text-white required">Distância máxima do prestador
                                 (km)</label>
                             <input type="number" class="form-control" id="filtroDistancia"
                                 placeholder="Distância máxima" required min="0">
@@ -168,10 +173,10 @@
                         </div>
                     </form>
                     <div class="mb-3">
-                        <label for="nomep" class="form-label text-white" id="labelnome" style="display: none;">Nome
+                        <label for="nomep" class="form-label text-white" id="labelnome" style="display: none;" >Nome
                             Perstador</label>
                         <input type="text" class="form-control" id="nomep" placeholder="Nome Perstador"
-                            style="display: none;">
+                            style="display: none;" readonly>
                     </div>
 
                     <div class="div-1">
@@ -186,7 +191,7 @@
             <div div class="modal-dialog modal-xl">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Informações</h5>
+                        <h5 class="modal-title">Escolha um prestador</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body" id="map" style="height:800px"></div>

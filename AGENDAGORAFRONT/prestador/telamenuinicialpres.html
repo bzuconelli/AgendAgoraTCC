@@ -193,6 +193,9 @@
                         <button id ="salvar" class="btn btn-custom btn-sm" onclick="coletarDados()">Salvar</button>
 
                     </div>
+                    <div class="div-1">
+                        <button id ="editar" class="btn btn-custom btn-sm" onclick="coletarDadoseditado()" style="display: none">Editar</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -205,7 +208,21 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p>Os dias foram registrados com sucesso </p>
+                    <p>As vagas foram registradas com sucesso </p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="modal" tabindex="-1" id="diaseditado">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Informações</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>As vagas foram editadas com sucesso</p>
                 </div>
 
             </div>

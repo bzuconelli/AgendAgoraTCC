@@ -80,14 +80,17 @@
             color: #fff;
             margin-right: 30px
         }
+        .required:after {
+            content: " *";
+            color: red;
+        }
 
         .imagem008 {
             width: 75px;
             align-items: left;
         }
-
         .navbar-dark .navbar-nav .nav-link.ativo {
-            color: #d29f06;
+            color: #ed27ff;
             /* Cor desejada para o link ativo */
         }
     </style>
@@ -108,22 +111,19 @@
                     </li>
                     <h2 style="color: #fff;">|</h2>
                     <li class="nav-item">
-                        <a id="meusServicosLink" class="nav-link" href="prestadorservicos.html">Meus Serviços
-                            Contratados</a>
+                        <a  id="meusServicosLink" class="nav-link" href="prestadorservicos.html">Meus Serviços Contratados</a>
                     </li>
                     <h2 style="color: #fff;">|</h2>
                     <li class="nav-item">
-                        <a id="servicosFazerLink" class="nav-link" href="prestadorservicosdodia.html">Meus serviços a
-                            fazer</a>
+                        <a  id="servicosFazerLink" class="nav-link" href="prestadorservicosdodia.html">Meus serviços a fazer</a>
                     </li>
                     <h2 style="color: #fff;">|</h2>
                     <li class="nav-item">
-                        <a id="calendarioVagasLink" class="nav-link" href="telamenuinicialpres.html">Calendário de
-                            vagas</a>
+                        <a id="calendarioVagasLink" class="nav-link" href="telamenuinicialpres.html">Calendário de vagas</a>
                     </li>
                 </ul>
             </div>
-            <a class="account-settings" href="prestadorconfig.html"><img src="../Bazaart_20231122_091830_231.png"
+            <a id= "configLink"class="account-settings" href="prestadorconfig.html"><img src="../Bazaart_20231122_091830_231.png"
                     class="imagem007"></a>
             <a class="account-settings" onclick="deslogar()"><img src="../Bazaart_20231122_092328_048.png"
                     class="imagem007"></a>
@@ -137,24 +137,24 @@
                     <h2 class="text-center">Configurações de Conta</h2>
                     <form id="editarconfigpresta">
                         <div class="mb-3">
-                            <label for="nome" class="form-label">Nome</label>
+                            <label for="nome" class="form-label required">Nome</label>
                             <input type="text" class="form-control" id="nome" placeholder="Seu Nome" required>
                         </div>
                         <div class="mb-3">
-                            <label for="nome" class="form-label">Sobrenome</label>
+                            <label for="nome" class="form-label required">Sobrenome</label>
                             <input type="text" class="form-control" id="sobrenome" placeholder="Seu Sobrenome" required>
                         </div>
                         <div class="mb-3">
-                            <label for="email" class="form-label">E-mail</label>
+                            <label for="email" class="form-label required">E-mail</label>
                             <input type="email" class="form-control" id="email" placeholder="seuemail@example.com"
                                 required>
                         </div>
                         <div class="mb-3">
-                            <label for="senha" class="form-label">Senha</label>
+                            <label for="senha" class="form-label required">Senha</label>
                             <input type="password" class="form-control" id="senha" placeholder="Sua Senha" required>
                         </div>
                         <div class="mb-3 form-check">
-                            <input type="checkbox" class="form-check-input" id="versenha" onclick="visualizar()">
+                            <input type="checkbox" class="form-check-input required" id="versenha" onclick="visualizar()">
                             <label class="form-check-label text-white" for="versenha">Ver Senha</label>
                         </div>
                         <div class="mb-3">
@@ -176,10 +176,10 @@
                         </div>
                         <div class="mb-3">
                             <label for="numero" class="form-label text-white required">Número</label>
-                            <input type="numero" class="form-control" id="numero" placeholder="Seu Numero" required>
+                            <input type="numero" class="form-control" id="numero" placeholder="Seu Numero" onkeyup="num(event)" required>
                         </div>
                         <div class="mb-3">
-                            <label for="servico" class="text-white" id="teste">Tipo de
+                            <label for="servico" class="text-white required" id="teste">Tipo de
                                 Serviço:</label>
                             <select class="form-control" id="servico" required>
                                 <option value="">Que tipo de serviço você presta</option>
@@ -188,7 +188,7 @@
                                 <option value="3">Pintor</option>
                             </select>
                         </div>
-                        <label class="text-white" id="pag">Quais formas de pagamento você aceita ?</label>
+                        <label class="text-white required" id="pag">Quais formas de pagamento você aceita?</label>
                         <fieldset name="formapag">
                             <div class="mb-3 form-check">
 
@@ -213,8 +213,9 @@
                         </div>
                     </form>
                     <br>
-                    <p id="permitir">É necessário preencher todos os campos com * vermelho e permitir a localização para
-                        continuar a edição. </p>
+                    <div class="alert alert-warning " role="alert" >
+                        É necessário preencher todos os campos com * vermelho e permitir a localização para atualizar o cadastro. 
+                     </div>
                 </div>
             </div>
         </div>

@@ -98,4 +98,23 @@ function deslogar() {
         window.location.href="../login.html"
     })
 }
+let num=(event) =>{
+    let input = event.target
+    input.value = input.value.replace(/\D/g, '');
+  
+  }
+let path = window.location.pathname;
+function highlightActiveLink() {
+    document.querySelectorAll('.nav-link').forEach(function (link) {
+        link.classList.remove('ativo');
+    });
+    if (path.includes("agendarservico.html")) {
+        document.getElementById('agendarLink').classList.add('ativo');
+    } else if (path.includes("contratanteservicos.html")) {
+        document.getElementById('meusServicosLink').classList.add('ativo');
+    } else if (path.includes("contratanteconfig.html")) {
+        document.getElementById('configLink').classList.add('ativo');
+    }
+}
+window.onload = highlightActiveLink;
 

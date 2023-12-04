@@ -38,7 +38,8 @@ function apenasdodia() {
         let colunaendereco = linha.insertCell();
         let colunaData = linha.insertCell();
         let colunaacao = linha.insertCell();
-        let dataFormatada = new Date(ordendeservico.data).toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' });
+        let partesDaData = ordendeservico.data.split('-');
+        let dataFormatada = new Date(partesDaData[0], partesDaData[1] - 1, partesDaData[2]).toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' });
         colunacodigo.innerHTML = ordendeservico.idos;
         colunacliente.innerHTML = ordendeservico.nomec + "  " + ordendeservico.sobrenomec;
         colunaServico.innerHTML = ordendeservico.descricao;
@@ -46,7 +47,7 @@ function apenasdodia() {
         colunaendereco.innerHTML = "Rua " + ordendeservico.rua + " " + ordendeservico.numero + " " + ordendeservico.bairo + " " + ordendeservico.cidade + " ";
         colunaData.innerHTML = dataFormatada;
         colunaacao.innerHTML = "  <button class='btn btn-danger' onclick='cancelar(this)'>Cancelar</button>" + " "
-         + "<button type='button' class='btn btn-success'onclick='finalizar(this)'>Finalizar</button>"+" "
+         + "<button type='button' class='btn btn-success'onclick='finalizar(this)'>Finalizar</button>"+""
          + " <img src='../3721678-whatsapp_108065.png' style='width: 40px; height: 40px;' onclick='whats(this)'></button>"
          
     }));
@@ -99,4 +100,23 @@ function deslogar() {
         window.location.href = "../login.html"
     })
 }
+let path = window.location.pathname;
+function highlightActiveLink() {
+    document.querySelectorAll('.nav-link').forEach(function (link) {
+        link.classList.remove('ativo');
+    });
+    if (path.includes("agedarservicocomoprestador.html")) {
+        document.getElementById('agendarLink').classList.add('ativo');
+    } else if (path.includes("prestadorservicos.html")) {
+        document.getElementById('meusServicosLink').classList.add('ativo');
+    } else if (path.includes("prestadorservicosdodia.html")) {
+        document.getElementById('servicosFazerLink').classList.add('ativo');
+    } else if (path.includes("telamenuinicialpres.html")) {
+        document.getElementById('calendarioVagasLink').classList.add('ativo');
+    }
+    else if (path.includes("prestadorconfig.html")) {
+        document.getElementById('configLink').classList.add('ativo');
+    }
+}
+window.onload = highlightActiveLink;
 apenasdodia() 

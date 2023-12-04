@@ -55,13 +55,15 @@ document.getElementById('agendarservico').addEventListener('submit', function (e
         let longitudecontratente = prestador.lng;
         let distancia = document.getElementById('filtroDistancia').value;
         let data = document.getElementById('data').value;
-        let dataInput = document.getElementById('data');
-        let dataSelecionada = new Date(dataInput.value);
         let dataAtual = new Date();
+        let ano = dataAtual.getFullYear();
+        let mes = (dataAtual.getMonth() + 1).toString().padStart(2, '0'); // Adiciona zero à esquerda, se necessário
+        let dia = dataAtual.getDate().toString().padStart(2, '0'); // Adiciona zero à esquerda, se necessário
+        let dataFormatada = `${ano}-${mes}-${dia}`;
         let formasdepagamento = document.querySelector('#filtroPagamento');
         let formadepagamento = formasdepagamento.options[formasdepagamento.selectedIndex].value;
 
-        if (dataSelecionada <= dataAtual) {
+        if (data <= dataFormatada) {
             const myModal = new bootstrap.Modal(document.getElementById('datapassada'), {});
             myModal.show();
 
@@ -141,3 +143,22 @@ function deslogar() {
         window.location.href = "../login.html"
     })
 }
+let path = window.location.pathname;
+function highlightActiveLink() {
+    document.querySelectorAll('.nav-link').forEach(function (link) {
+        link.classList.remove('ativo');
+    });
+    if (path.includes("agedarservicocomoprestador.html")) {
+        document.getElementById('agendarLink').classList.add('ativo');
+    } else if (path.includes("prestadorservicos.html")) {
+        document.getElementById('meusServicosLink').classList.add('ativo');
+    } else if (path.includes("prestadorservicosdodia.html")) {
+        document.getElementById('servicosFazerLink').classList.add('ativo');
+    } else if (path.includes("telamenuinicialpres.html")) {
+        document.getElementById('calendarioVagasLink').classList.add('ativo');
+    }
+    else if (path.includes("prestadorconfig.html")) {
+        document.getElementById('configLink').classList.add('ativo');
+    }
+}
+window.onload = highlightActiveLink;

@@ -47,7 +47,7 @@ public class OrdendeservicoDAO {
         }
     }
     public List<OrdendeservicoEntity> findbyidcotratante(int id, boolean apenasconcluido,boolean tipousuario) throws SQLException {
-        String sql = "select os.idordendeservico, p.nomeprestador,p.sobrenomeprestador," +
+        String sql = "select os.idordendeservico, p.nomeprestador,p.sobrenomeprestador, p.telefone,  " +
                 " os.descservico,os.statusordem,a.dataserv,os.formapagamento,os.avaliacao " +
                 " from ordendeservico os " +
                 " inner join agenda a on os.agenda_idagenda= a.idagenda " +
@@ -57,11 +57,10 @@ public class OrdendeservicoDAO {
         }else {
             sql+=" where os.prestador_idprestador = ? ";
         }
-        if (apenasconcluido) {
-            sql += "and os.statusordem ='concluido' ";
-        }else {
-            sql+="and os.statusordem ='aberto' ";
+        if (!apenasconcluido) {
+            sql += " and os.statusordem ='aberto'  ";
         }
+        sql += "ORDER BY a.dataserv";
         try (final PreparedStatement preparedStatement = connectionSingleton.getConnection().prepareStatement(sql)) {
             preparedStatement.setInt(1, id);
             try (final ResultSet rs = preparedStatement.executeQuery()) {
@@ -73,11 +72,12 @@ public class OrdendeservicoDAO {
                     entity.agenda.prestadorEntity = new PrestadorEntity();
                     entity.agenda.prestadorEntity.nome = rs.getString(2);
                     entity.agenda.prestadorEntity.sobrenome = rs.getString(3);
-                    entity.descricao = rs.getString(4);
-                    entity.status = rs.getString(5);
-                    entity.agenda.data = rs.getString(6);
-                    entity.formapagamento = rs.getString(7);
-                    entity.nota = rs.getInt(8);
+                    entity.agenda.prestadorEntity.telefone = rs.getString(4);
+                    entity.descricao = rs.getString(5);
+                    entity.status = rs.getString(6);
+                    entity.agenda.data = rs.getString(7);
+                    entity.formapagamento = rs.getString(8);
+                    entity.nota = rs.getInt(9);
                     resultado.add(entity);
                 }
                 return resultado;
@@ -178,9 +178,10 @@ public class OrdendeservicoDAO {
                 "WHERE " +
                 " agenda.prestador_idprestador = ? " +
                 " AND ordendeservico.statusordem = 'aberto ' ";
-                if (apenasdodia){
+                if (!apenasdodia){
                     sql+=" AND agenda.dataserv = CURRENT_DATE()";
                 }
+                sql += "ORDER BY agenda.dataserv ";
         try (final PreparedStatement preparedStatement = connectionSingleton.getConnection().prepareStatement(sql)) {
             preparedStatement.setInt(1,id);
             try (final ResultSet rs = preparedStatement.executeQuery()) {

@@ -115,7 +115,7 @@ async function putcontratante(id, nome, sobrenome, telefone, cidade, rua, bairro
     let contratante = await response.json();
     return contratante;
 }
-async function putprestador(id, nome, sobrenome, telefone, cidade, rua, bairro, numero, email, senha, latitude, longitude, idendereco,recebecartao, recebedinheiro, recebepix, servico) {
+async function putprestador(id, nome, sobrenome, telefone, cidade, rua, bairro, numero, email, senha, latitude, longitude, idendereco, recebecartao, recebedinheiro, recebepix, servico) {
     let response = await fetch("http://localhost:8080/prestador/" + id, {
         method: "PUT",
         headers: {
@@ -245,7 +245,7 @@ async function deletetoken() {
         },
     })
 }
-async function putfinalizacao(idos,valor) {
+async function putfinalizacao(idos, valor) {
     let response = await fetch("http://localhost:8080/ordendeservico/" + idos, {
         method: "PUT",
         headers: {
@@ -256,7 +256,7 @@ async function putfinalizacao(idos,valor) {
 
         body: JSON.stringify({
             valor: valor
-            
+
         })
     });
     let avaliacao = await response.json();
@@ -271,10 +271,24 @@ async function postdias(dadosSalvos) {
             'Authorization': sessionStorage.getItem('token')
         },
         body: JSON.stringify(dadosSalvos)
-    });  
+    });
     let diastrabalho = await response.json();
     return diastrabalho
 }
+async function editardias(dadosSalvos, mes, ano) {
+    let response = await fetch("http://localhost:8080/agenda/" + mes + "/" + ano, {
+        method: "PUT",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': sessionStorage.getItem('token')
+        },
+        body: JSON.stringify(dadosSalvos)
+    })
+    let avaliacao = await response.json();
+    return avaliacao;
+};
+
 
 
 
