@@ -72,7 +72,6 @@ function whats(element) {
     let fone = trelement.childNodes[3].innerHTML;
     let numeroFormatado = fone.replace(/\D/g, '');
     window.open("https://wa.me/55"+numeroFormatado)
-
 }
 
 

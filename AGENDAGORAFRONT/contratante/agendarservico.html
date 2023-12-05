@@ -86,7 +86,7 @@
             align-items: left;
         }
         .navbar-dark .navbar-nav .nav-link.ativo {
-            color: #ed27ff;
+            color: #726f6f;
             /* Cor desejada para o link ativo */
         }
     </style>
@@ -103,11 +103,11 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">                    
                     <li class="nav-item">
-                        <a  id="agendarLink" class="nav-link" href="agendarservico.html">Agendar Serviço</a>
+                        <a  id="agendarLink" class="nav-link" href="agendarservico.html">Agendar serviço</a>
                     </li>
                     <h2 style="color: #fff;">|</h2>
                     <li class="nav-item">
-                        <a id="meusServicosLink" class="nav-link" href="contratanteservicos.html">Meus Serviços Contratados</a>
+                        <a id="meusServicosLink" class="nav-link" href="contratanteservicos.html">Meus serviços contratados</a>
                     </li>
                 </ul>
             </div>                        
@@ -123,9 +123,9 @@
                     <h2 class="text-center">Agendar serviço</h2>
                     <form id="agendarservico">
                         <div class="mb-3">
-                            <label for="tiposervico" class="form-label text-white required">Escolha o tipo de serviço</label>
+                            <label for="tiposervico" class="form-label text-white required">Profissional</label>
                             <select class="form-select required" id="tiposervico" required>
-                                <option value="" select> Escolha o tipo de serviço</option>
+                                <option value="" select> Profissional</option>
                                 <option value="1">Eletricista</option>
                                 <option value="2">Encanador</option>
                                 <option value="3">Pintor</option>
@@ -143,14 +143,13 @@
                                 placeholder="Distância máxima" required min="0">
                         </div>
                         <div class="mb-3">
-                            <label for="data" class="form-label text-white required"> Escolha a data</label>
+                            <label for="data" class="form-label text-white required"> Data</label>
                             <input type="date" class="form-control " id="data" placeholder="Escolha a data" required>
                         </div>
                         <div class="mb-3">
-                            <label for="filtroPagamento" class="form-label text-white required">Escolha uma forma de
-                                Pagamento</label>
+                            <label for="filtroPagamento" class="form-label text-white required">Forma de pagamento</label>
                             <select class="form-select required" id="filtroPagamento" required>
-                                <option value="" select> Escolha uma forma de Pagamento</option>
+                                <option value="" select> Forma de Pagamento</option>
                                 <option value="pix">Pix</option>
                                 <option value="cartão">Cartão</option>
                                 <option value="dinheiro">Dinheiro</option>
@@ -197,7 +196,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <p>Nenhum prestador encontado de acordo com os filtros </p>
+                        <p>Nenhum prestador encontrado de acordo com os filtros </p>
                     </div>
 
                 </div>

@@ -21,7 +21,7 @@
         }
 
         .registration-container h2 {
-            color: #d29f06;
+            color: #fff;
         }
 
         .btn-custom {
@@ -47,8 +47,6 @@
         #permitir {
             text-align: center;
             color: #fff;
-
-
         }
 
         .imagem007 {
@@ -59,6 +57,21 @@
         .alert-warning {
             text-align: center;
         }
+        .alinhamento {
+            display: flex;  
+            align-items: center;
+            text-align: center;                   
+
+
+        }
+        .alinhamento img{
+            margin-right: 170px;
+            
+        }
+        
+      
+
+        
     </style>
 </head>
 
@@ -67,8 +80,12 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6">
-                <div class="registration-container">
-                    <h2 class="text-center">Cadastro</h2>
+                <div class="registration-container"> <a href="login.html">
+                    <div class="alinhamento"><img src="Bazaart_20231122_092907_642.png" class="imagem007">                   
+                </a>                                  
+                     <h2 class="text-center" >Cadastro</h2> 
+                    </div>
+                     
                     <form id="cadastro">
                         <div class="mb-3">
                             <label for="nome" class="form-label text-white required ">Nome</label>
@@ -83,7 +100,7 @@
                             <input type="email" class="form-control" id="email" placeholder="Seu email" required>
                         </div>
                         <div class="mb-3">
-                            <label for="senha" class="form-label text-white required">Senha</label>
+                            <label for="senha" class="form-label text-white ">Senha</label>
                             <input type="password" class="form-control" id="senha" placeholder="Sua senha" required>
                         </div>
                         <div class="mb-3 form-check">
@@ -103,17 +120,17 @@
                         <div class="mb-3">
                             <label for="rua" class="form-label text-white required">Rua</label>
                             <input type="rua" class="form-control" id="rua" placeholder="Sua Rua" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="bairro" class="form-label text-white required">Bairro</label>
-                            <input type="bairro" class="form-control" id="bairro" placeholder="Seu bairro" required>
-                        </div>
+                        </div>                       
                         <div class="mb-3">
                             <label for="numero" class="form-label text-white required">Número</label>
                             <input type="numero" class="form-control" id="numero" placeholder="Seu Numero"
                                 onkeyup="num(event)">
                         </div>
-                        <label class="text-white">Como você irá se cadastrar?</label>
+                        <div class="mb-3">
+                            <label for="bairro" class="form-label text-white required">Bairro</label>
+                            <input type="bairro" class="form-control" id="bairro" placeholder="Seu bairro" required>
+                        </div>
+                        <label class="text-white required">Como você irá se cadastrar?</label>
                         <div class="mb-3 form-check">
                             <input type="radio" class="form-check-input" id="prestador" name="tipoUsuario"
                                 value="prestador" required>
@@ -126,16 +143,16 @@
                                 Contratante</label>
                         </div>
                         <div class="mb-3">
-                            <label for="servico" class="text-white" style="display: none;" id="servicolabel">Tipo de
+                            <label for="servico" class="text-white required " style="display: none;" id="servicolabel">Tipo de
                                 Serviço:</label>
-                            <select class="form-control" id="servico" style="display: none;">
+                            <select class="form-control " id="servico" style="display: none;">
                                 <option value="" selected>Que tipo de serviço você presta?</option>
                                 <option value=1>Eletricista</option>
                                 <option value=2>Encanador</option>
                                 <option value=3>Pintor</option>
                             </select>
                         </div>
-                        <label class="text-white" style="display: none;" id="pag">Quais formas de pagamento você
+                        <label class="text-white required" style="display: none;" id="pag">Quais formas de pagamento você
                             aceita?</label>
                         <fieldset name="formapag">
                             <div class="mb-3 form-check">
@@ -163,9 +180,7 @@
                             continuar o cadastro.
                         </div>
                         <div class="div-1">
-                            <a href="login.html">
-                                <img src="Bazaart_20231122_092907_642.png" class="imagem007">
-                            </a>
+                            
                             <button type="submit" class="btn btn-custom btn-block" id="cadastrar">
                                 <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"
                                     id="spinner" style="display:none"></span>Cadastrar</button>

@@ -86,7 +86,7 @@
             align-items: left;
         }
         .navbar-dark .navbar-nav .nav-link.ativo {
-            color: #ed27ff;
+            color: #726f6f;
             /* Cor desejada para o link ativo */
         }
     </style>
@@ -103,15 +103,15 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">                    
                     <li class="nav-item">
-                        <a id="agendarLink" class="nav-link" href="agedarservicocomoprestador.html">Agendar Serviço</a>
+                        <a id="agendarLink" class="nav-link" href="agedarservicocomoprestador.html">Agendar serviço</a>
                     </li>
                     <h2 style="color: #fff;">|</h2>
                     <li class="nav-item">
-                        <a  id="meusServicosLink" class="nav-link" href="prestadorservicos.html">Meus Serviços Contratados</a>
+                        <a  id="meusServicosLink" class="nav-link" href="prestadorservicos.html">Meus serviços contratados</a>
                     </li>
                     <h2 style="color: #fff;">|</h2>
                     <li class="nav-item">
-                        <a  id="servicosFazerLink" class="nav-link" href="prestadorservicosdodia.html">Meus serviços a fazer</a>
+                        <a  id="servicosFazerLink" class="nav-link" href="prestadorservicosdodia.html">Meus serviços à fazer</a>
                     </li>
                     <h2 style="color: #fff;">|</h2>
                     <li class="nav-item">
@@ -133,9 +133,9 @@
                     <h2 class="text-center">Agendar serviço</h2>
                     <form id="agendarservico">
                         <div class="mb-3">
-                            <label for="tiposervico" class="form-label text-white required">Escolha o tipo de serviço</label>
+                            <label for="tiposervico" class="form-label text-white required">Profissional</label>
                             <select class="form-select required" id="tiposervico" required>
-                                <option value="" select> Escolha o tipo de serviço</option>
+                                <option value="" select>Profissional</option>
                                 <option value="1">Eletricista</option>
                                 <option value="2">Encanador</option>
                                 <option value="3">Pintor</option>
@@ -153,14 +153,14 @@
                                 placeholder="Distância máxima" required min="0">
                         </div>
                         <div class="mb-3">
-                            <label for="data" class="form-label text-white required"> Escolha a data</label>
+                            <label for="data" class="form-label text-white required"> Data</label>
                             <input type="date" class="form-control " id="data" placeholder="Escolha a data" required>
                         </div>
                         <div class="mb-3">
-                            <label for="filtroPagamento" class="form-label text-white required">Escolha uma forma de
+                            <label for="filtroPagamento" class="form-label text-white required">Forma de
                                 Pagamento</label>
                             <select class="form-select required" id="filtroPagamento" required>
-                                <option value="" select> Escolha uma forma de Pagamento</option>
+                                <option value="" select> Forma de pagamento</option>
                                 <option value="pix">Pix</option>
                                 <option value="cartão">Cartão</option>
                                 <option value="dinheiro">Dinheiro</option>
@@ -173,8 +173,7 @@
                         </div>
                     </form>
                     <div class="mb-3">
-                        <label for="nomep" class="form-label text-white" id="labelnome" style="display: none;" >Nome
-                            Perstador</label>
+                        <label for="nomep" class="form-label text-white" id="labelnome" style="display: none;" >Nome do prestador</label>
                         <input type="text" class="form-control" id="nomep" placeholder="Nome Perstador"
                             style="display: none;" readonly>
                     </div>
@@ -235,7 +234,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <p>Serviço agendado com sucesso </p>
+                        <p>Serviço agendado com sucesso! </p>
                     </div>
 
                 </div>

@@ -163,7 +163,7 @@
             width: 50px;
         }
         .navbar-dark .navbar-nav .nav-link.ativo {
-            color: #ec0707;
+            color: #726f6f;
             /* Cor desejada para o link ativo */
         }
         
@@ -182,15 +182,15 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a id="agendarLink" class="nav-link" href="agedarservicocomoprestador.html">Agendar Serviço</a>
+                        <a id="agendarLink" class="nav-link" href="agedarservicocomoprestador.html">Agendar serviço</a>
                     </li>
                     <h2 style="color: #fff;">|</h2>
                     <li class="nav-item">
-                        <a  id="meusServicosLink" class="nav-link" href="prestadorservicos.html">Meus Serviços Contratados</a>
+                        <a  id="meusServicosLink" class="nav-link" href="prestadorservicos.html">Meus Serviços contratados</a>
                     </li>
                     <h2 style="color: #fff;">|</h2>
                     <li class="nav-item">
-                        <a  id="servicosFazerLink" class="nav-link" href="prestadorservicosdodia.html">Meus serviços a fazer</a>
+                        <a  id="servicosFazerLink" class="nav-link" href="prestadorservicosdodia.html">Meus serviços à fazer</a>
                     </li>
                     <h2 style="color: #fff;">|</h2>
                     <li class="nav-item">
@@ -212,7 +212,7 @@
                     <div class="card-header">
                         <h4>Serviços do dia</h4>
                         <input type="checkbox" class="form-check-input" id="apenasdodia" onclick="apenasdodia()">
-                        <label class="form-check-label text-white" for="apenasdodia"> Mostrar todos a fazer </label>
+                        <label class="form-check-label text-white" for="apenasdodia"> Mostrar todos à fazer </label>
 
                     </div>
                     <div class="card-body">
@@ -257,20 +257,20 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title">Finalizar Ordem de Serviço</h5>
+                            <h5 class="modal-title">Finalizar ordem de serviço</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <label for="valorCobrado">Valor Cobrado:</label>
+                            <label for="valorCobrado">Valor cobrado:</label>
                             <input type="number" id="valorCobrado" min="0" style="margin-bottom: 10px;">                             
                             <div class="alert alert-warning " role="alert">
-                               Para finalizar é necessário informar  um valor 
+                               Para finalizar é necessário informar  um valor. 
                             </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="button" class="btn btn-warning" id="btnConfirmarFinalizacao">Concluir Ordem de
-                                Serviço </button>
+                            <button type="button" class="btn btn-warning" id="btnConfirmarFinalizacao">Concluir ordem de
+                                serviço </button>
                         </div>
                     </div>
                 </div>
