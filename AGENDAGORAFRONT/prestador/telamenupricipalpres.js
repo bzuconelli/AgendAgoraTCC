@@ -41,7 +41,7 @@ function createCalendar(month, year) {
             let date = new Date(year, month - 1, day);
             let formattedDate = `${(day < 10 ? '0' : '') + day}`;
             let dataBuscada = `${year}-${(month < 1 ? '0' : '') + (month)}-${formattedDate}`;
-            let dadosDia = diastrabalho.find(dados => dados.data === dataBuscada);         
+            let dadosDia = diastrabalho.find(dados => dados.data === dataBuscada);
             let valorVaga = dadosDia ? dadosDia.quantidade : 0;
             if (valorVaga > 0) {
                 mostrarSalvar = false;
@@ -77,6 +77,8 @@ function obterAnoMesAtual() {
 }
 obterAnoMesAtual();
 function coletarDados() {
+    document.getElementById("spinner").style.display = 'inline-block';
+    document.getElementById("salvar").disabled = true;
     let dayElements = document.querySelectorAll(`.day.month-${month}`);
     let dadosSalvos = [];
     dayElements.forEach(function (dayElement) {
@@ -94,9 +96,13 @@ function coletarDados() {
     postdias(dadosSalvos).then(() => {
         let myModal = new bootstrap.Modal(document.getElementById('dias'), {});
         myModal.show();
+        document.getElementById("spinner").style.display = 'none';
+        document.getElementById("salvar").disabled = false;
     })
 }
 function coletarDadoseditado() {
+    document.getElementById("spinner1").style.display = 'inline-block';
+    document.getElementById("editar").disabled = true;
     let dayElements = document.querySelectorAll(`.day.month-${month}`);
     let dadosSalvos = [];
     dayElements.forEach(function (dayElement) {
@@ -114,6 +120,8 @@ function coletarDadoseditado() {
     editardias(dadosSalvos, month, year).then(() => {
         let myModal = new bootstrap.Modal(document.getElementById('diaseditado'), {});
         myModal.show();
+        document.getElementById("spinner1").style.display = 'none';
+        document.getElementById("editar").disabled = false;
     })
 }
 function deslogar() {

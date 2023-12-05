@@ -113,7 +113,9 @@ function highlightActiveLink() {
     } else if (path.includes("contratanteservicos.html")) {
         document.getElementById('meusServicosLink').classList.add('ativo');
     } else if (path.includes("contratanteconfig.html")) {
-        document.getElementById('configLink').classList.add('ativo');
+        let configImagem = document.getElementById('configImagem');
+        configImagem.src = "../Bazaart_20231122_091830_231_cinza.png-removebg-preview.png";        
+        configImagem.classList.add('imagem-cinza');
     }
 }
 window.onload = highlightActiveLink;

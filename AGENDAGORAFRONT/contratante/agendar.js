@@ -33,7 +33,12 @@ function initMap(latitudecontratente, longitudecontratente, prestadores) {
                 map: map
             });
             let infoWindow = new google.maps.InfoWindow({
-                content: '<div id="teste">' + prestador.id + '<h2>' + prestador.nome + '</h2>' + '<h2>' + prestador.sobrenome + '</h2>' + '<h2>' + prestador.nota + '</h2>' + ' <button type="button"  data-bs-dismiss="modal" aria-label="Close" onclick="selecionar(this)">Selecionar Prestador</button></div>'
+                content: '<div id="teste" style="max-width: 200px; text-align: center; padding: 10px; border-radius: 8px; background-color: #fff; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">' +
+                    '<h3 style="margin-bottom: 5px; font-size: 8px;"> ' + prestador.id + '</h3>' +
+                    '<h2 style="margin-bottom: 10px;"> ' + prestador.nome + ' ' + prestador.sobrenome + '</h2>' +
+                    '<p style="font-size: 15px;">Nota: ' + prestador.nota + '</p>' +
+                    '<button type="button" style="background-color: #007BFF; color: #fff; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer;" data-bs-dismiss="modal" aria-label="Close" onclick="selecionar(this)">Selecionar Prestador</button>' +
+                    '</div>'
             });
             marker.setMap(map);
             marker.addListener('click', () => {
@@ -60,7 +65,7 @@ document.getElementById('agendarservico').addEventListener('submit', function (e
         let dia = dataAtual.getDate().toString().padStart(2, '0'); // Adiciona zero à esquerda, se necessário
         let dataFormatada = `${ano}-${mes}-${dia}`;
 
-      
+
         let formasdepagamento = document.querySelector('#filtroPagamento');
         let formadepagamento = formasdepagamento.options[formasdepagamento.selectedIndex].value;
         if (data <= dataFormatada) {

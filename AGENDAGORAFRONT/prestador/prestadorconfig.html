@@ -80,6 +80,7 @@
             color: #fff;
             margin-right: 30px
         }
+
         .required:after {
             content: " *";
             color: red;
@@ -89,10 +90,14 @@
             width: 75px;
             align-items: left;
         }
-        .navbar-dark .navbar-nav .nav-link.ativo {
-            color: #ed27ff;
-            /* Cor desejada para o link ativo */
+        .imagem-cinza {
+            width: 50px;
+            align-items: left;
         }
+
+       
+
+      
     </style>
 </head>
 
@@ -111,22 +116,25 @@
                     </li>
                     <h2 style="color: #fff;">|</h2>
                     <li class="nav-item">
-                        <a  id="meusServicosLink" class="nav-link" href="prestadorservicos.html">Meus Serviços Contratados</a>
+                        <a id="meusServicosLink" class="nav-link" href="prestadorservicos.html">Meus Serviços
+                            Contratados</a>
                     </li>
                     <h2 style="color: #fff;">|</h2>
                     <li class="nav-item">
-                        <a  id="servicosFazerLink" class="nav-link" href="prestadorservicosdodia.html">Meus serviços a fazer</a>
+                        <a id="servicosFazerLink" class="nav-link" href="prestadorservicosdodia.html">Meus serviços a
+                            fazer</a>
                     </li>
                     <h2 style="color: #fff;">|</h2>
                     <li class="nav-item">
-                        <a id="calendarioVagasLink" class="nav-link" href="telamenuinicialpres.html">Calendário de vagas</a>
+                        <a id="calendarioVagasLink" class="nav-link" href="telamenuinicialpres.html">Calendário de
+                            vagas</a>
                     </li>
                 </ul>
             </div>
-            <a id= "configLink"class="account-settings" href="prestadorconfig.html"><img src="../Bazaart_20231122_091830_231.png"
-                    class="imagem007"></a>
+            <a id="configLink" class="account-settings" href="prestadorconfig.html"><img
+                    src="../Bazaart_20231122_091830_231.png" class="imagem007" id="configImagem"></a>
             <a class="account-settings" onclick="deslogar()"><img src="../Bazaart_20231122_092328_048.png"
-                    class="imagem007"></a>
+                    class="imagem007 "></a>
             </li>
         </div>
     </nav>
@@ -176,7 +184,8 @@
                         </div>
                         <div class="mb-3">
                             <label for="numero" class="form-label text-white required">Número</label>
-                            <input type="numero" class="form-control" id="numero" placeholder="Seu Numero" onkeyup="num(event)" required>
+                            <input type="numero" class="form-control" id="numero" placeholder="Seu Numero"
+                                onkeyup="num(event)" required>
                         </div>
                         <div class="mb-3">
                             <label for="servico" class="text-white required" id="teste">Tipo de
@@ -213,9 +222,10 @@
                         </div>
                     </form>
                     <br>
-                    <div class="alert alert-warning " role="alert" >
-                        É necessário preencher todos os campos com * vermelho e permitir a localização para atualizar o cadastro. 
-                     </div>
+                    <div class="alert alert-warning " role="alert">
+                        É necessário preencher todos os campos com * vermelho e permitir a localização para atualizar o
+                        cadastro.
+                    </div>
                 </div>
             </div>
         </div>
@@ -227,11 +237,11 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <p>Ao fazer alterações você sera direcionado a tela de login?</p>
+                        <p>Ao fazer alterações você sera direcionado a tela de login</p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-primary" id="btnConfirmarAlteracoes">Confirmar</button>
+                        <button type="button" class="btn btn-warning" id="btnConfirmarAlteracoes">Confirmar</button>
                     </div>
                 </div>
             </div>

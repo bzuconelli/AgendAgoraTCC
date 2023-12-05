@@ -1,5 +1,5 @@
 if (sessionStorage.getItem("token") === null) {
-    window.location.href="../login.html"
+    window.location.href = "../login.html"
 
 }
 async function getPrestador() {
@@ -88,7 +88,7 @@ getPrestador().then(prestador => {
                     }
                     let tipodeserviço = document.querySelector('#servico');
                     let servico = tipodeserviço.options[tipodeserviço.selectedIndex].value;
-                    putprestador(id, nome, sobrenome, telefone, cidade, rua, bairro, numero, email, senha, latitude, longitude, idendereco,recebecartao, recebedinheiro, recebepix, servico).then(() => {
+                    putprestador(id, nome, sobrenome, telefone, cidade, rua, bairro, numero, email, senha, latitude, longitude, idendereco, recebecartao, recebedinheiro, recebepix, servico).then(() => {
                         document.getElementById("spinner").style.display = 'none';
                         window.location.href = "../login.html";
                     })
@@ -123,14 +123,14 @@ let phoneMask = (value) => {
 function deslogar() {
     deletetoken().then(() => {
         sessionStorage.clear();
-        window.location.href="../login.html"
+        window.location.href = "../login.html"
     })
 }
-let num=(event) =>{
+let num = (event) => {
     let input = event.target
     input.value = input.value.replace(/\D/g, '');
-  
-  }
+
+}
 let path = window.location.pathname;
 function highlightActiveLink() {
     document.querySelectorAll('.nav-link').forEach(function (link) {
@@ -146,7 +146,9 @@ function highlightActiveLink() {
         document.getElementById('calendarioVagasLink').classList.add('ativo');
     }
     else if (path.includes("prestadorconfig.html")) {
-        document.getElementById('configLink').classList.add('ativo');
+        let configImagem = document.getElementById('configImagem');
+        configImagem.src = "../Bazaart_20231122_091830_231_cinza.png-removebg-preview.png";        
+        configImagem.classList.add('imagem-cinza');
     }
 }
 window.onload = highlightActiveLink;
