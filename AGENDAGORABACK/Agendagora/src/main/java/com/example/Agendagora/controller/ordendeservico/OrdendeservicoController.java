@@ -146,7 +146,7 @@ public class OrdendeservicoController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
         UsuarioEntity usuarioEntity= usuarioDAO.findbyid(idusuario,tipousuario);
-        List<OrdendeservicoEntity> ordendeservicoEntityList = ordendeservicoDAO.consultarPorIdPrestador(usuarioEntity.id,apenasdodia);
+        List<OrdendeservicoEntity> ordendeservicoEntityList = ordendeservicoDAO.consultarPorIdPrestador(usuarioEntity.prestador.id,apenasdodia);
         return ResponseEntity.ok(converteros.toDTO1(ordendeservicoEntityList));
     }
     @PutMapping("{id}")
