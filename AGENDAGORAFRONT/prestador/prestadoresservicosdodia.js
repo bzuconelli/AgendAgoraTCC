@@ -46,9 +46,9 @@ function apenasdodia() {
         colunafone.innerHTML = ordendeservico.telefone;
         colunaendereco.innerHTML = "Rua " + ordendeservico.rua + " " + ordendeservico.numero + " " + ordendeservico.bairo + " " + ordendeservico.cidade + " ";
         colunaData.innerHTML = dataFormatada;
-        colunaacao.innerHTML = "<button class='btn btn-danger' onclick='cancelar(this)'>Cancelar</button>" + " "
+        colunaacao.innerHTML = "<button class='btn btn-danger' onclick='cancelar(this)'>Cancelar</button>"+" "
          + "<button type='button' class='btn btn-success'onclick='finalizar(this)'>Finalizar</button>"+""
-         + "<img src='../3721678-whatsapp_108065.png' style='width: 40px; height: 40px;' onclick='whats(this)'></button>"
+         + "<img src='../3721678-whatsapp_108065.png' style='width: 35px; height: 35px;' onclick='whats(this)'></button>"
          
     }));
 }
